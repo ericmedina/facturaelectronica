@@ -1,0 +1,46 @@
+body{
+	background-color: #dadada;
+	color: #333;
+}
+section>h3{
+	text-align: center;
+}
+form{
+	width: 80%;
+	margin-left: 10%;
+	margin-bottom: 50px;
+}
+form>div{
+	padding: 10px;
+	width: 100%;
+	position: relative;
+}
+form>div>#label{
+	width: 30%;
+	display: inline-block;
+}
+form>div>input[type="text"], form>div>select{
+	width: 60%;
+	box-sizing: border-box;
+	padding: 8px;
+	font-size: 1em;
+	border: solid 1px #dfdfdf;
+}
+form>div>input[type="submit"]{
+	float: right;
+	margin-right: 10%;
+	padding: 10px 15px 10px 15px;
+	font-size: 1em;
+	color: white;
+	box-sizing: border-box;
+	background-color: rgb(0,161,228);
+	border: none;
+	border-radius: 2px;
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+}
+form>div>input[type="submit"]:after{
+	content: "";
+	visibility: hidden;
+	display: block;
+	clear: both;
+}

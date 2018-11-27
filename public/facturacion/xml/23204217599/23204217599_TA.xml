@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginTicketResponse version="1">
+    <header>
+        <source>CN=wsaa, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>SERIALNUMBER=CUIT 23204217599, CN=daniel medina</destination>
+        <uniqueId>3676087076</uniqueId>
+        <generationTime>2018-08-22T19:24:54.565-03:00</generationTime>
+        <expirationTime>2018-08-23T07:24:54.565-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBkc3Q9IkNOPXdzZmUsIE89QUZJUCwgQz1BUiIgdW5pcXVlX2lkPSIyMTAzMTE0ODE1IiBnZW5fdGltZT0iMTUzNDk3NjYzNCIgZXhwX3RpbWU9IjE1MzUwMTk4OTQiLz4KICAgIDxvcGVyYXRpb24gdHlwZT0ibG9naW4iIHZhbHVlPSJncmFudGVkIj4KICAgICAgICA8bG9naW4gZW50aXR5PSIzMzY5MzQ1MDIzOSIgc2VydmljZT0id3NmZSIgdWlkPSJTRVJJQUxOVU1CRVI9Q1VJVCAyMzIwNDIxNzU5OSwgQ049ZGFuaWVsIG1lZGluYSIgYXV0aG1ldGhvZD0iY21zIiByZWdtZXRob2Q9IjIyIj4KICAgICAgICAgICAgPHJlbGF0aW9ucz4KICAgICAgICAgICAgICAgIDxyZWxhdGlvbiBrZXk9IjIzMjA0MjE3NTk5IiByZWx0eXBlPSI0Ii8+CiAgICAgICAgICAgIDwvcmVsYXRpb25zPgogICAgICAgIDwvbG9naW4+CiAgICA8L29wZXJhdGlvbj4KPC9zc28+Cg==</token>
+        <sign>skYO+/4c21/TNpw7rAXDQi4t6qlApDL2Kpw8xLKiZIGf0EJq50c83DcejRrEoniD1f78i+pvGUvVzntUfJsSv7VikXCpbD6Xh7AvL5/D6M8WcRUahx95An3A8LPKyVu4xyiDs/qUeUvo6hB1NeIFifPFnHoY8ivwnfJiWGFOJ0M=</sign>
+    </credentials>
+</loginTicketResponse>

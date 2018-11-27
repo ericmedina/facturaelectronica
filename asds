@@ -1,0 +1,90 @@
+¿Tu empresa está obligada a realizar facturas electrónicas?¿Buscás una forma sencilla e intuitiva de facturar? Registrate y facturá desde donde quieras.
+
+¿Estás cansado de llevar las cuentas en papel?
+¿Necesitas llevar un control de tu empresa?
+Registrate y mantené todos tus números en orden.
+
+<!-- 	<div class="row tile_count text-center" >
+		<h1 class="text-center">Totales de {{ucfirst($curr_mes)}}</h1>
+		@if(Auth::user()->tipo_actividad == 'servicios')
+				<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-dollar"></i> Total ventas</span>
+		  @if($porcentaje_venta< 0)
+		  	<div class="count red">${{$total_venta}}</div>
+		  	<span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{$porcentaje_venta}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @else
+		  	<div class="count green">${{$total_venta}}</div>
+		  	<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{$porcentaje_venta}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @endif
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-calculator"></i> Total gastos</span>
+		  @if($porcentaje_gasto< 0)
+		  <div class="count green">${{$total_gasto}}</div>
+		  	<span class="count_bottom"><i class="green"><i class="fa fa-sort-desc"></i>{{$porcentaje_gasto}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @else
+		  <div class="count red">${{$total_gasto}}</div>
+		  	<span class="count_bottom"><i class="red"><i class="fa fa-sort-asc"></i>{{$porcentaje_gasto}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @endif
+		</div>
+		<div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-dollar"></i> Saldo</span>
+		  <div class="count">${{$saldo}}</div>
+		</div>
+		@else
+
+		<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-dollar"></i> Total ventas</span>
+		  @if($porcentaje_venta< 0)
+		  	<div class="count red">${{$total_venta}}</div>
+		  	<span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{$porcentaje_venta}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @else
+		  	<div class="count green">${{$total_venta}}</div>
+		  	<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{$porcentaje_venta}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @endif
+		</div>
+		<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-shopping-cart"></i> Total compras</span>
+		  @if($porcentaje_compra< 0)
+		  	<div class="count red">${{$total_compra}}</div>
+		  	<span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{$porcentaje_compra}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @else
+		  	<div class="count green">${{$total_compra}}</div>
+		  	<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{$porcentaje_compra}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @endif
+		</div>
+		<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-calculator"></i> Total gastos</span>
+		  @if($porcentaje_gasto< 0)
+		  <div class="count red">${{$total_gasto}}</div>
+		  	<span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>{{$porcentaje_gasto}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @else
+		  <div class="count green">${{$total_gasto}}</div>
+		  	<span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>{{$porcentaje_gasto}}% </i> en relación a {{ucfirst($last_mes)}}</span>
+		  @endif
+		</div>
+		<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+		  <span class="count_top"><i class="fa fa-dollar"></i> Saldo</span>
+		  <div class="count">${{$saldo}}</div>
+		</div>
+		@endif
+		</div>
+		<div class="row tile_count text-center">
+			<h1>Existencias en el sistema</h1>
+			<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+			  <span class="count_top"><i class="fa fa-dollar"></i> Clientes registrados</span>
+			  	<div class="count">{{$cantidad_clientes}}</div>
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+			  <span class="count_top"><i class="fa fa-dollar"></i> Total productos</span>
+			  	<div class="count">{{$cantidad_productos}}</div>
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+			  <span class="count_top"><i class="fa fa-dollar"></i> Alertas de stock</span>
+			  	<div class="count">{{$alerta_stock}}</div>
+			</div>
+			<div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+			  <span class="count_top"><i class="fa fa-dollar"></i> Servicios registrados</span>
+			  	<div class="count">{{$cantidad_servicios}}</div>
+			</div>
+	</div> -->

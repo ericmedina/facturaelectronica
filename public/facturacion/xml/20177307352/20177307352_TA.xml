@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginTicketResponse version="1">
+    <header>
+        <source>CN=wsaa, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>C=ar, O=abel medina, SERIALNUMBER=CUIT 20177307352, CN=abel medina</destination>
+        <uniqueId>3407251463</uniqueId>
+        <generationTime>2018-03-29T16:10:45.653-03:00</generationTime>
+        <expirationTime>2018-03-30T04:10:45.653-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgc3JjPSJDTj13c2FhLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBkc3Q9IkNOPXdzZmUsIE89QUZJUCwgQz1BUiIgdW5pcXVlX2lkPSIxMDQ3OTEwNTUwIiBnZW5fdGltZT0iMTUyMjM1MDU4NSIgZXhwX3RpbWU9IjE1MjIzOTM4NDUiLz4KICAgIDxvcGVyYXRpb24gdHlwZT0ibG9naW4iIHZhbHVlPSJncmFudGVkIj4KICAgICAgICA8bG9naW4gZW50aXR5PSIzMzY5MzQ1MDIzOSIgc2VydmljZT0id3NmZSIgdWlkPSJDPWFyLCBPPWFiZWwgbWVkaW5hLCBTRVJJQUxOVU1CRVI9Q1VJVCAyMDE3NzMwNzM1MiwgQ049YWJlbCBtZWRpbmEiIGF1dGhtZXRob2Q9ImNtcyIgcmVnbWV0aG9kPSIyMiI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24ga2V5PSIyMDE3NzMwNzM1MiIgcmVsdHlwZT0iNCIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgo=</token>
+        <sign>ohG/ZgRWMZsCnokbwarsgwUiXHVscFmhIQ9BjD4oFK+bjNLOlIwBjo/sHiUmOjYOrS5OSOD+En9BtfZ93tUbn+lpZ++/12a38vsxlpvE8iOjwd12W4NJKGYWZRoLCJXjpVZ9Sj3oxCxrSPGIqGASomDgfxoL+lpo8hU9ImIOpUE=</sign>
+    </credentials>
+</loginTicketResponse>

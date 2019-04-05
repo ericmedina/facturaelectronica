@@ -7,6 +7,8 @@ use App\Cliente;
 use App\Venta;
 use App\Responsabilidad_iva;
 use Laracasts\Flash\FlashNotifier;
+use App\Actividad;
+use Auth;
 
 class ClienteController extends Controller
 {
@@ -53,6 +55,13 @@ class ClienteController extends Controller
         $cliente->email = $request->email;
         $cliente->responsabilidades_iva_id = $request->responsabilidad_iva;
         $cliente->save();
+        //-----------guarda la actividad--------------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Agrego un nuevo cliente: ".$request->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$cliente->nombre</b> ha sido agregado con éxito!")->success()->important();
         return redirect(route('clientes.index'));
     }
@@ -113,6 +122,13 @@ class ClienteController extends Controller
         $cliente->email = $request->email;
         $cliente->responsabilidades_iva_id = $request->responsabilidad_iva;
         $cliente->save();
+        //-----------guarda la actividad--------------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Edito un datos del cliente: ".$request->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$cliente->nombre</b> ha sido editado con éxito!")->warning()->important();
         return redirect(route('clientes.index'));
     }
@@ -127,6 +143,13 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         $cliente->delete();
+        //-----------guarda la actividad--------------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Elimino al cliente: ".$cliente->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$cliente->nombre</b> ha sido eliminado con éxito!")->error()->important();
         return redirect(route('clientes.index'));
     }

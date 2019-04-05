@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Generar comprobante - PampaDev')
 @section('contenido')
-<h1 class="text-center">Generar comprobantes</h1>
+<h2 class="text-center">Generar comprobantes</h2>
 @include('flash::message')
 <form action="/comprobantes" method="POST" accept-charset="utf-8" name="form_comprobante" id="form_comprobante" class="form-inline form-label-left">
   {{ csrf_field() }}
@@ -17,17 +17,20 @@
           <h4 class="text-center">Datos cliente</h4>
         </div>
         <div class="x_content">
-          <div class="col-md-4 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4 label-control" for="nombre">Nombre:</label>
-            <input type="text" name="nombre" class="form-control col-xs-8" id="nombre">
+          <div class="col-md-12 col-sm-12 col-xs-12 form-item text-center">
+              <button type="button" class="boton boton-confirmar " id="boton-buscar-cliente" style="padding: 5px 40px!important;"><i class="fa fa-user"></i> Buscar cliente</button>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="cuit">CUIT:</label>
-            <input type="text" class="form-control col-xs-8" id="cuit" name="cuit">
+            <label class="col-md-4 col-xs-12 label-control" for="nombre">Nombre:</label>
+            <input type="text" name="nombre" class="form-control col-md-8 col-xs-12" id="nombre">
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="resp_iva">Resp. IVA:</label>
-            <select name="resp_iva" class="form-control col-xs-8" style="width: 66.66666667%!important;" id="resp_iva">
+            <label class="col-md-4 col-xs-12" for="cuit">CUIT:</label>
+            <input type="text" class="form-control col-md-8 col-xs-12" id="cuit" name="cuit">
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12 form-item">
+            <label class="col-md-4 col-xs-12" for="resp_iva">Resp. IVA:</label>
+            <select name="resp_iva" class="form-control col-md-8 col-xs-12" id="resp_iva">
               @foreach ($responsabilidades_iva as $responsabilidad_iva)
                 @if($responsabilidad_iva->nombre == "Consumidor Final")
                   <option  value="{{$responsabilidad_iva->nombre}}" selected>{{$responsabilidad_iva->nombre}}</option>
@@ -38,15 +41,12 @@
             </select>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="direccion">Dirección:</label>
-            <input type="text" class="form-control col-xs-8" id="direccion" name="direccion">
+            <label class="col-md-4 col-xs-12" for="direccion">Dirección:</label>
+            <input type="text" class="form-control col-md-8 col-xs-12" id="direccion" name="direccion">
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="localidad">Localidad:</label>
-            <input type="text" class="form-control col-xs-8" id="localidad" name="localidad">
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12 form-item text-center">
-              <button type="button" class="boton boton-confirmar " id="boton-buscar-cliente">Buscar cliente</button>
+            <label class="col-md-4 col-xs-12" for="localidad">Localidad:</label>
+            <input type="text" class="form-control col-md-8 col-xs-12" id="localidad" name="localidad">
           </div>
         </div>
       </div>
@@ -60,8 +60,8 @@
         </div>
         <div class="x_content">
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="tipo_comprobante">Comprobante:</label>
-            <select name="tipo_comprobante" class="form-control col-xs-8"  id="tipo_comprobante">
+            <label class="col-md-4 col-xs-12" for="tipo_comprobante">Comprobante:</label>
+            <select name="tipo_comprobante" class="form-control col-md-8 col-xs-12"  id="tipo_comprobante">
               @if (Auth::user()->responsabilidad_iva_id == 1)
                 <option value="A">Factura A</option>
                 <option selected="" value="B">Factura B</option>
@@ -76,17 +76,17 @@
             </select>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4 label-control" for="num_comprobante">N°:</label>
-            <input type="text" name="num_comprobante" class="form-control col-xs-8" id="num_comprobante" value="00000001">
+            <label class="col-md-4 col-xs-12 label-control" for="num_comprobante">N°:</label>
+            <input type="text" name="num_comprobante" class="form-control col-md-8 col-xs-12" id="num_comprobante" value="00000001">
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="fecha">Fecha:</label>
-            <input type="date" class="form-control col-xs-8" id="fecha" name="fecha" value="{{$fecha}}">
+            <label class="col-md-4 col-xs-12" for="fecha">Fecha:</label>
+            <input type="date" class="form-control col-md-8 col-xs-12" id="fecha" name="fecha" value="{{$fecha}}">
             <input type="date"  class="form-control col-xs-8 hide" id="vencimiento" name="vencimiento" value="{{$vencimiento}}">
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
-            <label class="col-xs-4" for="forma_pago">Forma pago:</label>
-            <select name="forma_pago" class="form-control col-xs-8" id="forma_pago">
+            <label class="col-md-4 col-xs-12" for="forma_pago">Forma pago:</label>
+            <select name="forma_pago" class="form-control col-md-8 col-xs-12" id="forma_pago">
               <option value="contado">Contado</option>
               <option value="cuenta_corriente">Cuenta corriente</option>
             </select>
@@ -116,21 +116,27 @@
               
             </tbody>
           </table>
-          @if(Auth::user()->tipo_actividad == "productos y servicios")
-            <div class="col-md-6 col-sm-6 col-xs-12 text-center">
-                <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Agregar producto</button>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 text-center">
-                <button type="button" class="boton boton-confirmar" id="boton-modal-servicio" >Agregar servicio</button>
-            </div>
-          @elseif(Auth::user()->tipo_actividad == "productos")
+          @if(Auth::user()->categoria_id == 1)
             <div class="col-xs-12 text-center">
-              <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Agregar producto</button>
-          </div>
-          @elseif(Auth::user()->tipo_actividad == "servicios")
-            <div class="col-xs-12 text-center">
-              <button type="button" class="boton boton-confirmar" id="boton-modal-servicio" >Agregar servicio</button>
+                  <button type="button" class="boton boton-confirmar col-xs-12 col-md-offset-4 col-md-4" id="boton-modal-descripcion" >Insertar descripción</button>
+              </div>
+          @elseif(Auth::user()->categoria_id >=2)
+            @if(Auth::user()->tipo_actividad == "productos y servicios")
+              <div class="col-md-6 col-sm-6 col-xs-12 text-center">
+                  <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Insertar producto</button>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12 text-center">
+                  <button type="button" class="boton boton-confirmar" id="boton-modal-servicio" >Insertar servicio</button>
+              </div>
+            @elseif(Auth::user()->tipo_actividad == "productos")
+              <div class="col-xs-12 text-center">
+                <button type="button" class="boton boton-confirmar col-xs-12 col-md-offset-4 col-md-4" id="boton-modal-producto" >Insertar producto</button>
             </div>
+            @elseif(Auth::user()->tipo_actividad == "servicios")
+              <div class="col-xs-12 text-center">
+                <button type="button" class="boton boton-confirmar col-xs-12 col-md-offset-4 col-md-4" id="boton-modal-servicio" >Insertar servicio</button>
+              </div>
+            @endif
           @endif
         </div>
       </div>
@@ -157,22 +163,22 @@
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item-totales">
             <div class="form-group col-xs-12">
-              <label class="col-xs-4 label-control" for="subtotal">Subtotal:</label>
-              <div class=" col-xs-8 input-group">
+              <label class="col-md-4 col-xs-12 label-control" for="subtotal">Subtotal:</label>
+              <div class=" col-md-8 col-xs-12 input-group">
                 <span class="input-group-addon">$</span>
                 <input type="text" name="subtotal" class="form-control" id="subtotal" value="0">
               </div>
             </div>
             <div class="form-group col-xs-12">
-              <label class="col-xs-4 label-control" for="importe_iva">Imp. IVA:</label>
-              <div class=" col-xs-8 input-group">
+              <label class="col-md-4 col-xs-12 label-control" for="importe_iva">Imp. IVA:</label>
+              <div class=" col-md-8 col-xs-12 input-group">
                 <span class="input-group-addon">$</span>
                 <input type="text" name="importe_iva" class="form-control" id="importe_iva" value="0">
               </div>
             </div>
             <div class="form-group col-xs-12">
-              <label class="col-xs-4 label-control" for="total">Total:</label>
-              <div class=" col-xs-8 input-group">
+              <label class="col-md-4 col-xs-12 label-control" for="total">Total:</label>
+              <div class=" col-md-8 col-xs-12 input-group">
                 <span class="input-group-addon">$</span>
                 <input type="text" name="total" class="form-control" id="total" value="0">
               </div>
@@ -181,6 +187,7 @@
         </div>
       </div>
     </div>
+    
     <input type="hidden" name="detalle" id="detalle" value="">
     <input type="hidden" name="alicuotas" id="alicuotas" value="">
     <div class="col-md-4 col-sm-12 col-xs-12 text-center">
@@ -200,12 +207,27 @@
   @include('layouts.dialogs.observaciones')
   @include('layouts.dialogs.assoc')
 </form>
-@include('layouts.dialogs.agregar_producto')
-@include('layouts.dialogs.agregar_servicio')
+
+
+@if(Auth::user()->categoria_id == 1)
+  @include('layouts.dialogs.agregar_detalle')
+@elseif(Auth::user()->categoria_id ==2 ||Auth::user()->categoria_id ==3 )
+  @if(Auth::user()->tipo_actividad == "productos y servicios")
+    @include('layouts.dialogs.agregar_producto')
+    @include('layouts.dialogs.agregar_servicio')
+  @elseif(Auth::user()->tipo_actividad == "productos")
+    @include('layouts.dialogs.agregar_producto')
+  @elseif(Auth::user()->tipo_actividad == "servicios")
+    @include('layouts.dialogs.agregar_servicio')
+  @endif
+@endif
 @include('layouts.dialogs.buscar_cliente')
 @include('layouts.dialogs.waiting_comprobante')
 @include('layouts.dialogs.rechazado')
 @include('layouts.dialogs.aprobado')
+@include('layouts.dialogs.mail')
+@include('layouts.dialogs.agregado')
+@include('layouts.dialogs.message')
 @endsection
 @section('js')
   <script src="{{ asset('js/facturacion.js') }}?version=1" type="text/javascript"></script>

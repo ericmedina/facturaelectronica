@@ -8,9 +8,9 @@
       </div>  
       <div class="modal-body">
         <div class="form-group form-item">
-          <label class="control-label col-md-3 col-sm-3 col-xs-4" for="buscar_cliente">Buscar:
+          <label class="control-label col-md-3 col-sm-3 hidden-xs" for="buscar_cliente">Buscar:
           </label>
-          <div class="col-md-6 col-sm-6 col-xs-8">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <input type="text" id="buscar_cliente" name="buscar_cliente" class="form-control col-md-7 col-xs-12" placeholder="Cliente">
           </div>
         </div>

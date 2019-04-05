@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Mis pagos - PampaDev')
 @section('contenido')
-<h1 class="text-center">Mis pagos</h1>
+<h2 class="text-center">Mis pagos</h2>
 @include('flash::message')
 <div id="card">
   <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">

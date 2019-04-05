@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><img height="40" src="{{ asset('images/icono_fondo_blanco2.png') }}" alt="Logo pampadev"> <img height="40" src="{{ asset('images/logotipo_fondo_blanco.png') }}" alt="Icono pampadev"></a>
+              <a href="{{url('/')}}" class="site_title"><img height="40" src="{{ asset('images/icono_fondo_blanco2.png') }}" alt="Logo pampadev"> <img height="40" src="{{ asset('images/logotipo_fondo_blanco.png') }}" alt="Icono pampadev"></a>
             </div>
 
             <div class="clearfix"></div>

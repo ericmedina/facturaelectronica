@@ -32,7 +32,7 @@ return [
     |------------------------------------------------------------------------
     */
     
-    'homo' => false,
+    'homo' => true,
 
 
     #########################################################################
@@ -56,8 +56,8 @@ return [
     'URL_TIPO_IVA_HOMO'      =>  "https://wswhomo.afip.gov.ar/wsfev1/service.asmx?op=FEParamGetTiposIva",
     
     #GET PERSONA
-    'URL_PERSONA_HOMO'   =>"https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA4",
-    'WSDL_PERSONA_HOMO'   =>"https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA4?WSDL",
+    'URL_PERSONA_HOMO'   =>"https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA5",
+    'WSDL_PERSONA_HOMO'   =>"https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA5?WSDL",
 
 
     ############################################################################
@@ -84,6 +84,6 @@ return [
     'URL_TIPO_IVA'  =>  "https://servicios1.afip.gov.ar/wsfev1/service.asmx?op=FEParamGetTiposIva",
     
     #GET PERSONA
-    'URL_PERSONA'   =>"https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA4",
-    'WSDL_PERSONA'   =>"https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA4?WSDL",
+    'URL_PERSONA'   =>"https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA5",
+    'WSDL_PERSONA'   =>"https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA5?WSDL",
 ];

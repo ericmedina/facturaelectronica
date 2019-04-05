@@ -10,6 +10,8 @@ use App\Responsabilidad_iva;
 use Carbon\Carbon;
 use App\Compra;
 use App\DetalleCompra;
+use App\Actividad;
+use Auth;
 
 class CompraController extends Controller
 {
@@ -79,6 +81,18 @@ class CompraController extends Controller
             $producto->stock = floatval($producto->stock)+floatval($value->cantidad);
             $producto->save();
         }
+        //-----------guarda la actividad--------------------
+        if(empty($proveedor->nombre)){
+            $provedor_nombre=".";
+        }else{
+            $provedor_nombre=" al proveedor ".$proveedor->nombre;
+        }
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Se hizo una compra de: ".$detalle->total.$provedor_nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         return redirect(route('compras.create'));
     }
 

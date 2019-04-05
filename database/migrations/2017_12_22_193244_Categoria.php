@@ -14,7 +14,7 @@ class Categoria extends Migration
     public function up()
     {
         Schema::create('categorias', function(Blueprint $table){
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('categoria');
             $table->float('precio');
 

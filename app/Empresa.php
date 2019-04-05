@@ -22,11 +22,17 @@ class Empresa  extends Authenticatable
     public function facturas_sistema(){
     	return $this->hasMany('App\Facturas_sistema');
     }
-    public function categoria(){
-    	return $this->belongsTo('App\Categoria');
+    public function empresa_contador(){
+        return $this->hasOne('App\EmpresaContador');
     }
     public function fiscal(){
         return $this->hasOne('App\Fiscal');
+    }
+    public function categoria(){
+        return $this->belongsTo('App\Categoria');
+    }
+    public function contrato(){
+        return $this->hasOne('App\Contrato');
     }
     public function responsabilidad_iva(){
         return $this->belongsTo('App\Responsabilidad_iva');
@@ -54,14 +60,14 @@ class Empresa  extends Authenticatable
         $this->pago($empresa);
         $this->regimen_iva($empresa);
 
-        if(!file_exists(public_path()."/facturacion/certs/".$this->cuit)){
-            mkdir(public_path()."/facturacion/certs/".$this->cuit);
+        if(!file_exists(storage_path()."/app/public/facturacion/certs/".$this->cuit)){
+            mkdir(storage_path()."/app/public/facturacion/certs/".$this->cuit);
         }
-        if(!file_exists(public_path()."/facturacion/comprobantes/".$this->cuit)){
-            mkdir(public_path()."/facturacion/comprobantes/".$this->cuit);
+        if(!file_exists(storage_path()."/app/public/facturacion/comprobantes/".$this->cuit)){
+            mkdir(storage_path()."/app/public/facturacion/comprobantes/".$this->cuit);
         }
-        if(!file_exists(public_path()."/facturacion/xml/".$this->cuit)){
-            mkdir(public_path()."/facturacion/xml/".$this->cuit);
+        if(!file_exists(storage_path()."/app/public/facturacion/xml/".$this->cuit)){
+            mkdir(storage_path()."/app/public/facturacion/xml/".$this->cuit);
         }  
     }
 
@@ -71,11 +77,11 @@ class Empresa  extends Authenticatable
                 $table->increments('id');
                 $table->string('nombre');
                 $table->string('cuit');
-                $table->string('direccion')->nullable();
-                $table->string('localidad')->nullable();
-                $table->string('provincia')->nullable();
-                $table->string('telefono')->nullable();
-                $table->string('email')->nullable();
+                $table->string('direccion')->default('');
+                $table->string('localidad')->default('');
+                $table->string('provincia')->default('');
+                $table->string('telefono')->default('');
+                $table->string('email')->default('');
                 $table->integer('responsabilidades_iva_id')->unsigned();
 
                 $table->foreign('responsabilidades_iva_id')->references('id')->on('01responsabilidades_iva');

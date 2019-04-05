@@ -1,19 +1,20 @@
 @extends('layouts.main')
 @section('title', 'Listado de servicios - PampaDev')
 @section('contenido')
-<h1 class="text-center">Listado de servicios</h1>
+<h2 class="text-center">Listado de servicios</h2>
 @include('flash::message')
 <form action="{{url('/servicios')}}" method="get" accept-charset="utf-8" class="form-inline">
-	<div class="col-md-4 col-sm-6 col-xs-10 form-item">
-      <label class="col-xs-3 label-control" for="buscar">Buscar:</label>
-      <div class=" col-xs-9 input-group">
+	<div class="col-md-4 col-sm-6 col-xs-12 form-item">
+      <label class="col-md-3 hidden-xs label-control" for="buscar">Buscar:</label>
+      <div class=" col-md-9 col-xs-12 input-group">
         <input type="text" name="buscar" class="form-control" id="buscar">
       </div>
     </div>
-  	<div class="col-xs-2">
-      <button type="submit" style="margin-top: 7px;" class="btn btn-success">Buscar</button>  	
+  	<div class="col-md-2 col-md-offset-0 col-xs-8 col-xs-offset-2">
+      <button type="submit" style="margin-top: 7px;" class="btn btn-success col-xs-12">Buscar</button>  	
   	</div>
 </form>
+<br>
 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
   <thead>
     <tr>

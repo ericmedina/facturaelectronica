@@ -9,6 +9,8 @@ use App\Proveedor;
 use App\CategoriaProducto;
 use App\Marca;
 use App\IVA;
+use App\Actividad;
+use Auth;
 
 
 class ProductoController extends Controller
@@ -63,6 +65,13 @@ class ProductoController extends Controller
         $producto->categoria_producto_id = $request->categoria_producto;
         $producto->marca_id = $request->marca;
         $producto->save();
+         //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Agrego el producto ".$request->producto;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$producto->producto</b> ha sido agregado con éxito!")->success()->important();
         return redirect(route('productos.index'));
     }
@@ -104,6 +113,7 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         $producto = Producto::find($id);
+        $producto_viejo=$producto->producto;
         $producto->codigo = $request->codigo;
         $producto->producto = $request->producto;
         $producto->stock = $request->stock;
@@ -115,6 +125,13 @@ class ProductoController extends Controller
         $producto->categoria_producto_id = $request->categoria_producto;
         $producto->marca_id = $request->marca;
         $producto->save();
+         //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Modifico el producto ".$producto_viejo." por ".$request->producto;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$producto->producto</b> ha sido editado con éxito!")->warning()->important();
         return redirect(route('productos.index'));
     }
@@ -128,7 +145,16 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         $producto = Producto::find($id);
-        $producto->delete();
+         //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Elimino el producto ".$producto->producto;
+        //--------fin del guardado de actividad----------------
+        //$producto->delete();
+        if($producto->delete()){
+        $actividad->save();
+        }
         flash("<b>¡$producto->producto</b> ha sido eliminado con éxito!")->error()->important();
         return redirect(route('productos.index'));
     }

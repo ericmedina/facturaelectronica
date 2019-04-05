@@ -1,7 +1,7 @@
 @extends('layouts.panel_form')
 @section('title', 'Agregar cliente - PampaDev')
 @section('titulo_panel')
-  <h3 class="text-center">Datos cliente</h3>
+  <h2 class="text-center">Datos cliente</h2>
 @endsection
 @section('contenido_panel')
   <form action="{{ route('clientes.store') }}" method="POST" class="form-horizontal form-label-left">

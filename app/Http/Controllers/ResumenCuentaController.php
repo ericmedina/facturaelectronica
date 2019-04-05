@@ -10,6 +10,8 @@ use App\Responsabilidad_iva;
 use App\ResumenCuenta;
 use Carbon\Carbon;
 use App\Movimiento;
+use App\actividad;
+
 
 class ResumenCuentaController extends Controller
 {

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Gasto;
 use App\Movimiento;
+use Auth;
+use App\Actividad;
 
 class GastoController extends Controller
 {
@@ -43,7 +45,16 @@ class GastoController extends Controller
         $gasto->descripcion = $request->descripcion;
         $gasto->total = $request->total;
         $gasto->fecha = $request->fecha;
-        $gasto->save();
+        //$gasto->save();
+        //--------guardado de actividad----------------
+        if($gasto->save()){
+            $actividad=new Actividad();
+            $actividad->usuario_id=Auth::id();
+            $actividad->tipo_usuario="Empresa";
+            $actividad->actividad="Ingreso un nuevo gasto en: ".$gasto->descripcion. " de $".$request->total;
+            $actividad->save();
+        }
+        //--------fin del guardado de actividad----------------
         $movimiento  = new Movimiento();
         $movimiento->movimiento_id = $gasto->id;
         $movimiento->movimiento = "GASTO";
@@ -97,6 +108,19 @@ class GastoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gasto = Gasto::find($id);
+        $gasto_total=$gasto->total;
+        $gasto_descripcion=$gasto->descripcion;
+       // $gasto->delete();
+        //--------guardado de actividad----------------
+        if($gasto->delete()){            
+             $actividad=new Actividad();
+             $actividad->usuario_id=Auth::id();
+             $actividad->tipo_usuario="Empresa";
+             $actividad->actividad="Borro gasto en: ".$gasto_descripcion." con el valor de $".$gasto_total;
+             $actividad->save();
+        }
+        //--------fin del guardado de actividad----------------
+        return redirect(route('gastos.index'));
     }
 }

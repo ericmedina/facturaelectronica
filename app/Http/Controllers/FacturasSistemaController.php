@@ -72,7 +72,7 @@ class FacturasSistemaController extends Controller
                     'description' => '',
                     'quantity' => 1,
                     'currency_id' => 'ARS',
-                    'unit_price' =>700// floatval($pago->total)
+                    'unit_price' =>$pago->total// floatval($pago->total)
                 ]
             ],
             'payer' =>  ['name'  =>  $pago->empresa->razon_social,

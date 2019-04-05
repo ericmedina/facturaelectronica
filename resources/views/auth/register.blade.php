@@ -27,18 +27,16 @@
     <body style="background-color: #e5e5e5;" class="login">
         <div class="contenido_login container-fluid text-center">
             <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                <form class="form-horizontal" id="form_register" method="POST" action="{{ route('register') }}">
-
-                    <div class="x_panel tile">
-                      <div class="x_title  text-center" >
-                        <h3 class="text-center">Registrarse</h3>
-                        <div class="clearfix"></div>
-                      </div>
+                  <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+                    <div id="title_login">
+                        <h2>REGISTRARSE EN PAMPADEV</h2>
+                    </div>
+                  <div class="x_panel tile">
                       <div class="x_content">
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="razon_social" class="col-md-2 control-label">Nombre/Razón Social:</label>
+                            <label for="razon_social" class="col-md-3 control-label">Nombre/Razón Social:</label>
 
                             <div class="col-md-8">
                                 <input id="razon_social" type="text" class="form-control" name="razon_social" value="" required autofocus>
@@ -50,7 +48,7 @@
                                 @endif
                         </div>
                         <div class="form-group">
-                            <label for="cuit" class="col-md-2 control-label">CUIT:</label>
+                            <label for="cuit" class="col-md-3 control-label">CUIT:</label>
 
                             <div class="col-md-8">
                                 <input id="cuit" type="text" class="form-control" name="cuit" value="" required>
@@ -62,7 +60,7 @@
                                 @endif
                         </div>
                         <div class="form-group">
-                            <label for="nombre_fantasia" class="col-md-2 control-label">Nombre de fantasía(Opcional):</label>
+                            <label for="nombre_fantasia" class="col-md-3 control-label">Nombre de fantasía(Opcional):</label>
 
                             <div class="col-md-8">
                                 <input id="nombre_fantasia" type="text" class="form-control" name="nombre_fantasia" value="">
@@ -74,7 +72,7 @@
                                 @endif
                         </div>
                         <div class="form-group">
-                            <label for="direccion" class="col-md-2 control-label">Dirección:</label>
+                            <label for="direccion" class="col-md-3 control-label">Dirección:</label>
 
                             <div class="col-md-8">
                                 <input id="direccion" type="text" class="form-control" name="direccion" value="" required>
@@ -86,7 +84,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="localidad" class="col-md-2 control-label">Localidad:</label>
+                            <label for="localidad" class="col-md-3 control-label">Localidad:</label>
 
                             <div class="col-md-8">
                                 <input id="localidad" type="text" class="form-control" name="localidad" value="" required>
@@ -98,7 +96,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="provincia" class="col-md-2 control-label">Provincia:</label>
+                            <label for="provincia" class="col-md-3 control-label">Provincia:</label>
 
                             <div class="col-md-8">
                                 <input id="provincia" type="text" class="form-control" name="provincia" value="" required>
@@ -110,7 +108,7 @@
                                 @endif
                         </div>
                         <div class="form-group">
-                            <label for="telefono" class="col-md-2 control-label">Teléfono:</label>
+                            <label for="telefono" class="col-md-3 control-label">Teléfono:</label>
 
                             <div class="col-md-8">
                                 <input id="telefono" type="text" class="form-control" name="telefono" value="" required>
@@ -123,7 +121,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tipo_actividad" class="col-md-2 control-label">Concepto:</label>
+                            <label for="tipo_actividad" class="col-md-3 control-label">Concepto:</label>
 
                             <div class="col-md-8">
                                 <select name="tipo_actividad"  class="form-control">
@@ -139,7 +137,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="responsabilidad_iva" class="col-md-2 control-label">Responsabilidad IVA:</label>
+                            <label for="responsabilidad_iva" class="col-md-3 control-label">Responsabilidad IVA:</label>
 
                             <div class="col-md-8">
                                 <select name="responsabilidad_iva"  class="form-control">
@@ -155,7 +153,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="col-md-2 control-label">E-Mail</label>
+                            <label for="email" class="col-md-3 control-label">E-Mail</label>
 
                             <div class="col-md-8">
                                 <input id="email" type="email" class="form-control" name="email" value="" required>
@@ -168,7 +166,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-md-2 control-label">Password</label>
+                            <label for="password" class="col-md-3 control-label">Password</label>
 
                             <div class="col-md-8">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -181,7 +179,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password-confirm" class="col-md-2 control-label">Confirm Password</label>
+                            <label for="password-confirm" class="col-md-3 control-label">Confirm Password</label>
 
                             <div class="col-md-8">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
@@ -189,9 +187,9 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-10">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
+                            <div class="col-md-10 text-right">
+                                <button type="submit" class="btn btn-success submit">
+                                    Registrarse
                                 </button>
                             </div>
                         </div>

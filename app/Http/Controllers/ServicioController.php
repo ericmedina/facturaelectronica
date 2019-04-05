@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Servicio;
 use App\IVA;
 use Laracasts\Flash\FlashNotifier;
+use App\Actividad;
+use Auth;
 
 class ServicioController extends Controller
 {
@@ -48,6 +50,13 @@ class ServicioController extends Controller
         $servicio->precio = $request->precio;
         $servicio->iva_id = $request->iva;
         $servicio->save();
+        //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Agrego el servicio ".$request->descripcion;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$servicio->descripcion</b> ha sido agregado con éxito!")->success()->important();
         return redirect(route('servicios.index'));
     }
@@ -90,6 +99,13 @@ class ServicioController extends Controller
         $servicio->precio = $request->precio;
         $servicio->iva_id = $request->iva;
         $servicio->save();
+        //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Edito el servicio ".$request->descripcion;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$servicio->descripcion</b> ha sido editado con éxito!")->warning()->important();
         return redirect(route('servicios.index'));
     }
@@ -103,7 +119,15 @@ class ServicioController extends Controller
     public function destroy($id)
     {
         $servicio = Servicio::find($id);
+        $servicio_nombre=$servicio->descripcion;
         $servicio->delete();
+        //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Elimino el servicio ".$servicio_nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$servicio->descripcion</b> ha sido eliminado con éxito!")->error()->important();
         return redirect(route('servicios.index'));
     }

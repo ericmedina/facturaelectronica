@@ -13,15 +13,17 @@ class FacturasSistema extends Migration
      */
     public function up()
     {
-        Schema::create('facturas_sistema', function(Blueprint $table){
+        Schema::create('01facturas_sistema', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('empresa_id')->unsigned();
-            $table->integer('categoria_id')->unsigned();
+            $table->integer('contrato_id')->unsigned();
             $table->float('total');
             $table->date('fecha');
+            $table->string('external_id');
+            $table->string('payment_id');
+            $table->enum('estado',['Pendiente','Pago','Vencido','Cancelado']);
+            
+            $table->foreign('contrato_id')->references('id')->on('01contratos');
 
-            $table->foreign('empresa_id')->references('id')->on('empresas');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
 
             $table->timestamps();
         });

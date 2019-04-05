@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Mail\Mailer;
 use Illuminate\Auth\Events\Registered;
 use Mail;
+use App\Contrato;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -76,6 +78,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+                
+
+
         $data['confirmation_code'] = str_random(25);
         $empresa =  Empresa::create([
             'razon_social'                      =>      $data['razon_social'],
@@ -98,6 +103,14 @@ class RegisterController extends Controller
         $fiscal = new Fiscal();
         $fiscal->empresa_id =  $empresa->id;
         $fiscal->save();
+        //-------Generar Contrato-----------------
+
+        $contrato = New Contrato;
+        $contrato->licencia_id = 1;
+        $contrato->empresa_id = $empresa->id;
+        $contrato->periodo_id = 1;
+        $contrato->save();
+
         // Send confirmation code
         Mail::send('email.confirmation_code', $data, function($message) use ($data) {
             $message->to($data['email'], $data['razon_social'])->subject('Por favor confirma tu correo');

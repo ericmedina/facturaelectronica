@@ -1,7 +1,7 @@
 @extends('layouts.panel_form')
 @section('title', 'Agregar nueva compra - PampaDev')
 @section('titulo_panel')
-  <h3 class="text-center">Nueva compra</h3>
+  <h2 class="text-center">Nueva compra</h2>
 @endsection
 @section('contenido')
 <form action="{{ route('pago.store') }}" method="POST" id="form_compra" class="form-horizontal form-label-left">
@@ -19,29 +19,29 @@
                 <button type="button" class="boton boton-confirmar" id="boton_buscar_proveedor">Buscar proveedor</button>
               </div>
               <div class="form-group col-xs-12 col-md-12">
-                <label class="control-label col-xs-2" for="proveedor">Proveedor:
+                <label class="control-label col-md-2 col-xs-12" for="proveedor">Proveedor:
                 </label>
-                <div class="col-xs-8">
+                <div class="col-md-8 col-xs-12">
                   <input type="text" id="proveedor" readonly="" name="proveedor" class="form-control">
                 </div>
               </div>
               <div class="form-group col-xs-12 col-md-12">
-                <label class="control-label col-xs-2" for="cuit">Cuit:
+                <label class="control-label col-md-2 col-xs-12" for="cuit">Cuit:
                 </label>
-                <div class="col-xs-8">
+                <div class="col-md-8 col-xs-12">
                   <input type="text" id="cuit" name="cuit" readonly="" class="form-control">
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="col-xs-2 control-label" for="deuda">Deuda:</label>
-                <div class=" col-xs-4 input-group" style="padding-left: 10px;">
+                <label class="col-md-2 col-xs-12 control-label" for="deuda">Deuda:</label>
+                <div class=" col-md-4 col-xs-12 input-group" style="padding-left: 10px;">
                   <span class="input-group-addon">$</span>
                   <input type="text" name="deuda" class="form-control" readonly="" id="deuda" value="">
                 </div>
               </div>
               <div class="form-group col-xs-12 ">
-                <label class="col-xs-2 control-label" for="pago">Utd. paga:</label>
-                <div class=" col-xs-4 input-group" style="padding-left: 10px;">
+                <label class="col-md-2 col-xs-12 control-label" for="pago">Utd. paga:</label>
+                <div class=" col-md-4 col-xs-12 input-group" style="padding-left: 10px;">
                   <span class="input-group-addon">$</span>
                   <input type="text" name="pago" class="form-control" id="pago" value="">
                 </div>

@@ -8,12 +8,8 @@ class Facturas_sistema extends Model
 {
     protected $table = '01facturas_sistema';
 
-    public function Categoria(){
-    	return $this->belongsTo('App\Categoria');
-    }
-
-    public function Empresa(){
-    	return $this->belongsTo('App\Empresa');
+    public function contrato(){
+    	return $this->belongsTo('App\Contrato');
     }
     public function scopeSearch($query, $id){
     	return $query->where('empresa_id', "=", $id);

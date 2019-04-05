@@ -1,7 +1,7 @@
 @extends('layouts.panel_form')
 @section('title', 'Mi perfil - PampaDev')
 @section('titulo_panel')
-  <h3 class="text-center">Mi perfil</h3>
+  <h2 class="text-center">Mi perfil</h2>
 @endsection
 @section('contenido_panel')
   <form action="{{ url('/empresas/perfil') }}" method="POST" class="form-horizontal form-label-left">

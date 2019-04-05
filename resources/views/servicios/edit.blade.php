@@ -1,7 +1,7 @@
 @extends('layouts.panel_form')
 @section('title', 'Editar servicio - PampaDev')
 @section('titulo_panel')
-  <h3 class="text-center">Editar {{ $servicio->descripcion }}</h3>
+  <h2 class="text-center">Editar {{ $servicio->descripcion }}</h2>
 @endsection
 @section('contenido_panel')
   <form action="{{ url('servicios/'.$servicio->id) }}" method="POST" class="form-horizontal form-label-left">

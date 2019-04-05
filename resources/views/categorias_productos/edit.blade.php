@@ -1,7 +1,7 @@
 @extends('layouts.panel_form')
 @section('title', "Editar categoria de producto - PampaDev")
 @section('titulo_panel')
-  <h3 class="text-center">Editar {{ $categoria->categoria }}</h3>
+  <h2 class="text-center">Editar {{ $categoria->categoria }}</h2>
 @endsection
 @section('contenido_panel')
   <form action="{{ url('/categoriaproducto/'.$categoria->id) }}" method="POST" class="form-horizontal form-label-left">

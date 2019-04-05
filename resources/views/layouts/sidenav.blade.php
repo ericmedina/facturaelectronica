@@ -1,7 +1,6 @@
 
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
   <div class="menu_section">
-    <h3>Menú</h3>
     <ul class="nav side-menu">
       <li><a href="{{url('/')}}"><i class="fa fa-home"></i> Vista principal</a></li>
       <li><a><i class="fa fa-dollar"></i> Ventas <span class="fa fa-chevron-down"></span></a>
@@ -10,7 +9,7 @@
           <li><a href="{{ route('facturas.create') }}">Nuevo comprobante</a></li>
         </ul>
       </li>
-      @if(Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios")
+      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-shopping-cart"></i> Compras <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('compras.index') }}">Ver compras</a></li>
@@ -18,13 +17,15 @@
         </ul>
       </li>
       @endif
+      @if(Auth::user()->categoria->categoria != 'Basico')
       <li><a><i class="fa fa-calculator"></i> Gastos <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('gastos.index') }}">Ver gastos</a></li>
           <li><a href="{{ route('gastos.create') }}">Nuevo gasto</a></li>
         </ul>
       </li>
-      @if(Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios")
+      @endif
+      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-cubes"></i> Productos <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('productos.index') }}">Ver productos</a></li>
@@ -36,7 +37,7 @@
         </ul>
       </li>
       @endif
-      @if(Auth::user()->tipo_actividad == "servicios" || Auth::user()->tipo_actividad == "productos y servicios")
+      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "servicios" || Auth::user()->tipo_actividad == "productos y servicios"))
         <li><a><i class="fa fa-gears"></i> Servicios <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{{ route('servicios.index') }}">Ver servicios</a></li>
@@ -51,16 +52,18 @@
           <li><a href="{{ route('resumen_cuenta.index') }}">Cuentas corrientes</a></li>
         </ul>
       </li>
+      @if(Auth::user()->categoria->categoria != 'Basico')
       <li><a><i class="fa fa-bar-chart"></i> Estadísticas <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="#">General</a></li>
+          <li><a href="{{url('/estadisticas/general')}}">General</a></li>
           <li><a href="#">Clientes</a></li>
           <li><a href="#">Productos</a></li>
           <li><a href="#">Servicios</a></li>
           <li><a href="#">Proveedores</a></li>
         </ul>
       </li>
-      @if(Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios")
+      @endif
+      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-truck"></i> Proveedores <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('proveedor.index') }}">Ver proveedores</a></li>
@@ -69,6 +72,12 @@
         </ul>
       </li>
       @endif
+      <li><a><i class="fa fa-file-text-o"></i>Tickets</a>
+        <ul class="nav child_menu">
+          <li><a href="{{ route('ticket.index') }}">Mis Tickets</a></li>
+          <li><a href="{{ route('ticket.create') }}">Nuevo Ticket</a></li>
+        </ul>
+      </li>
       <li><a href="{{ route('pagos.index') }}"><i class="fa fa-credit-card"></i>Mis pagos</a></li>
       <li><a><i class="fa fa-user"></i> Mi cuenta <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
@@ -76,6 +85,7 @@
           <li><a href="{{ url('empresas/password') }}">Cambiar contraseña</a></li>
           <li><a href="{{ url('/empresas/confirmar_suspender') }}">Suspender cuenta</a></li>
           <li><a href="{{ url('/logout') }}">Cerrar sesión</a></li>
+          <li><a href="{{ url('contratos/create')}}">Licencias</a></li>
         </ul>
       </li>
     </ul>

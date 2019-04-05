@@ -11,7 +11,23 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    { 
+        DB::table('01descuentos')->insert([
+            'porcentaje'=>0
+        ]);
+        DB::table('01descuentos')->insert([
+            'porcentaje'=>5
+        ]);
+        DB::table('01descuentos')->insert([
+            'porcentaje'=>10
+        ]);
+        DB::table('01descuentos')->insert([
+            'porcentaje'=>15
+        ]);
+        DB::table('01descuentos')->insert([
+            'porcentaje'=>20
+        ]);
+        /*
         DB::table('categorias')->insert([
         	'categoria'=>"Basico",
         	'precio'=>500
@@ -74,5 +90,6 @@ class DatabaseSeeder extends Seeder
         DB::table('responsabilidades_iva')->insert([
          	"nombre" => "IVA Responsable No Inscripto"
         ]);
+        */
     }
 }

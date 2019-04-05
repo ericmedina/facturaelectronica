@@ -136,8 +136,8 @@ class Facturacion
 	{
 		#CHECKEA SI YA EXISTE ACCESO
 		if(file_exists($this->cert)){
-			if(file_exists(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml")){
-				$xml = simplexml_load_file(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml");
+			if(file_exists(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml")){
+				$xml = simplexml_load_file(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml");
 				$exp = $xml->header->expirationTime;
 				$now = date('c',date('U'));
 			}else{
@@ -167,17 +167,17 @@ class Facturacion
 			$TRA->header->addChild('generationTime',date('c',date('U')-60));
 			$TRA->header->addChild('expirationTime',date('c',date('U')+60));
 			$TRA->addChild('service',$ws);
-			$TRA->asXML(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.xml");
+			$TRA->asXML(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.xml");
 
 			#FIRMA TICKET DE ACCESO CON CERTIFICADO
 
-			$STATUS=openssl_pkcs7_sign(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.xml", getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.tmp", "file://".$this->cert,
+			$STATUS=openssl_pkcs7_sign(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.xml", storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.tmp", "file://".$this->cert,
 			    array("file://".$this->key, $this->PASSPHRASE),
 			    array(),
 			    !PKCS7_DETACHED
 			    );
 			  if (!$STATUS) {exit("ERROR generating PKCS#7 signature\n");}
-			  $inf=fopen(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.tmp", "r");
+			  $inf=fopen(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA.tmp", "r");
 			  $i=0;
 			  $CMS="";
 			  while (!feof($inf)) 
@@ -197,10 +197,10 @@ class Facturacion
 			      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
 			    }
 			#Genera XML
-			file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml", $results->loginCmsReturn);
+			file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml", $results->loginCmsReturn);
 
 		}
-		$xml = json_encode(simplexml_load_file(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml"));
+		$xml = json_encode(simplexml_load_file(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA.xml"));
 		$TA = json_decode($xml,true);
 		$token = $TA['credentials']['token'];
 		$sign = $TA['credentials']['sign'];
@@ -231,8 +231,8 @@ class Facturacion
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
 		    }
 
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-compultimoautorizado.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-compultimoautorizado.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-compultimoautorizado.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-compultimoautorizado.json",$json_obj);
 		$response = json_decode($json_obj, true);
 		return $response['FECompUltimoAutorizadoResult']['CbteNro'];
 	}
@@ -323,8 +323,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -332,7 +332,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -342,21 +342,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->errores = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];
-					
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -414,8 +459,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -423,7 +468,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -433,24 +478,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];
-					
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
-				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -508,8 +595,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -517,7 +604,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -527,21 +614,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->errores = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];
-					
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -600,8 +732,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -609,7 +741,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -619,20 +751,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->errores = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];	
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -691,8 +869,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -700,7 +878,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -710,21 +888,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->errores = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];
-					
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -783,8 +1006,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-caesolicitar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -792,7 +1015,7 @@ class Facturacion
 
 		#LEEMOS LOS DATOS
 
-		$data = file_get_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
+		$data = file_get_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-caesolicitar.json");
 		$json = json_decode($data, true);
 		$response=array('success'=>false);
 		$contenido = $json['FECAESolicitarResult'];
@@ -802,21 +1025,66 @@ class Facturacion
 				$this->cae = $contenido['FeDetResp']['FECAEDetResponse']['CAE'];
 				$this->vencimiento_cae = $contenido['FeDetResp']['FECAEDetResponse']['CAEFchVto'];
 				if(array_key_exists('Obs', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Obs'];
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Obs'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
 				}
 			}else if($contenido['FeDetResp']['FECAEDetResponse']['Resultado']=="R"){
 				$this->resultado = "R";
 				if(array_key_exists('Observaciones', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->observaciones = $contenido['FeDetResp']['FECAEDetResponse']['Observaciones'];
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Observaciones'] as $error){
+						if(!array_key_exists('Obs', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->observaciones = $arr;
 				}if(array_key_exists('Errors', $contenido['FeDetResp']['FECAEDetResponse'])){
-					$this->errores = $contenido['FeDetResp']['FECAEDetResponse']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeDetResp']['FECAEDetResponse']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido)){
-					$this->errores = $contenido['Errors'];
-					
+					$arr = array();
+					foreach( $contenido['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}if(array_key_exists('Errors', $contenido['FeCabResp'])){
-					$this->errores = $contenido['FeCabResp']['Errors'];
-					
+					$arr = array();
+					foreach($contenido['FeCabResp']['Errors'] as $error){
+						if(!array_key_exists('Err', $contenido)){
+							array_push($arr, $this->traducir_error($error['Code']));
+						}else{
+							foreach ($error as $err) {
+								array_push($arr, $this->traducir_error($err['Code']));
+							}
+						}
+					}
+					$this->errores = $arr;
 				}
 			}
 		}else{
@@ -891,8 +1159,8 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-tiposiva.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-tiposiva.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-tiposiva.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-tiposiva.json",$json_obj);
 		 if (is_soap_fault($results)) 
 		    {
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
@@ -911,8 +1179,8 @@ class Facturacion
 	{
 		#CHECKEA SI YA EXISTE ACCESO
 		if(file_exists($this->cert)){
-			if(file_exists(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml")){
-				$xml = simplexml_load_file(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml");
+			if(file_exists(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml")){
+				$xml = simplexml_load_file(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml");
 				$exp = $xml->header->expirationTime;
 				$now = date('c',date('U'));
 			}else{
@@ -942,17 +1210,17 @@ class Facturacion
 			$TRA->header->addChild('generationTime',date('c',date('U')-60));
 			$TRA->header->addChild('expirationTime',date('c',date('U')+60));
 			$TRA->addChild('service',$ws);
-			$TRA->asXML(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.xml");
+			$TRA->asXML(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.xml");
 
 			#FIRMA TICKET DE ACCESO CON CERTIFICADO
 
-			$STATUS=openssl_pkcs7_sign(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.xml", getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.tmp", "file://".$this->cert,
+			$STATUS=openssl_pkcs7_sign(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.xml", storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.tmp", "file://".$this->cert,
 			    array("file://".$this->key, $this->PASSPHRASE),
 			    array(),
 			    !PKCS7_DETACHED
 			    );
 			  if (!$STATUS) {exit("ERROR generating PKCS#7 signature\n");}
-			  $inf=fopen(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.tmp", "r");
+			  $inf=fopen(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TRA_persona.tmp", "r");
 			  $i=0;
 			  $CMS="";
 			  while (!feof($inf)) 
@@ -972,10 +1240,10 @@ class Facturacion
 			      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
 			    }
 			#Genera XML
-			file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml", $results->loginCmsReturn);
+			file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml", $results->loginCmsReturn);
 
 		//}
-		$xml = json_encode(simplexml_load_file(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml"));
+		$xml = json_encode(simplexml_load_file(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_TA_persona.xml"));
 		$TA = json_decode($xml,true);
 		$token = $TA['credentials']['token'];
 		$sign = $TA['credentials']['sign'];
@@ -985,7 +1253,7 @@ class Facturacion
 
 
 	public function persona($cuit_persona){
-		$this->Autorizacion_persona("ws_sr_padron_a5");
+		$this->Autorizacion_persona("ws_sr_constancia_inscripcion");
 
 		#LLAMAMOS CLIENTE SOAP
 
@@ -1015,13 +1283,12 @@ class Facturacion
 		#GUARDAMOS RESPONSE
 
 		$json_obj = json_encode($results);
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-getPersona.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-Persona.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-getPersona.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-Persona.json",$json_obj);
 		if (is_soap_fault($results)) 
 	    {
 	      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
 	    }
-	    dd($results);
 
 	}
 
@@ -1048,11 +1315,81 @@ class Facturacion
 		      exit("SOAP Fault: ".$results->faultcode."\n".$results->faultstring."\n");
 		    }
 
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-compconsultar.xml",$client->__getLastRequest());
-		file_put_contents(getcwd()."/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-compconsultar.json",$json_obj);
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_request-compconsultar.xml",$client->__getLastRequest());
+		file_put_contents(storage_path()."/app/public/facturacion/xml/".Auth::user()->cuit.'/'.$this->cuit_emisor."_response-compconsultar.json",$json_obj);
 		$response = json_decode($json_obj, true);
 		return $response;
 	}
+
+	/*MANEJAR CODIGOS DE ERROR*/
+	public function traducir_error($codigo){
+		switch ($codigo) {
+			case '10000':
+				return 'El CUIT emisor no se encuentra autorizado a emitir el comprobante.';
+				break;
+			case '10001':
+				return 'La cantidad de registros enviados debe estar comprendida entre 1 y 9998.';
+				break;
+			case '10002':
+				return 'Las cantidades de registros enviados declaradas no coinciden.';
+				break;
+			case '10004':
+				return 'El punto de venta debe estar comprendido entre 1 y 99998.';
+				break;
+			case '10005':
+				return 'El punto de venta debe estar dado de alta y ser del tipo RECE.';
+				break;
+			case '10006':
+				return 'El tipo de comprobante no es válido. Debe ser un valor numérico mayor a 0.';
+				break;
+			case '10007':
+				return 'El tipo de comprobante debe ser:
+							- 01, 02, 03, 04, 05,34,39,60, 63 para los clase A
+							- 06, 07, 08, 09, 10, 35, 40,64, 61 para los clase B.
+							- 11, 12, 13, 15 para los clase C.
+							- 51, 52, 53, 54 para los clase M.
+							- 49 para los Bienes Usados.';
+				break;
+			case '10008':
+				return 'El número de comprobante debe estar comprendido entre 1 y 99999999.';
+				break;
+			case '10010':
+				return 'El número de comprobante debe estar comprendido entre 1 y 99999999.';
+				break;
+			case '10011':
+				return '"Comprobante desde:" debe ser mayor o igual a "Comprobante hasta:"';
+				break;
+			case '10013':
+				return 'Para comprobantes tipo "A" es obligatorio escribir el CUIT del cliente.';
+				break;
+			case '10014':
+				return 'El monto del comprobante debe ser menor a $5000.';
+				break;
+			case '10015':
+				return 'Si el monto del comprobante excede los $5000 se deberá especificar el DNI/CUIT del cliente.';
+				break;
+			case '10016':
+				return 'El N° de comprobante debe ser mayor al último autorizado.';
+				break;
+			case '10018':
+				return 'Error en el envío de los importes de IVA';
+				break;
+			case '10013':
+				return 'El CUIT emisor no se encuentra autorizado a emitir el comprobante';
+				break;
+			case '10013':
+				return 'El CUIT emisor no se encuentra autorizado a emitir el comprobante';
+				break;
+			case '10013':
+				return 'El CUIT emisor no se encuentra autorizado a emitir el comprobante';
+				break;
+			
+			default:
+				return 'Error interno al generar comprobante, por favor comuníquese con un administrador.';
+				break;
+		}
+	}
+
 }
 
 ?>

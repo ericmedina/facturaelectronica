@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CategoriaProducto;
 use Laracasts\Flash\FlashNotifier;
+use Auth;
+use App\Actividad;
 
 
 class CategoriaProductoController extends Controller
@@ -41,6 +43,11 @@ class CategoriaProductoController extends Controller
         $categoria = new CategoriaProducto();
         $categoria->categoria = $request->categoria;
         $categoria->save();
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Agrego la categoria ".$categoria->categoria;
+        $actividad->save();
         flash("<b>¡$categoria->categoria</b> ha sido agregado con éxito!")->success()->important();
         return redirect(route('categoriaproducto.index'));
     }
@@ -78,8 +85,14 @@ class CategoriaProductoController extends Controller
     public function update(Request $request, $id)
     {
         $categoria = CategoriaProducto::find($id);
+        $categoria_vieja=$categoria->categoria;
         $categoria->categoria = $request->categoria;
         $categoria->save();
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Edito la categoria ".$categoria_vieja." por ".$categoria->categoria;
+        $actividad->save();
         flash("<b>¡$categoria->categoria</b> ha sido editado con éxito!")->warning()->important();
         return redirect(route('categoriaproducto.index'));
     }
@@ -94,6 +107,11 @@ class CategoriaProductoController extends Controller
     {
         $categoria = CategoriaProducto::find($id);
         $categoria->delete();
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Elimino la categoria ".$categoria->categoria;
+        $actividad->save();
         flash("<b>¡$categoria->categoria</b> se ha eliminado con éxito!")->error()->important();
         return redirect(route('categoriaproducto.index'));
     }

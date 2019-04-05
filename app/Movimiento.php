@@ -28,4 +28,26 @@ class Movimiento extends Model
     public function resumen_cuenta(){
         return $this->belongsTo('App\ResumenCuenta', 'movimiento_id', 'id');
     }
+    public function codigo_comprobante($comprobante){
+        switch ($comprobante) {
+            case 'A':
+                return '01';
+                break;
+            case 'NCA':
+                return '03';
+                break;
+            case 'B':
+                return '06';
+                break;
+            case 'NCB':
+                return '08';
+                break;
+            case 'C':
+                return '11';
+                break;
+            case 'NCC':
+                return '13';
+                break;
+        }
+    }
 }

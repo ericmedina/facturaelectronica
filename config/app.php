@@ -181,6 +181,7 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

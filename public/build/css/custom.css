@@ -241,17 +241,6 @@ html , body{
 .menu_section {
     margin-bottom: 35px
 }
-.menu_section h3 {
-    padding-left: 15px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: .5px;
-    font-weight: bold;
-    font-size: 11px;
-    margin-bottom: 0;
-    margin-top: 0;
-    text-shadow: 1px 1px #000
-}
 .menu_section>ul {
     margin-top: 10px
 }
@@ -496,8 +485,8 @@ body .container.body .right_col {
 body {
     height: 100%;
     color: #3f4c5a;
-    background: #2A3F54;
-    font-family: Montserrat, sans-serif;
+    background: #F1F1F1;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.471
@@ -694,7 +683,6 @@ a:focus {
 }
 .top_nav .navbar-right {
     margin: 0;
-    width: 70%;
     float: right
 }
 .top_nav .navbar-right li {
@@ -1096,7 +1084,6 @@ h2 {
     margin: 5px 0 6px;
     display: block;
     text-overflow: ellipsis;
-    overflow: hidden;
     white-space: nowrap
 }
 .x_title h2 small {
@@ -4265,3 +4252,6 @@ table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
     background-color: #ffff !important;
 }
 /** /bootstrap-datetimepicker **/
+.fila-seleccionada{
+    border-color: rgb(255, 190, 20)!important;
+}

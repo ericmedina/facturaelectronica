@@ -8,4 +8,11 @@
 <!-- Custom Theme Scripts -->
 <script src="{{asset('build/js/custom.min.js')}}"></script>
 <script src="{{asset('js/index.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $(".fila-clickeable").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+  </script>
 @yield('js', '')

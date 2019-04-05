@@ -9,3 +9,8 @@ $('#btn-observaciones').on('click', function(){
 		$('#message').addClass('alert-fixed');
 		$('#message').css('display', 'block');
 });
+$(':submit').on('click', function(){
+	$(this).attr('disabled',true);
+	form = $(this).parents('form:first');
+	form.submit();
+});

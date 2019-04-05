@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Empresa;
 use App\Fiscal;
-
+use App\EmpresaContador;
+use Auth;
+use App\Actividad;
+use App\Contador;
+use App\Contrato;
+use Carbon\Carbon;
 class EmpresaController extends Controller
 {
     /**
@@ -36,7 +41,9 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $empresa = new Empresa();
+            
+
+       $empresa = new Empresa();
         $empresa->razon_social = $request->razon_social;
         $empresa->cuit = $request->cuit;
         $empresa->nombre_fantasia = $request->nombre_fantasia;
@@ -54,6 +61,15 @@ class EmpresaController extends Controller
             $fiscal = new Fiscal();
             $fiscal->empresa_id =  $empresa->id;
             $fiscal->save();
+            
+
+        //--------fin del guardado de actividad----------------
+              $actividad=new Actividad();
+              $actividad->usuario_id=Auth::id();
+              $actividad->tipo_usuario="Empresa";
+              $actividad->actividad="Se creo la empresa ".$nombre_fantasia;
+              $actividad->save();
+        //--------fin del guardado de actividad----------------
         }
     }
 
@@ -86,9 +102,40 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $acepta)
     {
-        //
+        //lo uso para aceptar este contador a una empresa
+       // dd($a);
+        if($acepta=='si'){
+             $empresa_contador=EmpresaContador::find(Auth::user()->empresa_contador->id);
+             $empresa_contador->estado='aprobado';
+             $empresa_contador->save();
+             //--------fin del guardado de actividad----------------
+              $empresa=Empresa::find($empresa_contador->empresa_id);
+              $contador=Contador::find($empresa_contador->contador_id);
+              $actividad=new Actividad();
+              $actividad->usuario_id=Auth::id();
+              $actividad->tipo_usuario="Empresa";
+              $actividad->actividad="La empresa ".$empresa->nombre_fantasia." acepto al contador ".$contador->nombre;
+              $actividad->save();
+        //--------fin del guardado de actividad----------------
+
+        }
+        if($acepta=='no'){
+             $empresa_contador=EmpresaContador::find(Auth::user()->empresa_contador->id);
+             $empresa_contador->estado='rechazado';
+             $empresa_contador->save();
+              //--------fin del guardado de actividad----------------
+              $empresa=Empresa::find($empresa_contador->empresa_id);
+              $contador=Contador::find($empresa_contador->contador_id);
+              $actividad=new Actividad();
+              $actividad->usuario_id=Auth::id();
+              $actividad->tipo_usuario="Empresa";
+              $actividad->actividad="La empresa ".$empresa->nombre_fantasia." rechazo al contador ".$contador->nombre;
+              $actividad->save();
+                //--------fin del guardado de actividad----------------
+        }
+        return redirect("/");
     }
 
     /**

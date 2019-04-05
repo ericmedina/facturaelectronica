@@ -9,6 +9,7 @@
       <div class="modal-body">
       </div>
       <div class="modal-footer">
+        <a id="boton_sendMail" class="boton boton-confirmar">Enviar por mail</a>
         <a href="" id="boton_imprimir" target="_blank" class="boton boton-confirmar">Imprimir</a>
       </div>
 

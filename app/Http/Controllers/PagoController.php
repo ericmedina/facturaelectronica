@@ -7,6 +7,8 @@ use App\Pago;
 use Carbon\Carbon;
 use App\Movimiento;
 use App\Proveedor;
+use App\Actividad;
+use Auth;
 
 class PagoController extends Controller
 {
@@ -43,6 +45,7 @@ class PagoController extends Controller
         $pago->proveedor_id = $request->id;
         $pago->fecha = $fecha;
         $pago->pago = $request->pago;
+        dd($request->pago);
         $pago->save();
         $proveedor = Proveedor::find($request->id);
         $proveedor->deuda -= $request->pago;
@@ -53,6 +56,13 @@ class PagoController extends Controller
         $movimiento->movimiento = "PAGO";
         $movimiento->saldo = $saldo_anterior-$request->pago;
         $movimiento->save();
+         //-------- guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Pago $".$request->pago." al proveedor ".$proveedor->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         return redirect(route('proveedor.index'));
     }
 

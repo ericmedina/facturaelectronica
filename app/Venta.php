@@ -16,8 +16,8 @@ class Venta extends Model
     public function cliente(){
     	return $this->belongsTo('App\Cliente');
     }
-    public function Movimiento(){
-    	return $this->hasOne('App\Movimiento');
+    public function movimiento(){
+    	return $this->hasOne('App\Movimiento', 'movimiento_id', 'id');
     }
     public function detalle(){
         return $this->hasMany('App\Detalle');
@@ -39,5 +39,27 @@ class Venta extends Model
     }
     public function scopeCuentas($query){
         return $query->select(DB::raw('cliente_id, sum(total) as total'))->where('estado', 'Pendiente')->groupBy('cliente_id');
+    }
+    public function comprobante(){
+        switch ($this->tipo_comprobante) {
+            case 'A':
+                return $this->belongsTo('App\FacturaA', 'num_comprobante');
+                break;
+            case 'NCA':
+                return $this->belongsTo('App\CreditoA', 'num_comprobante');
+                break;
+            case 'B':
+                return $this->belongsTo('App\FacturaB', 'num_comprobante');
+                break;
+            case 'NCB':
+                return $this->belongsTo('App\CreditoB', 'num_comprobante');
+                break;
+            case 'C':
+                return $this->belongsTo('App\FacturaC', 'num_comprobante');
+                break;
+            case 'NCC':
+                return $this->belongsTo('App\CreditoC', 'num_comprobante');
+                break;
+        }
     }
 }

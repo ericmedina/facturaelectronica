@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Generar comprobante - PampaDev')
 @section('contenido')
-<h1 class="text-center">Generar comprobantes</h1>
+<h2 class="text-center">Generar comprobantes</h2>
 @include('flash::message')
 <form action="/resumen_cuenta" method="POST" accept-charset="utf-8" name="form_comprobante" id="form_comprobante" class="form-inline form-label-left">
   {{ csrf_field() }}

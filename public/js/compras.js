@@ -67,7 +67,14 @@ $('#btn-guardar-compra').on('click', function(){
 
         $('#alicuotas').val(JSON.stringify(alic));
         $('#detalle').val(JSON.stringify(array_detalles));
-        $('#form_compra').submit();
+        
+        if($("#id").val()==""){
+            $('#message_text').html('Debe seleccionar un proveedor antes de guardar la compra');
+             $('.modal_message').modal('toggle');
+        }else{
+             $('#form_compra').submit();
+            
+        }
 });
 
 
@@ -78,6 +85,7 @@ $('#buscar_producto_compra').on('click', function(){
 	$('.modal-agregar-compras').modal('show');
 });
 $('#buscar_producto').on('keyup', function(){
+    $('#tabla_productos').parents('.table-modal').removeClass('hidden');
     var fila="";
     $.ajax({
 		type:'GET',
@@ -118,6 +126,7 @@ $('#tabla_productos').on('click', '.boton-agregar-producto', function(){
 	precio = $('#precio_producto').val();
     cantidad = $('#cantidad_detalle').val();
     $('#total_detalle').val(parseFloat(cantidad*precio));
+    $('#tabla_productos').parents('.table-modal').addClass('hidden');
 });
 $('#cantidad_detalle').on('keyup', function(){
 	cantidad = $(this).val();

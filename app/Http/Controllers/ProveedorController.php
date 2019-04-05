@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Proveedor;
 use Laracasts\Flash\FlashNotifier;
+use App\Actividad;
+
 
 class ProveedorController extends Controller
 {
@@ -46,6 +48,13 @@ class ProveedorController extends Controller
         $proveedor->email = $request->email;
         $proveedor->observaciones = $request->observaciones;
         $proveedor->save();
+         //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Agrego el proveedor ".$request->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$proveedor->nombre</b> ha sido agregado con éxito!")->success()->important();
         return redirect(route('proveedor.index'));
     }
@@ -89,6 +98,13 @@ class ProveedorController extends Controller
         $proveedor->email = $request->email;
         $proveedor->observaciones = $request->observaciones;
         $proveedor->save();
+        //--------guardado de actividad----------------
+        $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Edito datos del proveedor ".$request->nombre;
+        $actividad->save();
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$proveedor->nombre</b> ha sido editado con éxito!")->warning()->important();
         return redirect(route('proveedor.index'));
 
@@ -103,7 +119,17 @@ class ProveedorController extends Controller
     public function destroy($id)
     {
         $proveedor = Proveedor::find($id);
-        $proveedor->delete();
+        $proveedor_nombre=$proveedor->nombre;
+        //$proveedor->delete();
+        //--------guardado de actividad----------------
+        if($proveedor->delete()){
+            $actividad=new Actividad();
+            $actividad->usuario_id=Auth::id();
+            $actividad->tipo_usuario="Empresa";
+            $actividad->actividad="Elimino el proveedor ".$proveedor_nombre;
+            $actividad->save();
+        }
+        //--------fin del guardado de actividad----------------
         flash("<b>¡$proveedor->nombre</b> se ha eliminado con éxito!")->error()->important();
         return redirect(route('proveedor.index'));
     }

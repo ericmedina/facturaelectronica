@@ -33,6 +33,7 @@ use App\Venta;
 use App\Reg_Venta_Cbte;
 use App\Reg_Venta_Alic;
 use App\Alicuota;
+use App\Actividad;
 use App\ResumenCuenta;
 
 class FacturacionController extends Controller
@@ -47,15 +48,16 @@ class FacturacionController extends Controller
         }
         return view('facturacion.create')->with('fecha', $fecha)->with('responsabilidades_iva', $responsabilidades_iva)->with('iva', $iva)->with('vencimiento', Carbon::today()->addDays(29)->format('Y-m-d'));
     }
-
     public function save(Request $request){
-        
         $facturacion = new Facturacion();
     	$alicuotas = json_decode($request->alicuotas);
         $detalles = json_decode($request->detalle);
         $cliente = Cliente::searchCuit(str_replace("/", "", str_replace("-", "", $request->cuit)))->get()->first();
         $cliente_id = "";
         $i = 0;
+        if($request->nombre == '' || $request->nombre == null){
+            $request->nombre = "CONSUMIDOR FINAL";
+        }
         foreach ($alicuotas as $key => $value) {
             $i++;
         }
@@ -77,7 +79,9 @@ class FacturacionController extends Controller
         if ($request->tipo_comprobante == "A") {
             $factura = new FacturaA();
             $factura->fecha = $request->fecha;
-            //$request->vencimiento = $request->fecha+30;
+            
+            $fecha = new Carbon($request->fecha);
+            $factura->vencimiento = $fecha->addMonth(1)->format('Y-m-d');
             $factura->total = $request->total;
             $factura->forma_pago = $request->forma_pago;
             if($request->cuit == ""){
@@ -126,7 +130,7 @@ class FacturacionController extends Controller
             $regimen_venta_cbte->num_comprobante_hasta = str_pad($request->num_comprobante, 20, "0", STR_PAD_LEFT);
             $regimen_venta_cbte->tipo_doc = $facturacion->doc_tipo($request->cuit);
             $regimen_venta_cbte->nro_doc = str_pad(str_replace("/", "", str_replace("-", "", $request->cuit)),20, " ", STR_PAD_LEFT);
-            $regimen_venta_cbte->cliente = str_pad($request->nombre, 30, " ", STR_PAD_LEFT);
+            $regimen_venta_cbte->cliente = str_pad(substr($request->nombre,0,30), 30, " ", STR_PAD_RIGHT);
             $regimen_venta_cbte->total = str_pad(str_replace(".", "", $request->total), 15, "0", STR_PAD_LEFT);
             $regimen_venta_cbte->importe_neto = str_pad(str_replace(".", "", $request->subtotal), 15, "0", STR_PAD_LEFT);
             $regimen_venta_cbte->percepcion_no_categorizados = str_pad(0, 15, "0", STR_PAD_LEFT);
@@ -190,7 +194,9 @@ class FacturacionController extends Controller
         }else if($request->tipo_comprobante == "B"){
             $factura = new FacturaB();
             $factura->fecha = $request->fecha;
-            //$request->vencimiento = $request->fecha+30;
+            
+            $fecha = new Carbon($request->fecha);
+            $factura->vencimiento = $fecha->addMonth(1)->format('Y-m-d');
             $factura->total = $request->total;
             $factura->forma_pago = $request->forma_pago;
             if($request->cuit == ""){
@@ -714,6 +720,41 @@ class FacturacionController extends Controller
                 $factura->cliente_id = $cliente_id;
             }
             $factura->save();
+
+            $venta = new Venta();
+            $venta->cliente_id = $factura->cliente_id;
+            $venta->fecha = $factura->fecha;
+            $venta->tipo_comprobante = "A";
+            $venta->num_comprobante = $factura->id;
+            $venta->total = $factura->total;
+            $venta->save();
+
+            $saldo_anterior = Movimiento::orderBy('id','DESC')->get()->first()->saldo;
+            $movimiento = new Movimiento();
+            $movimiento->movimiento_id = $venta->id;
+            $movimiento->movimiento = "VENTA";
+            if($request->forma_pago == "cuenta_corriente"){
+                $movimiento->saldo = $saldo_anterior;
+            }else{
+                $movimiento->saldo = $saldo_anterior+$factura->total;
+            }
+            $movimiento->save();
+            
+            foreach ($detalles as $key => $value) {
+                $detalle = new Detalle();
+                $detalle->venta_id = $venta->id;
+                $detalle->descripcion = $value->detalle;
+                $detalle->cantidad = $value->cantidad;
+                $detalle->precio = $value->importe;
+                $detalle->total = floatval($value->importe)*floatval($value->cantidad);
+                $detalle->tipo = $value->tipo;
+                $detalle->save();   
+                if($value->tipo == 'producto' && $value->id != "0"){
+                    $producto = Producto::find($value->id);
+                    $producto->stock = floatval($producto->stock)-floatval($value->cantidad);
+                    $producto->save();
+                }
+            }
         }else if($request->tipo_comprobante == "P"){
             $factura = new Presupuesto();
             $factura->fecha = $request->fecha;
@@ -725,13 +766,20 @@ class FacturacionController extends Controller
             }
             $factura->save();
         }
-        return redirect(url('facturas/create'));
+        //-----------guarda la actividad--------------------
+            $actividad=new Actividad();
+            $actividad->usuario_id=Auth::id();
+            $actividad->tipo_usuario="Empresa";
+            $actividad->actividad="Agrego un nuevo comprobante: ".$request->tipo_comprobante.$request->num_comprobante;
+            $actividad->save();
+        //--------fin del guardado de actividad----------------
+        return $venta->id;
     }
     public function create_keys(){
 		$rsa = new RSA();
 		$keys =json_encode($rsa->createKey(4096));
 		$privatekey = json_decode($keys)->privatekey;
-		$file = public_path().'/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.".key";
+		$file = storage_path().'/app/public/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.".key";
 		if(!file_exists($file)){
 			fopen($file, "w+");
 			$file = fopen($file, "w+") or die("Unable to open file!");;
@@ -750,7 +798,7 @@ class FacturacionController extends Controller
 		$csr = $x509->signCSR();
 
 		$x509->saveCSR($csr);
-		$file = public_path()."/facturacion/certs/".Auth::user()->cuit."/".Auth::user()->cuit.".csr";
+		$file = storage_path()."/app/public/facturacion/certs/".Auth::user()->cuit."/".Auth::user()->cuit.".csr";
 		if(!file_exists($file)){
 			fopen($file, "w+");
 			$file = fopen($file, "w+") or die("Unable to open file!");;
@@ -764,15 +812,20 @@ class FacturacionController extends Controller
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'inline; ' . $archivo,
             ];
-        return Response::make(File::get(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$archivo.'.pdf'), 200, $headers);
+            $actividad=new Actividad();
+        $actividad->usuario_id=Auth::id();
+        $actividad->tipo_usuario="Empresa";
+        $actividad->actividad="Visualizó el comprobante: ".$archivo;
+        $actividad->save();
+        return Response::make(File::get(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$archivo.'.pdf'), 200, $headers);
     }
     public function generar_comprobante(Request $request){
     	$alicuotas = json_decode($request->alicuotas, true);
         $detalles = json_decode($request->detalle);
         $facturacion = new Facturacion();
         //URLS Y CERTS
-        $facturacion->cert = public_path().'/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.'.crt';
-        $facturacion->key = public_path().'/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.'.key';
+        $facturacion->cert = storage_path().'/app/public/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.'.crt';
+        $facturacion->key = storage_path().'/app/public/facturacion/certs/'.Auth::user()->cuit.'/'.Auth::user()->cuit.'.key';
         //DATOS EMISOR
         $facturacion->cuit_emisor = Auth::user()->cuit;
 
@@ -784,8 +837,13 @@ class FacturacionController extends Controller
         $facturacion->tipo_doc = $facturacion->doc_tipo($request->cuit);
         //DATOS COMPROBANTE
         $facturacion->tipo_comprobante = $facturacion->tipo_comprobante($request->tipo_comprobante);
-        $facturacion->comprobante_desde =intval($request->num_comprobante);
-        $facturacion->comprobante_hasta =intval($request->num_comprobante);
+        if(config('facturacion.homo')){
+            $facturacion->comprobante_desde = intval($facturacion->UltimoAutorizado())+1;//intval($request->num_comprobante);
+            $facturacion->comprobante_hasta = intval($facturacion->UltimoAutorizado())+1;//intval($request->num_comprobante);
+        }else{
+            $facturacion->comprobante_desde =intval($request->num_comprobante);
+            $facturacion->comprobante_hasta =intval($request->num_comprobante);
+        }
         $facturacion->comprobante_fecha = Carbon::parse($request->fecha)->format('Ymd');
         $facturacion->importe_total = $request->total;
         $facturacion->importe_neto = $request->subtotal;
@@ -809,6 +867,23 @@ class FacturacionController extends Controller
         }elseif($request->tipo_comprobante == "P"){
             $facturacion->resultado = "A";
         }
+        if($facturacion->resultado == "A"){
+            //-----------guarda la actividad--------------------
+            $actividad=new Actividad();
+            $actividad->usuario_id=Auth::id();
+            $actividad->tipo_usuario="Empresa";
+            $actividad->actividad="Genero un nuevo comprobante: ".$request->tipo_comprobante.$request->num_comprobante;
+            $actividad->save();
+            //--------fin del guardado de actividad----------------
+        }else{
+            //-----------guarda la actividad--------------------
+            $actividad=new Actividad();
+            $actividad->usuario_id=Auth::id();
+            $actividad->tipo_usuario="Empresa";
+            $actividad->actividad="Fue rechazado su comprobante: ".$request->tipo_comprobante.$request->num_comprobante;
+            $actividad->save();
+            //--------fin del guardado de actividad----------------
+        }
         
         echo json_encode($facturacion);
         if($request->tipo_comprobante == "R"){
@@ -816,17 +891,17 @@ class FacturacionController extends Controller
             $vencimiento = "NO EXISTE";
             $codigo = "NO";
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
             $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>"",'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>"", 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => $request->tipo_comprobante, 'titulo_factura'=>"Remito", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }elseif($request->tipo_comprobante == "P"){
             $cae = "NO EXISTE";
             $vencimiento = "NO EXISTE";
             $codigo = "NO";
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
                         $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>"",'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>"", 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => $request->tipo_comprobante, 'titulo_factura'=>"Presupuesto", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }elseif($request->tipo_comprobante == "NCA"){
             $cae = $facturacion->cae;
             $vencimiento = $facturacion->vencimiento_cae;
@@ -834,9 +909,9 @@ class FacturacionController extends Controller
             $bar = new DNS1D;
             $barcode = '<img src="data:image/png;base64,' . $bar->getBarcodePNG("$codigo", "I25+",1.2,45,array(1,1,1)) . '" alt="barcode"   />';
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
             $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>$barcode,'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>date("d-m-Y", strtotime($facturacion->vencimiento_cae)), 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => "A", 'titulo_factura'=>"Nota de crédito", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }elseif($request->tipo_comprobante == "NCB"){
             $cae = $facturacion->cae;
             $vencimiento = $facturacion->vencimiento_cae;
@@ -844,9 +919,9 @@ class FacturacionController extends Controller
             $bar = new DNS1D;
             $barcode = '<img src="data:image/png;base64,' . $bar->getBarcodePNG("$codigo", "I25+",1.2,45,array(1,1,1)) . '" alt="barcode"   />';
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
             $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>$barcode,'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>date("d-m-Y", strtotime($facturacion->vencimiento_cae)), 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => "B", 'titulo_factura'=>"Nota de crédito", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }elseif($request->tipo_comprobante == "NCC"){
             $cae = $facturacion->cae;
             $vencimiento = $facturacion->vencimiento_cae;
@@ -854,9 +929,9 @@ class FacturacionController extends Controller
             $bar = new DNS1D;
             $barcode = '<img src="data:image/png;base64,' . $bar->getBarcodePNG("$codigo", "I25+",1.2,45,array(1,1,1)) . '" alt="barcode"   />';
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
             $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>$barcode,'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>date("d-m-Y", strtotime($facturacion->vencimiento_cae)), 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => "C", 'titulo_factura'=>"Nota de crédito", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }else{
             $cae = $facturacion->cae;
             $vencimiento = $facturacion->vencimiento_cae;
@@ -864,12 +939,11 @@ class FacturacionController extends Controller
             $bar = new DNS1D;
             $barcode = '<img src="data:image/png;base64,' . $bar->getBarcodePNG("$codigo", "I25+",1.2,45,array(1,1,1)) . '" alt="barcode"   />';
             $name = $request->tipo_comprobante.$request->num_comprobante.'.pdf';
-            fopen(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
+            fopen(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name,'w+');
             $pdf = PDF::loadView('layouts.pdf.comprobante', ['barcode'=>$barcode,'codigo'=>$codigo,'detalles'=>$detalles, 'Comprobante'=>$request, 'vencimiento'=>date("d-m-Y", strtotime($facturacion->vencimiento_cae)), 'cae'=>$facturacion->cae, 'num_comprobante' => $request->num_comprobante, 'tipo_comprobante' => $facturacion->tipo_comprobante, 'comp' => $request->tipo_comprobante, 'titulo_factura'=>"Factura", 'punto_venta'=>$facturacion->punto_venta, 'fecha'=>$request->fecha]);
-            $pdf->save(public_path().'/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
+            $pdf->save(storage_path().'/app/public/facturacion/comprobantes/'.Auth::user()->cuit.'/'.$name);
         }
     }
-
     public function num_comprobante($tipo){
         if($tipo == "A"){
             $factura = FacturaA::orderBy('id', 'DESC')->get()->first();

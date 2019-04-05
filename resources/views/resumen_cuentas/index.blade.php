@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Cuentas corrientes - PampaDev')
 @section('contenido')
-<h1 class="text-center">Cuentas corrientes</h1>
+<h2 class="text-center">Cuentas corrientes</h2>
 @include('flash::message')
 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
   <thead>

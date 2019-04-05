@@ -13,16 +13,16 @@ class Empresas extends Migration
      */
     public function up()
     {
-        Schema::create('empresas', function(Blueprint $table){
-            $table->increments('id');
+        Schema::create('01empresas', function(Blueprint $table){
+            $table->increments('id')->unsigned();
             $table->string('razon_social');
             $table->string('cuit');
             $table->string('nombre_fantasia')->nullable();
-            $table->string('direccion');
-            $table->string('localidad');
-            $table->string('provincia');
-            $table->string('telefono');
-            $table->string('email');
+            $table->string('direccion')->default('');
+            $table->string('localidad')->default('');
+            $table->string('provincia')->default('');
+            $table->string('telefono')->default('');
+            $table->string('email')->default('');
             $table->string('password');
             $table->enum('tipo_actividad', ['productos', 'servicios', 'productos y servicios']);
             $table->integer('responsabilidad_iva_id')->unsigned();

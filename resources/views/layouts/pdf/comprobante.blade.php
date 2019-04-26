@@ -121,7 +121,7 @@
 		</div>
 	@else
 	<div style="font-size: 10px; padding-top: 5px;" >
-		<p><strong>CAE:</strong> {{$cae}} <strong>VENCIMIENTO:</strong> {{$vencimiento}}</p>
+		<p style="margin-bottom: 10px;"><strong>CAE:</strong> {{$cae}} <strong>VENCIMIENTO:</strong> {{$vencimiento}}</p>
 		{!!$barcode!!}
 		<p style="width: 300px;text-align: center;font-size: 11px;">{{$codigo}}</p>
 	</div>
@@ -246,7 +246,7 @@
 		</div>
 	@else
 	<div style="font-size: 10px; padding-top: 5px;" >
-		<p><strong>CAE:</strong> {{$cae}} <strong>VENCIMIENTO:</strong> {{$vencimiento}}</p>
+		<p style="margin-bottom: 10px;"><strong>CAE:</strong> {{$cae}} <strong>VENCIMIENTO:</strong> {{$vencimiento}}</p>
 		{!!$barcode!!}
 		<p style="width: 300px;text-align: center;font-size: 11px;">{{$codigo}}</p>
 	</div>

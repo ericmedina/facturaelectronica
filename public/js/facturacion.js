@@ -6,11 +6,7 @@ $(document).ready(function(){
         num_comprobante();
     //ENVIAR DATOS DE FACTURA A AFIP
         $('#btn-generar-comprobante').on('click', function(){
-            if($('#total').val() == '0' || $('#total').val() == '' || $('#tabla-detalle > tbody > tr').length <=0){
-                $('.modal_message #message_title').html('Error');
-                $('.modal_message #message_text').html('Por favor complete todos los campos');
-                $('.modal_message').modal('show');
-            }else{
+            if(checkComprobante()){
                 if($('#tipo_comprobante').val() == "NCA" || $('#tipo_comprobante').val() == "NCB" || $('#tipo_comprobante').val() == "NCC"){
                     $('.modal-assoc').modal('show');
                 }else{
@@ -61,10 +57,17 @@ $(document).ready(function(){
     //ABRIR DIALOG PRODUCTOS
         $('#boton-modal-producto').on('click', function(){
             $('.modal-agregar-producto').modal('show');
-            $('#buscar_producto').focus();
         });
         $('.modal-agregar-producto').on('shown.bs.modal', function() {
             $('#buscar_producto').focus();
+        });
+        $(".modal-agregar-producto").on("hidden.bs.modal", function () {
+            $('#cantidad_detalle').val('1');
+            $('#total_detalle').val('0');
+            $('#precio_producto').val('');
+            $('#hidden_precio').val("");
+            $('#hidden_id').val("0");
+            $('#buscar_producto').val('');
         });
     //ABRIR DIALOG SERVICIO
         $('#boton-modal-servicio').on('click', function(){
@@ -74,6 +77,15 @@ $(document).ready(function(){
         $('.modal-agregar-servicio').on('shown.bs.modal', function() {
             $('#buscar_servicio').focus();
         });
+        $(".modal-agregar-servicio").on("hidden.bs.modal", function () {
+            $('#cantidad_servicio').val('1');
+            $('#total_servicio').val('0');
+            $('#precio_servicio').val('');
+            $('#buscar_servicio').val('');
+            $('#hidden_precio_servicio').val("");
+            $('#iva_servicio').val(5);
+            $('#hidden_id_servicio').val("0");
+        });
     //AGREGAR DIALOG DESCRIPCION
         $('#boton-modal-descripcion').on('click', function(){
             $('.modal-agregar-descripcion').modal('show');
@@ -81,6 +93,12 @@ $(document).ready(function(){
         });
         $('.modal-agregar-descripcion').on('shown.bs.modal', function() {
             $('#descripcion').focus();
+        });
+        $(".modal-agregar-descripcion").on("hidden.bs.modal", function () {
+            $('#cantidad_descripcion').val('1');
+            $('#total_descripcion').val('0');
+            $('#precio_descripcion').val('');
+            $('#descripcion').val('');
         });
     //CHEQUEAR NUMERO COMPROBANTE SEGUN EL TIPO DE CBTE
         $('#tipo_comprobante').on('change', function(){
@@ -113,98 +131,11 @@ $(document).ready(function(){
             }
             num_comprobante();
         });
-    //ABRIR DIALOG DE BUSCAR CLIENTE
-        $('#boton-buscar-cliente').on('click', function(){
-            $('.modal-buscar-cliente').modal('show');
-            $('#buscar_cliente').focus();
-        });
-        $('.modal-buscar-cliente').on('shown.bs.modal', function() {
-            $('#buscar_cliente').focus();
-        });
     //BUSCAR CLIENTE
-        $('#buscar_cliente').on('keyup', function(){
-            var fila="";
-            $.ajax({
-                type:'GET',
-                url: '/clientes/search/'+$('#buscar_cliente').val(),
-                complete: function(data){
-                    clientes = JSON.parse(data.responseText);
-                    clientes.forEach( function(cliente, posicion) {
-                        fila = fila+ '<tr>'+
-                                    '<td data-label="Nombre">'+cliente.nombre+'</td>'+
-                                    '<td data-label="CUIT">'+cliente.cuit+'</td>'+
-                                    '<td class="hide">'+cliente.localidad+'</td>'+
-                                    '<td class="hide">'+cliente.direccion+'</td>'+
-                                    '<td class="hide">'+cliente.responsabilidades_iva .nombre+'</td>'+
-                                    '<td data-label="Acciones"><button  type="button" class="boton boton-opciones boton-agregar-cliente">Seleccionar</button></td>'+
-                                '</tr>';
-
-                    });
-                    $('#tabla_clientes > tbody').html(fila);
-                }
-            })
-        });
-    //SELECCIONAR CLIENTE DE LA TABLA BUSCAR Y MOSTRARLO EN INPUTS
-        $('#tabla_clientes').on('click', '.boton-agregar-cliente', function(){
-            $(this).parents("tr").addClass("tr-selected");
-            nombre = $(this).parents("tr").find("td").eq(0).html();;
-            cuit = $(this).parents("tr").find("td").eq(1).html();
-            localidad = $(this).parents("tr").find("td").eq(2).html();
-            direccion = $(this).parents("tr").find("td").eq(3).html();
-            iva = $(this).parents("tr").find("td").eq(4).html();
-            $('#nombre').val(nombre);
-            $('#cuit').val(cuit);
-            $('#localidad').val(localidad);
-            $('#direccion').val(direccion);
-            $('#resp_iva').val(iva).change();
-            $('.modal-buscar-cliente').modal('hide');
-        });
+        cliente = document.getElementById('nombre')
+        autocomplete_cliente(cliente);
 	//BUSCAR PRODUCTO
-    	$('#buscar_producto').on('keyup', function(){
-    	    var fila="";
-    	    $.ajax({
-    			type:'GET',
-    			url: '/productos/search/'+$('#buscar_producto').val(),
-    			complete: function(data){
-    				productos = JSON.parse(data.responseText);
-            if (productos.length > 0) {
-                $('#tabla_productos').parents('.table-modal').removeClass('hidden');
-            }else{
-                $('#tabla_productos').parents('.table-modal').addClass('hidden');
-            }
-    		        productos.forEach( function(producto, posicion) {
-    		        	fila = fila+ '<tr class="fila-seleccionada">'+
-    		        				'<td data-label="Codigo">'+producto.codigo+'</td>'+
-    		        				'<td data-label="Producto">'+producto.producto+'</td>'+
-    		        				'<td data-label="IVA">'+producto.iva.alicuota+'</td>'+
-                                    '<td data-label="Precio">'+producto.precio_venta+'</td>'+
-                                    '<td class="hide">'+producto.id+'</td>'+
-    		        				'<td class="hide">'+producto.iva_id+'</td>'+
-    		        				'<td data-label="Acciones"><button  type="button" class="boton boton-opciones boton-agregar-producto">Seleccionar</button></td>'+
-    		        			'</tr>';
-
-    		        });
-    		        $('#tabla_productos > tbody').html(fila);
-    			}
-    		})
-        });
-    //SELECCIONAR PRODUCTO
-        $('#tabla_productos').on('click', '.boton-agregar-producto', function(){
-            codigo = $(this).parents("tr").find("td").eq(0).html();;
-            producto = $(this).parents("tr").find("td").eq(1).html();
-            iva = $(this).parents("tr").find("td").eq(2).html();
-            iva_id = $(this).parents("tr").find("td").eq(5).html();
-            precio_venta = $(this).parents("tr").find("td").eq(3).html();
-            id = $(this).parents("tr").find("td").eq(4).html();
-            $('#buscar_producto').val(producto);
-            $('#precio_producto').val(precio_venta);
-            $('#hidden_precio').val(precio_venta);
-            $('#iva_producto').val(iva_id);
-            $('#hidden_id').val(id);
-            $('#total_detalle').val(parseFloat($('#cantidad_detalle').val()*precio_venta));
-            $('#cantidad_detalle').focus();
-            $('#tabla_productos').parents('.table-modal').addClass('hidden');
-        });
+        
     //MODIFICAR CANTIDAD
         $('#cantidad_detalle').on('keyup', function(){
         	cantidad = $(this).val();
@@ -250,49 +181,7 @@ $(document).ready(function(){
             }
         });
     //BUSCAR SERVICIO
-    	$('#buscar_servicio').on('keyup', function(){
-    	    var fila="";
-    	    $.ajax({
-    			type:'GET',
-    			url: '/servicios/search/'+$('#buscar_servicio').val(),
-    			complete: function(data){
-    				servicios = JSON.parse(data.responseText);
-            if (servicios.length > 0) {
-                $('#tabla_servicios').parents('.table-modal').removeClass('hidden');
-            }else{
-                $('#tabla_servicios').parents('.table-modal').addClass('hidden');
-            }
-    		        servicios.forEach( function(servicio, posicion) {
-    		        	fila = fila+ '<tr>'+
-    		        				'<td data-label="Descripcion">'+servicio.descripcion+'</td>'+
-    		        				'<td data-label="IVA">'+servicio.iva.alicuota+'</td>'+
-                                    '<td data-label="Precio">'+servicio.precio+'</td>'+
-                                    '<td class="hide">'+servicio.id+'</td>'+
-    		        				'<td class="hide">'+servicio.iva_id+'</td>'+
-    		        				'<td data-label="Acciones"><button  type="button" class="boton boton-opciones boton-agregar-servicio">Seleccionar</button></td>'+
-    		        			'</tr>';
-
-    		        });
-    		        $('#tabla_servicios > tbody').html(fila);
-    			}
-    		})
-        });
-    //SELECCIONAR SERVICIO
-        $('#tabla_servicios').on('click', '.boton-agregar-servicio', function(){
-            $(this).parents("tr").addClass("tr-selected");
-            descripcion = $(this).parents("tr").find("td").eq(0).html();;
-            iva = $(this).parents("tr").find("td").eq(1).html();
-            precio_venta = $(this).parents("tr").find("td").eq(2).html();
-            id= $(this).parents("tr").find("td").eq(3).html();
-            iva_id= $(this).parents("tr").find("td").eq(4).html();
-            $('#buscar_servicio').val(descripcion);
-            $('#precio_servicio').val(precio_venta);
-            $('#iva_servicio').val(iva_id);
-            $('#hidden_id_servicio').val(id);
-            $('#total_servicio').val(parseFloat($('#cantidad_servicio').val()*precio_venta));
-            $('#cantidad_servicio').focus();
-            $('#tabla_servicios').parents('.table-modal').addClass('hidden');
-        });
+    	
     //MODIFICAR CANTIDAD
         $('#cantidad_servicio').on('keyup', function(){
         	cantidad = $(this).val();
@@ -476,8 +365,8 @@ function generar_comprobante(){
 
         $('#alicuotas').val(JSON.stringify(alic));
         $('#detalle').val(JSON.stringify(array_detalles));
-        if(parseFloat($('#total').val())>100000 && $('#cuit').val() == ""){
-            alert("El DNI/CUIT no puede estar vacío si el monto supera los $1000");
+        if(parseFloat($('#total').val())>10000 && $('#cuit').val() == ""){
+            alert("El DNI/CUIT no puede estar vacío si el monto supera los $10000");
         }else{
             $('.modal-waiting-comprobante').modal('show');
             $.ajax({
@@ -541,6 +430,9 @@ function generar_comprobante(){
             });
         }
 }
+$(".modal-aprobado").on("hidden.bs.modal", function () {
+    location.reload(); 
+});
 
 function num_comprobante(){
     $.ajax({
@@ -559,4 +451,304 @@ function showSuccessAlert(){
         $(this).removeClass('active');
     });
     
+}
+function autocomplete_producto(inp) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      $.get('/productos/search/'+val).then(function(response){
+          for (i = 0; i < response.length; i++) {
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<div style=''><strong>" + response[i]['producto'] + "</strong></div><div style=''>$"+response[i]['precio_venta']+"<input type='hidden' value='" + response[i]['producto'] + "'><input type='hidden' value='" + response[i]['precio_venta'] + "'><input type='hidden' value='" + response[i]['iva_id'] + "'><input type='hidden' value='" + response[i]['id'] + "'></div>";
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                console.log(this.getElementsByTagName("input"))
+                $('#buscar_producto').val(this.getElementsByTagName("input")[0].value);
+                $('#precio_producto').val(this.getElementsByTagName("input")[1].value);
+                $('#hidden_precio').val(this.getElementsByTagName("input")[1].value);
+                $('#iva_producto').val(this.getElementsByTagName("input")[2].value);
+                $('#hidden_id').val(this.getElementsByTagName("input")[3].value);
+                $('#total_detalle').val(parseFloat($('#cantidad_detalle').val()*this.getElementsByTagName("input")[1].value));
+                $('#cantidad_detalle').focus();
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+      })
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+function autocomplete_servicio(inp) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      $.get('/servicios/search/'+val).then(function(response){
+          for (i = 0; i < response.length; i++) {
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<div style=''><strong>" + response[i]['descripcion'] + "</strong></div><div style=''>$"+response[i]['precio']+"<input type='hidden' value='" + response[i]['descripcion'] + "'><input type='hidden' value='" + response[i]['precio'] + "'><input type='hidden' value='" + response[i]['iva']["alicuota"] + "'><input type='hidden' value='" + response[i]['iva_id'] + "'><input type='hidden' value='" + response[i]['id'] + "'></div>";
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                descripcion = this.getElementsByTagName("input")[0].value;
+                iva = this.getElementsByTagName("input")[2].value;
+                precio_venta = this.getElementsByTagName("input")[1].value;
+                id= this.getElementsByTagName("input")[4].value;
+                iva_id= this.getElementsByTagName("input")[3].value;
+                $('#buscar_servicio').val(descripcion);
+                $('#precio_servicio').val(precio_venta);
+                $('#iva_servicio').val(iva_id);
+                $('#hidden_id_servicio').val(id);
+                $('#total_servicio').val(parseFloat($('#cantidad_servicio').val()*precio_venta));
+                $('#cantidad_servicio').focus();
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+      })
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+} 
+function autocomplete_cliente(inp) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      $.get('/clientes/search/'+val).then(function(response){
+          for (i = 0; i < response.length; i++) {
+            b = document.createElement("DIV");
+            /*make the matching letters bold:*/
+            b.innerHTML = "<div style=''><strong>" + response[i]['nombre'] +
+                "</strong></div><div style=''>"+response[i]['cuit']+"<input type='hidden' value='" + response[i]['nombre'] + "'><input type='hidden' value='" + response[i]['cuit'] + "'><input type='hidden' value='" + response[i]['localidad'] + "'><input type='hidden' value='" + response[i]['direccion'] + "'><input type='hidden' value='" + response[i]['responsabilidades_iva']['nombre'] + "'><input type='hidden' value='" + response[i]['id'] + "'></div>";
+            b.addEventListener("click", function(e) {
+                /*insert the value for the autocomplete text field:*/
+                nombre = this.getElementsByTagName("input")[0].value;
+                cuit = this.getElementsByTagName("input")[1].value;
+                localidad = this.getElementsByTagName("input")[2].value;
+                direccion = this.getElementsByTagName("input")[3].value;
+                iva = this.getElementsByTagName("input")[4].value;
+                $('#nombre').val(nombre);
+                $('#cuit').val(cuit);
+                $('#localidad').val(localidad);
+                $('#direccion').val(direccion);
+                $('#resp_iva').val(iva).change();
+                /*close the list of autocompleted values,
+                (or any other open lists of autocompleted values:*/
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+      })
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+} 
+
+function mostrarError(error){
+    $('.modal_message #message_title').html('Error');
+    $('.modal_message #message_text').html(error);
+    $('.modal_message').modal('show');
 }

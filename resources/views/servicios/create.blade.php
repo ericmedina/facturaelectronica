@@ -11,13 +11,23 @@
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <input type="text" id="descripcion" name="descripcion" required="required" class="form-control col-md-7 col-xs-12">
+        @if ($errors->has('descripcion'))
+            <div class="alert alert-danger mt-1">
+                {{$errors->first('descripcion')}}
+            </div>
+        @endif
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">Precio:
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="precio" name="precio" class="form-control col-md-7 col-xs-12">
+        <input type="text" id="precio" name="precio" class="form-control col-md-7 col-xs-12" value="0">
+        @if ($errors->has('precio'))
+            <div class="alert alert-danger mt-1">
+                {{$errors->first('precio')}}
+            </div>
+        @endif
       </div>
     </div>
     <div class="form-group">

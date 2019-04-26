@@ -85,7 +85,7 @@
     	@foreach($ventas as $venta)
   	   	<tr>
           <td data-label="Fecha">{{ $venta->fecha }}</td>
-          <td data-label="Tipo">{{ $venta->movimiento->codigo_comprobante($venta->tipo_comprobante) }} </td>
+          <td data-label="Tipo">{{ $venta->codigo_comprobante($venta->tipo_comprobante) }} </td>
           <td data-label="Punto venta">{{ str_pad(Auth::user()->fiscal->punto_venta,4,"0",STR_PAD_LEFT) }}</td>
           <td data-label="Número">{{str_pad($venta->num_comprobante,8,"0",STR_PAD_LEFT) }}</td>
           <td data-label="Cliente">{{ $venta->cliente->nombre }}</td>
@@ -161,7 +161,7 @@
                  </thead>
                  <tbody>
                     <tr class="color_tabla">                      
-                     <td data-label="Tipo">{{ $venta->movimiento->codigo_comprobante($venta->tipo_comprobante) }} </td>
+                     <td data-label="Tipo">{{ $venta->codigo_comprobante($venta->tipo_comprobante) }} </td>
                      <td data-label="Punto venta">{{ str_pad(Auth::user()->fiscal->punto_venta,4,"0",STR_PAD_LEFT) }}</td>
                      <td data-label="Número">{{str_pad($venta->num_comprobante,8,"0",STR_PAD_LEFT) }}</td>
                      <td data-label="DNI">{{ $venta->cliente->cuit }}</td>

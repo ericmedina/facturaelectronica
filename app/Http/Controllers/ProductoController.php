@@ -53,6 +53,15 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'producto' => 'required|max:255',
+            'stock' => 'required|max:255',
+            'precio_venta' => 'required|max:255',
+            'categoria_producto' => 'required|max:255',
+            'proveedor' => 'required|max:255',
+            'iva' => 'required|max:255',
+            'marca' => 'required|max:255',
+        ]);
         $producto = new Producto;
         $producto->codigo = $request->codigo;
         $producto->producto = $request->producto;
@@ -112,6 +121,15 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'producto' => 'required|max:255',
+            'stock' => 'required|max:255',
+            'precio_venta' => 'required|max:255',
+            'categoria_producto' => 'required|max:255',
+            'proveedor' => 'required|max:255',
+            'iva' => 'required|max:255',
+            'marca' => 'required|max:255',
+        ]);
         $producto = Producto::find($id);
         $producto_viejo=$producto->producto;
         $producto->codigo = $request->codigo;

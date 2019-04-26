@@ -638,7 +638,7 @@ and dependencies (minified).
 								scrollInertia:o.scrollInertia, /* scrolling inertia (animation duration) */
 								scrollEasing:"mcsEaseInOut", /* animation easing */
 								moveDragger:false, /* move dragger instead of content */
-								timeout:60, /* scroll-to delay */
+								timeout:10, /* scroll-to delay */
 								callbacks:true, /* enable/disable callbacks */
 								onStart:true,
 								onUpdate:true,
@@ -2245,10 +2245,10 @@ and dependencies (minified).
 						return c/2 * ( -Math.pow( 2, -10 * t) + 2 ) + b;
 						break;
 					case "easeInOut": case "mcsEaseInOut":
-						t/=d/2;
+						t/=d/3;
 						if(t<1) return c/2*t*t*t + b;
 						t-=2;
-						return c/2*(t*t*t + 2) + b;
+						return c/4*(t*t*t + 2) + b;
 						break;
 					case "easeOutSmooth":
 						t/=d; t--;

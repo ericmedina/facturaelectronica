@@ -17,7 +17,12 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="producto">Producto<span class="required">:</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="producto" name="producto" required="required" class="form-control col-md-7 col-xs-12">
+        <input type="text" id="producto" name="producto" required="required" class="form-control col-md-7 col-xs-12" value="{{old('producto')}}">
+        @if ($errors->has('producto'))
+            <div class="alert alert-danger mt-1">
+                {{$errors->first('producto')}}
+            </div>
+        @endif
       </div>
     </div>
     <div class="form-group">
@@ -25,6 +30,11 @@
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <input type="text" id="stock" name="stock" required="required" class="form-control col-md-7 col-xs-12" value="1">
+        @if ($errors->has('stock'))
+            <div class="alert alert-danger mt-1">
+                {{$errors->first('stock')}}
+            </div>
+        @endif
       </div>
     </div>
     <div class="form-group">
@@ -57,6 +67,11 @@
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
         <input type="text" id="precio_venta" name="precio_venta" required="required" class="form-control col-md-7 col-xs-12" value="0">
+        @if ($errors->has('precio_venta'))
+            <div class="alert alert-danger mt-1">
+                {{$errors->first('precio_venta')}}
+            </div>
+        @endif
       </div>
     </div>
     <div class="form-group">

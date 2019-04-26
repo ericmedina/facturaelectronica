@@ -35,6 +35,7 @@ use App\Reg_Venta_Alic;
 use App\Alicuota;
 use App\Actividad;
 use App\ResumenCuenta;
+use Jenssegers\Agent\Agent;
 
 class FacturacionController extends Controller
 {
@@ -43,16 +44,17 @@ class FacturacionController extends Controller
     	$fecha = Carbon::today()->format('Y-m-d');
         $responsabilidades_iva = Responsabilidad_iva::orderBy('id', 'ASC')->get();
         $iva = IVA::orderBy('id', 'ASC')->get();
+        $agent = new Agent();
         if(Auth::user()->fiscal->certificado == null){
             flash("Para poder facturar debe generar sus certificados en AFIP, por favor clickee <a href=".route('keys')."><b>aquí</b></a> y siga los pasos o contáctese a administración@pampadev.com.ar y lo ayudaremos.")->error();
         }
-        return view('facturacion.create')->with('fecha', $fecha)->with('responsabilidades_iva', $responsabilidades_iva)->with('iva', $iva)->with('vencimiento', Carbon::today()->addDays(29)->format('Y-m-d'));
+        return view('facturacion.create')->with('fecha', $fecha)->with('responsabilidades_iva', $responsabilidades_iva)->with('iva', $iva)->with('vencimiento', Carbon::today()->addDays(29)->format('Y-m-d'))->with('agent', $agent);
     }
     public function save(Request $request){
         $facturacion = new Facturacion();
     	$alicuotas = json_decode($request->alicuotas);
         $detalles = json_decode($request->detalle);
-        $cliente = Cliente::searchCuit(str_replace("/", "", str_replace("-", "", $request->cuit)))->get()->first();
+        $cliente = Cliente::searchCuit($request->cuit)->get()->first();
         $cliente_id = "";
         $i = 0;
         if($request->nombre == '' || $request->nombre == null){

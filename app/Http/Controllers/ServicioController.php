@@ -44,6 +44,11 @@ class ServicioController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'descripcion' => 'required|max:255',
+            'precio' => 'required|max:255',
+            'iva' => 'required|max:255',
+        ]);
         $servicio = new Servicio();
 
         $servicio->descripcion = $request->descripcion;
@@ -94,6 +99,11 @@ class ServicioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'descripcion' => 'required|max:255',
+            'precio' => 'required|max:255',
+            'iva' => 'required|max:255',
+        ]);
         $servicio = Servicio::find($id);
         $servicio->descripcion = $request->descripcion;
         $servicio->precio = $request->precio;

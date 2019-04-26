@@ -333,7 +333,6 @@ html , body{
     display: -ms-flexbox;
     display: flex;
     z-index: 1;
-    overflow:auto;
 }
 .nav-md .container.body .col-md-3.left_col.menu_fixed {
     height: 100%;
@@ -787,10 +786,6 @@ a:focus {
     position: relative;
     display: block;
     padding: 13px 15px 12px
-}
-.nav.side-menu>li.current-page,
-.nav.side-menu>li.active {
-    border-right: 5px solid #00b5ed
 }
 .nav li.current-page {
     background: rgba(255, 255, 255, 0.05)

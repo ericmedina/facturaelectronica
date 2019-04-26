@@ -10,14 +10,24 @@
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombre <span class="required">:</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12">
+        <input type="text" id="nombre" name="nombre" required="required" class="form-control col-md-7 col-xs-12" value="{{old('nombre')}}">
+        @if ($errors->has('nombre'))
+          <div class="alert alert-danger mt-1">
+              {{$errors->first('nombre')}}
+          </div>
+        @endif
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="cuit">CUIT/DNI <span class="required">:</span>
       </label>
       <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" id="cuit" name="cuit" required="required" class="form-control col-md-7 col-xs-12">
+        <input type="text" id="cuit" name="cuit" required="required" class="form-control col-md-7 col-xs-12" value="{{old('cuit')}}">
+        @if ($errors->has('cuit'))
+          <div class="alert alert-danger mt-1">
+              {{$errors->first('cuit')}}
+          </div>
+        @endif
       </div>
     </div>
     <div class="form-group">

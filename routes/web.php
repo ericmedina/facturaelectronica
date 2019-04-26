@@ -97,7 +97,7 @@ Route::get('/', function () {
         $movimientos = Movimiento::orderBy('id', 'DESC')->simplePaginate(15);
         $movimientos->each(function($movimiento){
             if($movimiento->movimiento == "VENTA"){
-                $movimiento->venta;
+                $movimiento->venta->cliente;
             }elseif($movimiento->movimiento == "COMPRA"){
                 $movimiento->compra;
             }elseif($movimiento->movimiento == "GASTO"){
@@ -154,8 +154,6 @@ Route::get('/', function () {
 
 
 
-
-
         /*if($pagos > 0){
             flash("Tienes $pagos pagos pendientes. Por favor clickea <a href='/pagos' title=''>aquí.</a>")->error();
         }*/
@@ -193,6 +191,31 @@ Route::get('/modificar_codigo', function(){
     });
 });
 
-Route::get("/sistemas", function(){
+Route::get("/sistemas-personalizados", function(){
     return view("sistema");
+});
+Route::get("/marketing-digital", function(){
+    return view("marketing");
+});
+
+Route::get("/paginas-web", function(){
+    return view("paginas-web");
+});
+Route::get("/ecommerce", function(){
+    return view("ecomerce");
+});
+Route::get("/facturacionelectronica", function(){
+    return view("facturacionelectronica");
+});
+Route::get('array/productos/{buscar}', function($buscar){
+    $productos = App\Producto::search($buscar)->orderBy('producto', 'ASC')->get();
+    $productos->each(function($producto){
+        $producto->proveedor;
+        $producto->marca;
+        $producto->categoria_producto;
+    });
+    return Response::json($productos, 200);
+});
+Route::get('menu', function(){
+    return view('menu');
 });

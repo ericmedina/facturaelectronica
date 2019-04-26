@@ -12,8 +12,9 @@
     <link href="{{asset('vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <link href="{{asset('vendors/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')}}" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="{{asset('build/css/custom.css')}}" rel="stylesheet">
-    <link href="{{asset('css/facturacion.css')}}" rel="stylesheet">
+    <link href="{{asset('build/css/custom.css')}}?v=1.0" rel="stylesheet">
+    <link href="{{asset('css/facturacion.css')}}?v=1.0" rel="stylesheet">
     @yield('css', '')
   </head>

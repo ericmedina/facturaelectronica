@@ -182,6 +182,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         SantiGraviano\LaravelMercadoPago\Providers\MercadoPagoServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
     ],
 
@@ -236,7 +237,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'MP' => SantiGraviano\LaravelMercadoPago\Facades\MP::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
 ];

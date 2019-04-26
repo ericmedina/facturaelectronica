@@ -1,0 +1,58 @@
+--------para twitter---------------------
+<meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:src" content="https://www.medanocortado.com.ar/imagenes/medanocortado-300x200.jpg">
+  <meta name="twitter:site" content="@medanocortado">
+  <meta name="twitter:creator" content="@medanocortado">
+  <meta name="twitter:title" content='Colegio Secundario Médano Cortado'>
+  <meta name="twitter:description" content='Colegio secundario Medano Cortado Ex UE N°32. Se encuentra ubicado en la localidad de Catrilo, La Pampa, Argentina. Un colegio diferente gracias a su numerosa y diversa oferta de actividades, el colegio Médano Cortado de Catriló es muy valorado por sus alumnos.'>
+
+----------para facebook--------------------------------------
+
+<meta property="og:image"         content="https://www.medanocortado.com.ar/imagenes/medanocortado1.jpg" width="200" height="200"/>
+  
+
+    <meta property="og:url"           content='https://www.medanocortado.com.ar'/>
+    <meta property="og:type"          content="website"/>
+    <meta property="og:title"         content='Colegio Secundario Médano Cortado'/>
+    <meta property="og:description"   content='Colegio secundario Medano Cortado Ex UE N°32. Se encuentra ubicado en la localidad de Catrilo, La Pampa, Argentina. Un colegio diferente gracias a su numerosa y diversa oferta de actividades, el colegio Médano Cortado de Catriló es muy valorado por sus alumnos.'/>
+    <meta property="og:image"         content='https://www.medanocortado.com.ar/imagenes/medanocortado1.jpg'/>
+ <link href="https://www.medanocortado.com.ar/imagenes/medanocortado-300x200.jpg" rel="image_src" />
+  <meta property="og:image:width" content="500"/>
+  <meta property="og:image:height" content="300"/>
+
+------------------- SCHEMA-----------------------------------
+
+ <!-- schema -->
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "LocalBusiness",
+  "name" : "Colegio Secundario Médano Cortado",
+  "image" : "http://www.medanocortado.com.ar/imagenes/medanocortado-300x200.jpg",
+  "telephone" : "02954 49-1309",
+  "email" : "colegio.medanocortado@lapampa.edu.ar",
+  "address" : {
+    "@type" : "PostalAddress",
+    "streetAddress" : "Italia 41,",
+    "addressLocality" : "Catriló",
+    "addressRegion" : ", La Pampa",
+    "addressCountry" : "Argentina",
+    "postalCode" : "6330"
+  },
+  "openingHoursSpecification" : {
+    "@type" : "OpeningHoursSpecification",
+    "dayOfWeek" : {
+      "@type" : "DayOfWeek",
+      "name" : "lunes martes miercoles jueves viernes"
+    }
+  },
+  "url" : "http://www.medanocortado.com.ar/",
+  "review" : {
+    "@type" : "Review",
+    "author" : {
+      "@type" : "Person",
+      "name" : "PampaDev."
+    }
+  }
+}
+</script>

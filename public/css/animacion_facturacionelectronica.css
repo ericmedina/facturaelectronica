@@ -1,0 +1,169 @@
+.svg-facturacion.paso1{
+    height: 300px;
+    opacity: 0;
+    top: 0;
+    left: 50px;
+}
+.svg-facturacion.paso1.animacion{
+    -webkit-animation: fade 2s 0s 1 forwards; /* Safari 4+ */
+    -moz-animation:    fade 2s 0s 1 forwards; /* Fx 5+ */
+    -o-animation:      fade 2s 0s 1 forwards; /* Opera 12+ */
+    animation:         fade 2s 0s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso2 {
+    height: 239px;
+    opacity: 0;
+    top: 62px;
+    left: 80px;
+}
+.svg-facturacion.paso2.animacion{
+    -webkit-animation: scale .5s .5s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .5s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .5s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .5s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso3 {
+    height: 241.5px;
+    opacity: 0;
+    top: 25px;
+    left: 50px;
+}
+.svg-facturacion.paso3.animacion{
+    -webkit-animation: scale .5s .8s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .8s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .8s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .8s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso4 {
+    height: 150px;
+    opacity: 0;
+    top: 10px;
+    left: 0px;
+}
+.svg-facturacion.paso4.animacion{
+    -webkit-animation: scale .5s 1.1s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.1s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.1s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.1s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso5 {
+    height: 75px;
+    opacity: 0;
+    top: 65px;
+    left: 313px;
+}
+.svg-facturacion.paso5.animacion{
+    -webkit-animation: scale .5s 1.4s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.4s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.4s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.4s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso6 {
+    height: 205px;
+    opacity: 0;
+    top: 38px;
+    left: 290px;
+}
+.svg-facturacion.paso6.animacion{
+    -webkit-animation: scale .5s 1.7s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.7s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.7s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.7s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso7 {
+    height: 135px;
+    opacity: 0;
+    top: 68px;
+    left: 440px;
+}
+.svg-facturacion.paso7.animacion{
+    -webkit-animation: scale .5s 2s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso8 {
+    height: 42px;
+    opacity: 0;
+    top: 168px;
+    left: 315px;
+}
+.svg-facturacion.paso8.animacion{
+    -webkit-animation: scale .5s 2.3s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.3s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.3s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.3s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso9 {
+    height: 155px;
+    opacity: 0;
+    top: 130px;
+    left: 30px;
+}
+.svg-facturacion.paso9.animacion{
+    -webkit-animation: scale .5s 2.6s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.6s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.6s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.6s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso10 {
+    height: 12px;
+    opacity: 0;
+    top: 96px;
+    left: 168px;
+}
+.svg-facturacion.paso10.animacion{
+    -webkit-animation: scale .5s 2.6s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.6s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.6s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.6s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso11 {
+    height: 12px;
+    opacity: 0;
+    top: 117px;
+    left: 168px;
+}
+.svg-facturacion.paso11.animacion{
+    -webkit-animation: scale .5s 2.8s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.8s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.8s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.8s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso12 {
+    height: 12px;
+    opacity: 0;
+    top: 138px;
+    left: 168px;
+}
+.svg-facturacion.paso12.animacion{
+    -webkit-animation: scale .5s 3s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 3s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 3s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 3s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-facturacion.paso13 {
+    height: 12px;
+    opacity: 0;
+    top: 159px;
+    left: 168px;
+}
+.svg-facturacion.paso13.animacion{
+    -webkit-animation: scale .5s 3.2s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 3.2s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 3.2s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 3.2s 1 forwards; /* IE 10+, Fx 29+ */
+
+}

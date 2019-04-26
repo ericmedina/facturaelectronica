@@ -1,0 +1,118 @@
+.svg-ecommerce.paso1{
+    height: 380px;
+    opacity: 0;
+    top: -30px;
+    left: -30px;
+}
+.svg-ecommerce.paso1.animacion{
+    -webkit-animation: fade 2s 0s 1 forwards; /* Safari 4+ */
+    -moz-animation:    fade 2s 0s 1 forwards; /* Fx 5+ */
+    -o-animation:      fade 2s 0s 1 forwards; /* Opera 12+ */
+    animation:         fade 2s 0s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso2 {
+    height: 305px;
+    opacity: 0;
+    top: 9px;
+    left: 166px;
+}
+.svg-ecommerce.paso2.animacion{
+    -webkit-animation: scale .5s .5s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .5s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .5s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .5s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso3 {
+    height: 150px;
+    opacity: 0;
+    top: 117px;
+    left: 220px;
+}
+.svg-ecommerce.paso3.animacion{
+    -webkit-animation: scale .5s .8s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .8s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .8s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .8s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso4 {
+    height: 104px;
+    opacity: 0;
+    top: 222px;
+    left: 310px;
+}
+.svg-ecommerce.paso4.animacion{
+    -webkit-animation: scale .5s 1.1s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.1s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.1s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.1s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso5 {
+    height: 75px;
+    opacity: 0;
+    top: 110px;
+    left: 366px;
+}
+.svg-ecommerce.paso5.animacion{
+    -webkit-animation: scale .5s 1.4s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.4s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.4s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.4s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso6 {
+    height: 120px;
+    opacity: 0;
+    top: 200px;
+    left: 10px;
+}
+.svg-ecommerce.paso6.animacion{
+    -webkit-animation: scale .5s 1.7s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.7s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.7s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.7s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso7 {
+    height: 105px;
+    opacity: 0;
+    top: 95px;
+    left: 23px;
+}
+.svg-ecommerce.paso7.animacion{
+    -webkit-animation: scale .5s 2s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso8 {
+    height: 98px;
+    opacity: 0;
+    top: 0px;
+    left: 42px;
+}
+.svg-ecommerce.paso8.animacion{
+    -webkit-animation: scale .5s 2.3s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.3s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.3s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.3s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-ecommerce.paso9 {
+    height: 275px;
+    opacity: 0;
+    top: 38px;
+    left: 430px;
+}
+.svg-ecommerce.paso9.animacion{
+    -webkit-animation: scale .5s 2.6s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.6s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.6s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.6s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+

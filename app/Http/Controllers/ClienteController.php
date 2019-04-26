@@ -45,6 +45,10 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'cuit' => 'required|unique:'.str_replace(" ", "_", strtolower(Auth::user()->razon_social)).'_clientes|max:255',
+        ]);
         $cliente = new Cliente();
         $cliente->nombre = $request->nombre;
         $cliente->cuit = $request->cuit;
@@ -112,6 +116,10 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'cuit' => 'required|unique:'.str_replace(" ", "_", strtolower(Auth::user()->razon_social)).'_clientes|max:255',
+        ]);
         $cliente = Cliente::find($id);
         $cliente->nombre = $request->nombre;
         $cliente->cuit = $request->cuit;

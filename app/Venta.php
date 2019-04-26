@@ -40,6 +40,28 @@ class Venta extends Model
     public function scopeCuentas($query){
         return $query->select(DB::raw('cliente_id, sum(total) as total'))->where('estado', 'Pendiente')->groupBy('cliente_id');
     }
+    public function codigo_comprobante($comprobante){
+        switch ($comprobante) {
+            case 'A':
+                return '01';
+                break;
+            case 'NCA':
+                return '03';
+                break;
+            case 'B':
+                return '06';
+                break;
+            case 'NCB':
+                return '08';
+                break;
+            case 'C':
+                return '11';
+                break;
+            case 'NCC':
+                return '13';
+                break;
+        }
+    }
     public function comprobante(){
         switch ($this->tipo_comprobante) {
             case 'A':

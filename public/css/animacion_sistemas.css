@@ -1,0 +1,92 @@
+.svg-sistemas.paso1{
+    height: 187px;
+opacity: 0;
+top: -20px;
+left: 5%;
+}
+.svg-sistemas.paso1.animacion{
+    -webkit-animation: fade 2s 0s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    fade 2s 0s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      fade 2s 0s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         fade 2s 0s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso2 {
+    height: 70px;
+    opacity: 0;
+    top: 63px;
+    left: 328px;
+}
+.svg-sistemas.paso2.animacion{
+    -webkit-animation: scale .5s .5s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s .5s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s .5s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s .5s 1 forwards cubic-bezier(0.5, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso3 {
+    height: 114px;
+    opacity: 0;
+    top: 80px;
+    left: 155px;
+}
+.svg-sistemas.paso3.animacion{
+    -webkit-animation: scale .5s .8s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s .8s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s .8s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s .8s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso4 {
+    height: 246px;
+    opacity: 0;
+    top: 89px;
+    left: 186px;
+}
+.svg-sistemas.paso4.animacion{
+    -webkit-animation: scale .5s 1.1s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s 1.1s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s 1.1s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s 1.1s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso5 {
+    height: 135px;
+    opacity: 0;
+    top: 152px;
+    left: 0px;
+}
+.svg-sistemas.paso5.animacion{
+    -webkit-animation: scale .5s 1.4s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s 1.4s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s 1.4s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s 1.4s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso6 {
+    height: 247px;
+    opacity: 0;
+    top:-2px;
+    left: 27px;
+}
+.svg-sistemas.paso6.animacion{
+    -webkit-animation: scale .5s 1.7s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s 1.7s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s 1.7s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s 1.7s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+.svg-sistemas.paso7 {
+    height: 188px;
+    opacity: 0;
+    top: 120px;
+    left: 400px;
+}
+.svg-sistemas.paso7.animacion{
+    -webkit-animation: scale .5s 2s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Safari 4+ */
+    -moz-animation:    scale .5s 2s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Fx 5+ */
+    -o-animation:      scale .5s 2s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* Opera 12+ */
+    animation:         scale .5s 2s 1 forwards cubic-bezier(0.1, 0.7, 0.8, 0.9); /* IE 10+, Fx 29+ */
+
+}
+

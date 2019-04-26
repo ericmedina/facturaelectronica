@@ -484,11 +484,11 @@ class Empresa  extends Authenticatable
         if (!Schema::hasTable($empresa.'_productos')) {
             Schema::create($empresa.'_productos', function(Blueprint $table)use($empresa){
                 $table->increments('id');
-                $table->string('codigo');
+                $table->string('codigo')->default('');
                 $table->string('producto');
                 $table->float('stock');
                 $table->float('stock_minimo')->nullable();
-                $table->float('precio_compra');
+                $table->float('precio_compra')->default(0);
                 $table->float('precio_venta');
                 $table->integer('iva_id')->unsigned();
                 $table->integer('proveedor_id')->unsigned();

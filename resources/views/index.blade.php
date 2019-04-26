@@ -1,32 +1,83 @@
 @extends('layouts.main')
 @section('contenido')
 
-	<div class="x_panel tile text-center">
-        <div class="x_title" >
+	<div class="x_panel tile text-center p-botones">
+        <div class="x_title titulo_verde sombra_gris">
 	            <h2 class="text-center float-none">Nuevos movimientos</h2>
 	            <div class="clearfix"></div>
 	            
         </div>
         <div class="x_content">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="row panel-buttons">
-					<div class="col-md-4 col-sm-12 col-xs-12 text-center ">
-						<a href="{{ route('facturas.create') }}" title="" class="btn btn-success">
-						Nuevo comprobante</a>
-					</div>
-					<div class="col-md-4 col-sm-12 col-xs-12 text-center ">
-						<a href="{{ route('clientes.index') }}" title="" class="btn btn-success">Ver clientes</a>
-					</div>
-					<div class="col-md-4 col-sm-12 col-xs-12 text-center ">
-						<a href="{{ route('ventas.index') }}" title="" class="btn btn-success">Ver ventas</a>
-					</div>
+			<div class="col-md-12 col-sm-12 col-xs-12 p-botones sombra_gris">		
+				<div class="row panel-buttons contenedor_botones">
+					<div class="col-md-3 col-xs-6 text-center p-botones">
+           			<!-- small box -->
+           				<a href="{{ route('facturas.create') }}">           					
+			            <div class="small-box fondo_celeste botones_cuadrados">
+			              <div class="inner">
+			                <h3>Nuevo <br> comprobante<sup style="font-size: 20px"></sup></h3>
+
+			              
+			              </div>
+			              <div class="icon">
+			                <i class="fa fa-pencil"></i>
+			              </div>
+			            </div>
+           				</a>
+		         	</div>
+		         	<div class="col-md-3 col-xs-6 text-center p-botones">
+           			<!-- small box -->
+           				<a href="{{ route('clientes.index') }}">           					
+			            <div class="small-box fondo_celeste botones_cuadrados">
+			              <div class="inner">
+			                <h3>Ver <br>clientes<sup style="font-size: 20px"></sup></h3>
+
+			             
+			              </div>
+			              <div class="icon">
+			                <i class="fa fa-users"></i>
+			              </div>
+			            </div>
+           				</a>
+		         	</div>
+		         	<div class="col-md-3 col-xs-6 text-center p-botones">
+           			<!-- small box -->
+           				<a href="{{ route('ventas.index') }}">           					
+			            <div class="small-box fondo_celeste botones_cuadrados">
+			              <div class="inner">
+			                <h3>Ver <br>ventas<sup style="font-size: 20px"></sup></h3>
+
+			              
+			              </div>
+			              <div class="icon">
+			                <i class="fa fa-dollar"></i>
+			              </div>
+			            </div>
+           				</a>
+		         	</div>
+		         	<div class="col-md-3 col-xs-6 text-center p-botones">
+           			<!-- small box -->
+           				<a href="">           					
+			            <div class="small-box fondo_celeste botones_cuadrados">
+			              <div class="inner">
+			                <h3>Ver <br>proveedores<sup style="font-size: 20px"></sup></h3>
+
+			              
+			              </div>
+			              <div class="icon">
+			                <i class="fa fa-truck"></i>
+			              </div>
+			            </div>
+           				</a>
+		         	</div>
+							         		
 				</div>
 			</div>
 		</div>
 	</div>
 	@include('flash::message')
-    <div class="x_panel tile">
-        <div class="x_title" >
+    <div class="x_panel tile p-botones">
+        <div class="x_title titulo_naranja sombra_gris">
           <h2 class="text-center float-none">Últimos movimientos</h2>
           <div class="clearfix"></div>
         </div>

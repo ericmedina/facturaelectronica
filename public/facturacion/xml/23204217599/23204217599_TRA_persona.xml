@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<loginTicketRequest version="1.0"><header><uniqueId>1547927194</uniqueId><generationTime>2019-01-19T19:45:34+00:00</generationTime><expirationTime>2019-01-19T19:47:34+00:00</expirationTime></header><service>ws_sr_constancia_inscripcion</service></loginTicketRequest>

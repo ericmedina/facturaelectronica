@@ -1,0 +1,118 @@
+.svg-marketing.paso1{
+    height: 370px;
+    opacity: 0;
+    top: -20px;
+    left: 0px;
+}
+.svg-marketing.paso1.animacion{
+    -webkit-animation: fade 2s 0s 1 forwards; /* Safari 4+ */
+    -moz-animation:    fade 2s 0s 1 forwards; /* Fx 5+ */
+    -o-animation:      fade 2s 0s 1 forwards; /* Opera 12+ */
+    animation:         fade 2s 0s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso2 {
+    height: 260px;
+    opacity: 0;
+    top: 18px;
+    left: 45px;
+}
+.svg-marketing.paso2.animacion{
+    -webkit-animation: scale .5s .5s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .5s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .5s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .5s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso3 {
+    height: 230px;
+    opacity: 0;
+    top: 135px;
+    left: 152px;
+}
+.svg-marketing.paso3.animacion{
+    -webkit-animation: scale .5s .8s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s .8s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s .8s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s .8s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso4 {
+    height: 285px;
+    opacity: 0;
+    top: -5.5px;
+    left: 162.3px;
+}
+.svg-marketing.paso4.animacion{
+    -webkit-animation: scale .5s 2.3s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.3s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.3s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.3s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso5 {
+    height: 55px;
+    opacity: 0;
+    top: 210px;
+    left: 307px;
+}
+.svg-marketing.paso5.animacion{
+    -webkit-animation: scale .5s 2.6s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2.6s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2.6s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2.6s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso6 {
+    height: 230px;
+    opacity: 0;
+    top: -8px;
+    left: 20px;
+}
+.svg-marketing.paso6.animacion{
+    -webkit-animation: scale .5s 1.1s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.1s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.1s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.1s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso7 {
+    height: 278px;
+    opacity: 0;
+    top: 15px;
+    left: 63px;
+}
+.svg-marketing.paso7.animacion{
+    -webkit-animation: scale .5s 1.4s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.4s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.4s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.4s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso8 {
+    height: 127px;
+    opacity: 0;
+    top: 82px;
+    left: 00px;
+}
+.svg-marketing.paso8.animacion{
+    -webkit-animation: scale .5s 1.7s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 1.7s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 1.7s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 1.7s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+.svg-marketing.paso9 {
+    height: 290px;
+    opacity: 0;
+    top: 6px;
+    left: 165px;
+}
+.svg-marketing.paso9.animacion{
+    -webkit-animation: scale .5s 2s 1 forwards; /* Safari 4+ */
+    -moz-animation:    scale .5s 2s 1 forwards; /* Fx 5+ */
+    -o-animation:      scale .5s 2s 1 forwards; /* Opera 12+ */
+    animation:         scale .5s 2s 1 forwards; /* IE 10+, Fx 29+ */
+
+}
+

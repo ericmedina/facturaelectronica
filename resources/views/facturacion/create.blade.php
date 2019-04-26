@@ -1,32 +1,73 @@
 @extends('layouts.main')
 @section('title', 'Generar comprobante - PampaDev')
+@section('css')
+  <style type="text/css">
+    .autocomplete {
+      /*the container must be positioned relative:*/
+      position: absolute;
+      display: inline-block;
+    }
+    .autocomplete *{
+      box-sizing: border-box;
+    }
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+    .autocomplete-items > div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .autocomplete-items > div:hover {
+      /*when hovering an item:*/
+      background-color: #e9e9e9;
+    }
+    .autocomplete-active {
+      /*when navigating through the items using the arrow keys:*/
+      background-color: DodgerBlue !important;
+      color: #ffffff;
+    }
+  </style>
+@endsection
 @section('contenido')
-<h2 class="text-center">Generar comprobantes</h2>
+<div class="col-xs-12 p-botones titulo_verde sombra_gris">
+    <h2 class="text-center">Generar comprobantes</h2>
+</div>
 @include('flash::message')
-<form action="/comprobantes" method="POST" accept-charset="utf-8" name="form_comprobante" id="form_comprobante" class="form-inline form-label-left">
+<form action="/comprobantes" autocomplete="off" method="POST" accept-charset="utf-8" name="form_comprobante" id="form_comprobante" class="form-inline form-label-left">
   {{ csrf_field() }}
   <input type="hidden" name="cae" id="cae" value="">
   <input type="hidden" name="vencimiento" id="vencimiento" value="">
   <!-- Clientes -->
 
   @include('flash::message')
-  <div class="row">
+  <div class="row bordes_imput ocultar_labels">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
+      <div class="x_panel p-botones sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Datos cliente</h4>
         </div>
         <div class="x_content">
-          <div class="col-md-12 col-sm-12 col-xs-12 form-item text-center">
-              <button type="button" class="boton boton-confirmar " id="boton-buscar-cliente" style="padding: 5px 40px!important;"><i class="fa fa-user"></i> Buscar cliente</button>
-          </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12 label-control" for="nombre">Nombre:</label>
-            <input type="text" name="nombre" class="form-control col-md-8 col-xs-12" id="nombre">
+            <div class=" col-md-8 col-xs-12 h-35" style="padding-left: 0px;">
+              <div class="autocomplete">
+                <input type="text" name="nombre" class="form-control col-xs-12" id="nombre" placeholder="Ej: Juan Perez Perez">
+              </div>
+            </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="cuit">CUIT:</label>
-            <input type="text" class="form-control col-md-8 col-xs-12" id="cuit" name="cuit">
+            <input type="text" class="form-control col-md-8 col-xs-12" id="cuit" name="cuit" placeholder="Ej: 20333445552">
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="resp_iva">Resp. IVA:</label>
@@ -42,11 +83,11 @@
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="direccion">Dirección:</label>
-            <input type="text" class="form-control col-md-8 col-xs-12" id="direccion" name="direccion">
+            <input type="text" class="form-control col-md-8 col-xs-12" id="direccion" name="direccion" placeholder="Ej: Jose Andres">
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="localidad">Localidad:</label>
-            <input type="text" class="form-control col-md-8 col-xs-12" id="localidad" name="localidad">
+            <input type="text" class="form-control col-md-8 col-xs-12" id="localidad" name="localidad" placeholder="Ej: Santa Rosa, La Pampa">
           </div>
         </div>
       </div>
@@ -54,11 +95,11 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
+      <div class="x_panel sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Datos comprobante</h4>
         </div>
-        <div class="x_content">
+        <div class="x_content bordes_imput">
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="tipo_comprobante">Comprobante:</label>
             <select name="tipo_comprobante" class="form-control col-md-8 col-xs-12"  id="tipo_comprobante">
@@ -81,13 +122,15 @@
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="fecha">Fecha:</label>
-            <input type="date" class="form-control col-md-8 col-xs-12" id="fecha" name="fecha" value="{{$fecha}}">
+            <input type="date" class="form-control col-md-8 col-xs-12" id="fecha" name="fecha" value="{{$fecha}}" style="line-height: 1;">
             <input type="date"  class="form-control col-xs-8 hide" id="vencimiento" name="vencimiento" value="{{$vencimiento}}">
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12 form-item">
             <label class="col-md-4 col-xs-12" for="forma_pago">Forma pago:</label>
             <select name="forma_pago" class="form-control col-md-8 col-xs-12" id="forma_pago">
               <option value="contado">Contado</option>
+              <option value="debito">Débito</option>
+              <option value="credito">Crédito</option>
               <option value="cuenta_corriente">Cuenta corriente</option>
             </select>
           </div>
@@ -97,10 +140,11 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel">
+      <div class="x_panel sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Detalles comprobante</h4>
         </div>
+        
         <div id="card" class="x_content">
           <table id="tabla-detalle" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
             <thead>
@@ -116,11 +160,12 @@
               
             </tbody>
           </table>
-          @if(Auth::user()->categoria_id == 1)
+          
+          @if(Auth::user()->contrato->licencia->nombre == 'Basico')
             <div class="col-xs-12 text-center">
-                  <button type="button" class="boton boton-confirmar col-xs-12 col-md-offset-4 col-md-4" id="boton-modal-descripcion" >Insertar descripción</button>
+                  <button type="button" class=" col-xs-12 col-md-offset-4 col-md-4 boton boton-confirmar" id="boton-modal-descripcion" >Insertar descripción</button>
               </div>
-          @elseif(Auth::user()->categoria_id >=2)
+          @else
             @if(Auth::user()->tipo_actividad == "productos y servicios")
               <div class="col-md-6 col-sm-6 col-xs-12 text-center">
                   <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Insertar producto</button>
@@ -144,7 +189,7 @@
   </div>
   <div class="row">
     <div class="col-md-8 col-sm-12 col-xs-12">
-      <div class="x_panel">
+      <div class="x_panel sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Totales</h4>
         </div>
@@ -191,15 +236,15 @@
     <input type="hidden" name="detalle" id="detalle" value="">
     <input type="hidden" name="alicuotas" id="alicuotas" value="">
     <div class="col-md-4 col-sm-12 col-xs-12 text-center">
-      <button type="button" class="boton boton-opciones boton-margenes" id="btn-observaciones" >Agregar observaciones</button>
+      <button type="button" class="boton boton-confirmar boton-margenes" id="btn-observaciones" >Agregar observaciones</button>
     </div>
     @if(Auth::user()->fiscal->certificado == null)
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
-        <button type="button" disabled="" class="boton boton-confirmar disabled boton-margenes" id="btn-generar-comprobante">Generar comprobante</button>
+        <button type="button" disabled="" class="boton boton-opciones disabled boton-margenes" id="btn-generar-comprobante">Generar comprobante</button>
       </div>
     @else
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
-        <button type="button" class="boton boton-confirmar boton-margenes"  id="btn-generar-comprobante">Generar comprobante</button>
+        <button type="button" class="boton boton-opciones boton-margenes"  id="btn-generar-comprobante">Generar comprobante</button>
       </div>
     @endif
   </div>
@@ -209,9 +254,9 @@
 </form>
 
 
-@if(Auth::user()->categoria_id == 1)
+@if(Auth::user()->contrato->licencia->nombre == 'Basico')
   @include('layouts.dialogs.agregar_detalle')
-@elseif(Auth::user()->categoria_id ==2 ||Auth::user()->categoria_id ==3 )
+@else
   @if(Auth::user()->tipo_actividad == "productos y servicios")
     @include('layouts.dialogs.agregar_producto')
     @include('layouts.dialogs.agregar_servicio')
@@ -230,5 +275,24 @@
 @include('layouts.dialogs.message')
 @endsection
 @section('js')
-  <script src="{{ asset('js/facturacion.js') }}?version=1" type="text/javascript"></script>
+  <script src="{{ asset('js/check_facturacion.js') }}?version=1.1" type="text/javascript"></script>
+  <script src="{{ asset('js/facturacion.js') }}?version=1.2" type="text/javascript"></script>
+  <script type="text/javascript">
+    @if(Auth::user()->contrato->licencia->nombre == 'Basico')
+      
+    @else
+      @if(Auth::user()->tipo_actividad == "productos y servicios")
+        input = document.getElementById('buscar_producto');
+        autocomplete_producto(input);
+        input = document.getElementById('buscar_servicio');
+        autocomplete_servicio(input);
+      @elseif(Auth::user()->tipo_actividad == "productos")
+        input = document.getElementById('buscar_producto');
+        autocomplete_producto(input);
+      @elseif(Auth::user()->tipo_actividad == "servicios")
+        input = document.getElementById('buscar_servicio');
+        autocomplete_servicio(input);
+      @endif
+    @endif
+  </script>
 @endsection

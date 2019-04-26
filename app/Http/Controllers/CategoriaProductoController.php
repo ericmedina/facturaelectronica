@@ -40,6 +40,9 @@ class CategoriaProductoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'categoria' => 'required|max:255',
+        ]);
         $categoria = new CategoriaProducto();
         $categoria->categoria = $request->categoria;
         $categoria->save();

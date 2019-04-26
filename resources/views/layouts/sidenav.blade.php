@@ -9,7 +9,7 @@
           <li><a href="{{ route('facturas.create') }}">Nuevo comprobante</a></li>
         </ul>
       </li>
-      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
+      @if(auth::user()->contrato->licencia->nombre != 'basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-shopping-cart"></i> Compras <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('compras.index') }}">Ver compras</a></li>
@@ -17,7 +17,7 @@
         </ul>
       </li>
       @endif
-      @if(Auth::user()->categoria->categoria != 'Basico')
+      @if(Auth::user()->contrato->licencia->nombre != 'Basico')
       <li><a><i class="fa fa-calculator"></i> Gastos <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('gastos.index') }}">Ver gastos</a></li>
@@ -25,11 +25,13 @@
         </ul>
       </li>
       @endif
-      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
+      @if(Auth::user()->contrato->licencia->nombre != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-cubes"></i> Productos <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('productos.index') }}">Ver productos</a></li>
           <li><a href="{{ route('productos.create') }}">Nuevo producto</a></li>
+          <li><a href="{{ route('remarcar') }}">Remarcar</a></li>
+
           <li><a href="{{ route('categoriaproducto.index') }}">Ver categorias</a></li>
           <li><a href="{{ route('categoriaproducto.create') }}">Nueva categoria</a></li>
           <li><a href="{{ route('marcas.index') }}">Ver marca</a></li>
@@ -37,7 +39,7 @@
         </ul>
       </li>
       @endif
-      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "servicios" || Auth::user()->tipo_actividad == "productos y servicios"))
+      @if(Auth::user()->contrato->licencia->nombre != 'Basico' && (Auth::user()->tipo_actividad == "servicios" || Auth::user()->tipo_actividad == "productos y servicios"))
         <li><a><i class="fa fa-gears"></i> Servicios <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="{{ route('servicios.index') }}">Ver servicios</a></li>
@@ -52,7 +54,7 @@
           <li><a href="{{ route('resumen_cuenta.index') }}">Cuentas corrientes</a></li>
         </ul>
       </li>
-      @if(Auth::user()->categoria->categoria != 'Basico')
+      @if(Auth::user()->contrato->licencia->nombre != 'Basico')
       <li><a><i class="fa fa-bar-chart"></i> Estadísticas <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{url('/estadisticas/general')}}">General</a></li>
@@ -63,7 +65,7 @@
         </ul>
       </li>
       @endif
-      @if(Auth::user()->categoria->categoria != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
+      @if(Auth::user()->contrato->licencia->nombre != 'Basico' && (Auth::user()->tipo_actividad == "Productos" || Auth::user()->tipo_actividad == "productos y servicios"))
       <li><a><i class="fa fa-truck"></i> Proveedores <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{ route('proveedor.index') }}">Ver proveedores</a></li>

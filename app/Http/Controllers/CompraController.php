@@ -50,6 +50,14 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'tipo_comprobante' => 'required|max:255',
+            'num_comprobante' => 'required|max:255',
+            'total' => 'required|max:255',
+            'pagado' => 'required|max:255',
+            'id' => 'required|max:255',
+            'detalle' => 'required',
+        ]);
         $compra = new Compra();
         $compra->proveedor_id = $request->id;
         $compra->fecha = $request->fecha;

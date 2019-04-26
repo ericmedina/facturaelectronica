@@ -13,6 +13,9 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         '/pagos/check',
-        '/cert/upload_crt'
+        '/cert/upload_crt',
+        '/llenar_proveedores',
+        '/llenar_marcas',
+        '/llenar_categorias'
     ];
 }

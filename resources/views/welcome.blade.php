@@ -1,52 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-   {{--  http://www.themezaa.com/html/pofo/home-classic-one-page.html --}}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Nos dedicamos al diseño de paginas web empresariales, desarrollo sistemas de gestion y facturacion electrónica.">
-    <meta name="keywords" content="Páginas web, Diseño paginas web, Desarrollo paginas web, Desarrollo sistemas de gestion, programas para pymes, facturacion electronica">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="pampadev.com.ar">
-    <meta name="owner" content="Pampadev">
-
-    <title>Pampadev - Soluciones informáticas</title>  
-    <link rel="manifest" href="/manifest.json">                      
-    <link rel="icon" href="{{ asset('images/icono_fondo_blanco2.png') }}" type="image/ico" />
-    <!-- Bootstrap -->
-    <link async href="{{asset('vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet"> 
-    <link async href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{asset('/css/style.css')}}?version=2.1">
-    <link rel="stylesheet" href="{{asset('/css/keyframes.css')}}?version=2.1">
-    <link rel="stylesheet" href="{{asset('/css/animacion_facturacionelectronica.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/animacion_paginasweb.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/animacion_ecommerce.css')}}">
-
-</head>
-<body>
-    <img class="img_nube" src="{{asset('images/home/fondo_nube_gris.svg')}}" alt="">
-    <img class="img_forma_azul" src="{{asset('images/home/fondo_nube_azul.svg')}}" alt="">
-    <nav>
-      <div class="navbar container">
-        <a href="" class="brand" title=""><img src="{{asset('images/Iconos pampadev/brand.png')}}" alt=""></a>
-        <ul class="menu">
-          <li><a href="">Home</a></li>
-          <li><a href="">Nosotros</a></li>
-          <li><a href="">Servicios</a></li>
-          <li><a href="">Noticias</a></li>
-          <li><a href="">Contacto</a></li>
-          <li><a href=""><img src="{{asset('images/Iconos pampadev/Icono fondo blanco.png')}}" alt=""></a></li>
-        </ul>
-      </div>
-    </nav>
+@extends('layouts.home.main')
+@section('contenido')
     <div class="container">
       <section class="servicios row">
-        <div class="col-6 texto-servicio derecha">
+        <div class="col-12 d-block d-sm-none d-lg-none">
+            <div class="img-servicios col-12">
+              <img class="svg-sistemas" id="" src="{{asset('images/home/sistemas_medida.svg')}}" alt="sistemas a medida" >
+           
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 texto-servicio derecha mt-5 pt-5 pt-lg-0 mt-lg-0">
           <h1 class="titulo-servicio">SISTEMAS A MEDIDA</h1>
           <h2 class="slogan-servicio">Soluciones personalizadas</h2>
           <p class="resumen-servicio">
@@ -60,20 +22,23 @@
           </p>
           <a class="info-servicio" href="" title="">Más info</a>
         </div>
-        <div class="col-6">
+        <div class="col-6 d-none d-lg-block">
             <div class="img-servicios">
-              <img id="" src="{{asset('images/sistemas/paso1.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso2.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso3.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso4.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso5.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso6.svg')}}" alt="">
-              <img id="" src="{{asset('images/sistemas/paso7.svg')}}" alt="">
+             <img class="svg-sistemas paso1 animacion" id="" src="{{asset('images/sistemas/paso1.svg')}}" alt="" >
+              <img class="svg-sistemas paso2 animacion" id="" src="{{asset('images/sistemas/paso2.svg')}}" alt=""> 
+              <img class="svg-sistemas paso3 animacion" id="" src="{{asset('images/sistemas/paso3.svg')}}" alt="">
+              <img class="svg-sistemas paso4 animacion" id="" src="{{asset('images/sistemas/paso4.svg')}}" alt="">
+              <img class="svg-sistemas paso5 animacion" id="" src="{{asset('images/sistemas/paso5.svg')}}" alt="">
+              <img class="svg-sistemas paso6 animacion" id="" src="{{asset('images/sistemas/paso6.svg')}}" alt="">
+              <img class="svg-sistemas paso7 animacion" id="" src="{{asset('images/sistemas/paso7.svg')}}" alt="">
             </div>
         </div>
       </section>
+       <div class="d-block d-sm-none d-lg-none">
+          <hr>  <!-- LINEA CELESTE SE MUESTRA SOLO EN CEL  -->        
+      </div>
       <section class="servicios row">
-        <div class="col-md-6">
+        <div class="col-md-6 d-none d-lg-block">
           <div class="img-servicios">
               <img id="fondo_gris" src="{{asset('images/web/svgfondo.svg')}}" alt="">
               <img id="cables" src="{{asset('images/web/svgcables.svg')}}" alt="">
@@ -84,8 +49,13 @@
               <img id="engranaje2" src="{{asset('images/web/svgengranaje2.svg')}}" alt="">
               <img id="nubes" src="{{asset('images/web/svgnubes.svg')}}" alt="">
           </div>
-        </div>
-        <div class="col-md-6 texto-servicio izquierda">
+         </div>
+           <div class="col-12 d-block d-sm-none d-lg-none">
+              <div class="img-servicios">
+                  <img class="svg-sistemas" id="" src="{{asset('images/home/paginas_web.svg')}}" alt="" >
+              </div>
+          </div>
+        <div class="col-md-6 texto-servicio izquierda pt-5 mt-5 mt-lg-0 pt-lg-0">
           <h1 class="titulo-servicio">PÁGINAS WEB</h1>
           <h2 class="slogan-servicio">Tu ventana <br> al mundo</h2>
           <p class="resumen-servicio">
@@ -100,7 +70,15 @@
           <a class="info-servicio" href="" title="">Más info</a>
         </div>
       </section>
+       <div class="d-block d-sm-none d-lg-none">
+          <hr>  <!-- LINEA CELESTE SE MUESTRA SOLO EN CEL  -->        
+      </div>
       <section class="servicios row">
+        <div class="col-12 d-block d-sm-none d-lg-none mb-5">
+          <div class="img-servicios">
+             <img class="svg-sistemas" id="" src="{{asset('images/home/facturacion_electronica.svg')}}" alt="" >
+          </div>
+        </div>
         <div class="col-md-6 texto-servicio derecha">
           <h1 class="titulo-servicio">FACTURACIÓN ELECTRÓNICA</h1>
           <h2 class="slogan-servicio">Llevá tu empresa <br> donde vayas</h2>
@@ -109,27 +87,29 @@
           </p>
           <a class="info-servicio" href="" title="">Más info</a>
         </div>
-        <div class="col-md-6">
-          <img src="{{asset('images/home/facturacion_electronica.svg')}}" style="position: absolute;" alt="">
+        <div class="col-md-6 d-none d-lg-block">
           <div class="img-servicios">
-              {{-- <img class="svg-facturacion paso1" id="" src="{{asset('images/facturacion/paso1.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso4" id="" src="{{asset('images/facturacion/paso4.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso5" id="" src="{{asset('images/facturacion/paso5.svg')}}" alt=""> --}}
+              <img class="svg-facturacion paso1" id="" src="{{asset('images/facturacion/paso1.svg')}}" alt="">
+              <img class="svg-facturacion paso4" id="" src="{{asset('images/facturacion/paso4.svg')}}" alt="">
+              <img class="svg-facturacion paso5" id="" src="{{asset('images/facturacion/paso5.svg')}}" alt="">
               <img class="svg-facturacion paso2" id="" src="{{asset('images/facturacion/paso2.svg')}}" alt="">
-              {{-- <img class="svg-facturacion paso3" id="" src="{{asset('images/facturacion/paso3.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso10" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso11" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso12" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso13" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso6" id="" src="{{asset('images/facturacion/paso6.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso7" id="" src="{{asset('images/facturacion/paso7.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso8" id="" src="{{asset('images/facturacion/paso8.svg')}}" alt=""> --}}
-              {{-- <img class="svg-facturacion paso9" id="" src="{{asset('images/facturacion/paso9.svg')}}" alt=""> --}}
+              <img class="svg-facturacion paso3" id="" src="{{asset('images/facturacion/paso3.svg')}}" alt="">
+              <img class="svg-facturacion paso10" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt="">
+              <img class="svg-facturacion paso11" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt="">
+              <img class="svg-facturacion paso12" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt="">
+              <img class="svg-facturacion paso13" id="" src="{{asset('images/facturacion/paso3_1.svg')}}" alt="">
+              <img class="svg-facturacion paso6" id="" src="{{asset('images/facturacion/paso6.svg')}}" alt="">
+              <img class="svg-facturacion paso7" id="" src="{{asset('images/facturacion/paso7.svg')}}" alt="">
+              <img class="svg-facturacion paso8" id="" src="{{asset('images/facturacion/paso8.svg')}}" alt="">
+              <img class="svg-facturacion paso9" id="" src="{{asset('images/facturacion/paso9.svg')}}" alt="">
             </div>
         </div>
       </section>
+      <div class="d-block d-sm-none d-lg-none">
+          <hr>  <!-- LINEA CELESTE SE MUESTRA SOLO EN CEL  -->        
+      </div>
       <section class="servicios row">
-        <div class="col-md-6">
+        <div class="col-md-6 d-none d-lg-block">
           <div class="img-servicios">
               <img class="svg-marketing paso1" id="" src="{{asset('images/marketing/paso1.svg')}}" alt="">
               <img class="svg-marketing paso2" id="" src="{{asset('images/marketing/paso2.svg')}}" alt="">
@@ -142,7 +122,12 @@
               <img class="svg-marketing paso9" id="" src="{{asset('images/marketing/paso9.svg')}}" alt="">
             </div>
         </div>
-        <div class="col-md-6 texto-servicio izquierda">
+        <div class="col-12 d-block d-sm-none d-lg-none">
+          <div class="img-servicios">
+           <img class="svg-sistemas" id="" src="{{asset('images/home/marketing_digital.svg')}}" alt="" >
+          </div>
+        </div>
+        <div class="col-md-6 texto-servicio izquierda mt-5 pt-5 mt-lg-0 pt-lg-0">
           <h1 class="titulo-servicio">MARKETING DIGITAL</h1>
           <h2 class="slogan-servicio">Destacate <br> entre todos</h2>
           <p class="resumen-servicio">
@@ -151,8 +136,16 @@
           <a class="info-servicio" href="" title="">Más info</a>
         </div>
       </section>
+        <div class="d-block d-sm-none d-lg-none">
+          <hr>          
+        </div>
       <section class="servicios  row">
-        <div class="col-md-6 texto-servicio derecha">
+        <div class="col-12 d-block d-sm-none d-lg-none">
+          <div class="img-servicios">
+           <img class="svg-sistemas" id="" src="{{asset('images/home/ecommerce.svg')}}" alt="" >
+          </div>
+        </div>
+        <div class="col-md-6 texto-servicio derecha mt-5 pt-5 mt-lg-0 pt-lg-0">
           <h1 class="titulo-servicio">E-COMMERCE</h1>
           <h2 class="slogan-servicio">¿Querés vender <br> por internet?</h2>
           <p class="resumen-servicio">
@@ -160,7 +153,7 @@
           </p>
           <a class="info-servicio" href="" title="">Más info</a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 d-none d-lg-block">
           <div class="img-servicios">
               <img class="svg-ecommerce paso1" id="" src="{{asset('images/ecommerce/paso1.svg')}}" alt="">
               <img class="svg-ecommerce paso2" id="" src="{{asset('images/ecommerce/paso2.svg')}}" alt="">
@@ -212,170 +205,43 @@
           </div>
         </div>
       </section>
-      <hr>
-      <section class="contacto mb-4">
-        <h1 class="titulo-noticias">Contacto</h1>
-      </section>
     </div>
-
-
-
-
-
-    {{-- <style type="text/css">
-        .paginas_web{
-            position: relative;
-            left: 100px;
-            top: 200px;
-            width: 379px;
-        }
-
-        #fondo_gris {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: fade 2s 1 forwards; /* Safari 4+ */
-            -moz-animation:    fade 2s 1 forwards; /* Fx 5+ */
-            -o-animation:      fade 2s 1 forwards; /* Opera 12+ */
-            animation:         fade 2s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        @-webkit-keyframes fade {
-          0%   { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        @-moz-keyframes fade {
-          0%   { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        @-o-keyframes fade {
-          0%   { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        @keyframes fade {
-          0%   { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        #computadoras {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: scale .5s .5s 1 forwards; /* Safari 4+ */
-            -moz-animation:    scale .5s .5s 1 forwards; /* Fx 5+ */
-            -o-animation:      scale .5s .5s 1 forwards; /* Opera 12+ */
-            animation:         scale .5s .5s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-
-        #ventana {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: scale .3s .7s 1 forwards; /* Safari 4+ */
-            -moz-animation:    scale .3s .7s 1 forwards; /* Fx 5+ */
-            -o-animation:      scale .3s .7s 1 forwards; /* Opera 12+ */
-            animation:         scale .3s .7s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        #nubes {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: scale .3s 1s 1 forwards; /* Safari 4+ */
-            -moz-animation:    scale .3s 1s 1 forwards; /* Fx 5+ */
-            -o-animation:      scale .3s 1s 1 forwards; /* Opera 12+ */
-            animation:         scale .3s 1s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        #cables {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: scale .3s 1.2s 1 forwards; /* Safari 4+ */
-            -moz-animation:    scale .3s 1.2s 1 forwards; /* Fx 5+ */
-            -o-animation:      scale .3s 1.2s 1 forwards; /* Opera 12+ */
-            animation:         scale .3s 1.2s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        #libreta {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            -webkit-animation: scale .3s 1.4s 1 forwards; /* Safari 4+ */
-            -moz-animation:    scale .3s 1.4s 1 forwards; /* Fx 5+ */
-            -o-animation:      scale .3s 1.4s 1 forwards; /* Opera 12+ */
-            animation:         scale .3s 1.4s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        #engranaje1{
-            position: absolute;
-            height: 50px;
-            top: 45px;
-            right: 10px;
-            opacity: 0;
-            -webkit-animation: engranaje .3s 2s 1 forwards; /* Safari 4+ */
-            -moz-animation:    engranaje .3s 2s 1 forwards; /* Fx 5+ */
-            -o-animation:      engranaje .3s 2s 1 forwards; /* Opera 12+ */
-            animation:         engranaje .3s 2s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-        #engranaje2{
-            position: absolute;
-            height: 35px;
-            top: 20px;
-            right: 75px;
-            opacity: 0;
-            -webkit-animation: engranaje .3s 1.6s 1 forwards; /* Safari 4+ */
-            -moz-animation:    engranaje .3s 1.6s 1 forwards; /* Fx 5+ */
-            -o-animation:      engranaje .3s 1.6s 1 forwards; /* Opera 12+ */
-            animation:         engranaje .3s 1.6s 1 forwards; /* IE 10+, Fx 29+ */
-        }
-
-        @-webkit-keyframes scale {
-          0%   { opacity: 0;  transform: scale(0)}
-          100% { opacity: 1; transform: scale(1) }
-        }
-        @-moz-keyframes scale {
-          0%   { opacity: 0; transform: scale(0)}
-          100% { opacity: 1; transform: scale(1)}
-        }
-        @-o-keyframes scale {
-          0%   { opacity: 0; transform: scale(0)}
-          100% { opacity: 1; transform: scale(1)}
-        }
-        @keyframes scale {
-          0%   { opacity: 0; transform: scale(0)}
-          100% { opacity: 1; transform: scale(1)}
-        }
-        @-webkit-keyframes engranaje {
-          0%   { opacity: 0;  -webkit-transform: rotate(0deg) }
-          100% {opacity: 1; -webkit-transform: rotate(360deg)}
-        }
-        @-moz-keyframes engranaje {
-          0%   { opacity: 0; -moz-transform: rotate(0deg)}
-          100% {opacity: 1; -moz-transform: rotate(360deg)}
-        }
-        @-o-keyframes engranaje {
-          0%   { opacity: 0; -o-transform: rotate(0deg)}
-          100% {opacity: 1; -o-transform: rotate(360deg)}
-        }
-        @keyframes engranaje {
-          0%   { opacity: 0; transform: rotate(0deg)}
-          100% {opacity: 1; transform: rotate(360deg)}
-        }
-    </style>
-    <div class="paginas_web">
-        <img id="fondo_gris" src="{{asset('images/1x/svgfondo.svg')}}" alt="">
-        <img id="cables" src="{{asset('images/1x/svgcables.svg')}}" alt="">
-        <img id="computadoras" src="{{asset('images/1x/svgcomputadora.svg')}}" alt="">
-        <img id="ventana" src="{{asset('images/1x/svgVentana.svg')}}" alt="">
-        <img id="libreta" src="{{asset('images/1x/svglibreta.svg')}}" alt="">
-        <img id="engranaje1" src="{{asset('images/1x/svgengranaje1.svg')}}" alt="">
-        <img id="engranaje2" src="{{asset('images/1x/svgengranaje2.svg')}}" alt="">
-        <img id="nubes" src="{{asset('images/1x/svgnubes.svg')}}" alt="">
-    </div> --}}
-    
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script  src="{{asset('js/jquery.min.js')}}"></script>
+      <hr>
+      <section id="contacto" class="contacto pb-5" style="">
+        <div class="container">
+          <h1 class="titulo-servicio">¿TENÉS ALGUNA DUDA O CONSULTA?</h1>
+          <h2 class="slogan-servicio">Conectate con nosotros</h2>
+          <form action="{{ url('/consulta') }}" method="get" class="form-horizontal" accept-charset="utf-8">
+            <input class="form-control" type="text" name="nombre" value="" placeholder="Nombre/Razón social">
+            <select class="form-control round" name="categoria">
+              <option value="" selected="">Categoría a la que se dedica</option>
+            </select>
+            <input class="form-control" type="text" name="telefono" value="" placeholder="Teléfono">
+            <input class="form-control" type="text" name="email" value="" placeholder="E-mail">
+            <textarea rows="5" class="form-control" name="consulta" placeholder="Ingrese su consulta.."></textarea>
+            <div class="g-recaptcha" data-sitekey="6LdAe50UAAAAACup8Ycv_VfHOoWlyXVyESMsQmsO"></div>
+            <button class="float-right boton celeste" type="submit">Enviar</button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </section>
+@endsection
+@section('js')
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4R_duN92jPo5Z4hFRvxxXsAvhlDNvRL0 "></script>  
+    <script type="text/javascript">
+      $(window).scroll( function(){
+          /* Check the location of each desired element */
+          $('.img-servicios').each( function(i){
+              var bottom_of_object = $(this).offset().top+80;
+              var bottom_of_window = $(window).scrollTop() + $(window).height();
+              /* If the object is completely visible in the window, fade it in */
+              if( bottom_of_window > bottom_of_object ){
+                  $(this).children('img').addClass('animacion');
+              }
+          }); 
+      });
+    </script>
+@endsection
     <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109285614-1"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4R_duN92jPo5Z4hFRvxxXsAvhlDNvRL0 &signed_in=true"></script>-->    
     {{-- <script async type="text/javascript">

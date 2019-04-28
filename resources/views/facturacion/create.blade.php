@@ -39,7 +39,7 @@
   </style>
 @endsection
 @section('contenido')
-<div class="col-xs-12 p-botones titulo_verde sombra_gris">
+<div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
     <h2 class="text-center">Generar comprobantes</h2>
 </div>
 @include('flash::message')
@@ -52,7 +52,7 @@
   @include('flash::message')
   <div class="row bordes_imput ocultar_labels">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel p-botones sombra_gris">
+      <div class="x_panel p-botones sombra_gris solo_pc_sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Datos cliente</h4>
         </div>
@@ -95,7 +95,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel sombra_gris">
+      <div class="x_panel sombra_gris solo_pc_sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Datos comprobante</h4>
         </div>
@@ -140,7 +140,7 @@
   </div>
   <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-      <div class="x_panel sombra_gris">
+      <div class="x_panel sombra_gris solo_pc_sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Detalles comprobante</h4>
         </div>
@@ -189,7 +189,7 @@
   </div>
   <div class="row">
     <div class="col-md-8 col-sm-12 col-xs-12">
-      <div class="x_panel sombra_gris">
+      <div class="x_panel sombra_gris solo_pc_sombra_gris">
         <div class="x_title">
           <h4 class="text-center">Totales</h4>
         </div>
@@ -235,17 +235,41 @@
     
     <input type="hidden" name="detalle" id="detalle" value="">
     <input type="hidden" name="alicuotas" id="alicuotas" value="">
-    <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+{{--     <div class="col-md-4 col-sm-12 col-xs-12 text-center">
       <button type="button" class="boton boton-confirmar boton-margenes" id="btn-observaciones" >Agregar observaciones</button>
+    </div> --}}
+
+    <div class="col-xs-12 col-lg-4">
+      <div class="x_panel sombra_gris solo_pc_sombra_gris">
+          <label class="col-lg-12 col-md-4 col-xs-12 label-control" for="total">Si lo desea puede agregar observaciones:</label>
+          <textarea placeholder="Escriba aqui..." style="height: 100px;width: 100%;resize: none;" class="form-control" id="txtObservaciones" name="txtObservaciones"></textarea>
+      </div>
     </div>
+
     @if(Auth::user()->fiscal->certificado == null)
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
         <button type="button" disabled="" class="boton boton-opciones disabled boton-margenes" id="btn-generar-comprobante">Generar comprobante</button>
       </div>
     @else
+      {{-- 
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
         <button type="button" class="boton boton-opciones boton-margenes"  id="btn-generar-comprobante">Generar comprobante</button>
-      </div>
+      </div> 
+      --}}
+        <div class="panel-buttons">
+            <div class="col-lg-4 col-md-3 col-xs-12 text-center">
+              <div class="sombra_gris solo_pc_sombra_gris">                    
+                <div class="small-box boton_verde botones_cuadrados boton_generar_comprobante" id="btn-generar-comprobante">
+                  <div class="inner">
+                    <h3>Generar comprobante<sup style="font-size: 20px"></sup></h3>
+                  </div>
+                  <div class="icon-grande">
+                    <i class="fa fa-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
     @endif
   </div>
 
@@ -294,5 +318,9 @@
         autocomplete_servicio(input);
       @endif
     @endif
+
+    $(".boton_generar_comprobante").on("click", function(){
+      $("#form_comprobante").submit();
+    });
   </script>
 @endsection

@@ -445,7 +445,13 @@ a:hover{
     }
 /*-----------------------ESTILO PARA CELULARES----------------------*/
 /* ANTE CUALQUIER QUILOMBO EN ALGUN ESTILO, BORRAR DE ACA...
-      GRACIAS POR SU ATENCION, VUELVA PRONTO                         */
+      GRACIAS POR SU ATENCION, VUELVA PRONTO  
+                             */
+    .boton_verde{
+		background-color: #26a737;
+		color: white;
+	}
+/*------------- VISTA SOLO PC --------------------------*/
 @media screen and (min-width: 601px) {
 	.para_cel{
 		display: none;
@@ -453,7 +459,69 @@ a:hover{
 	.para_pc{
 		display: block;
 	}
+	.fondo_celeste{
+		background-color: #00b5ed;
+		color: white;		
+	}
+	.botones_cuadrados{
+	  min-height: 25vh;
+	  	  
+	}
+	.inner h3{
+		font-size: 27px!important;
+		word-wrap: break-word;
+		margin: 20% 8% 0% 10%!important;
+	}
+	.solo_pc_sombra_gris{
+		box-shadow: 0px 0px 7px 0px grey!important;
+	}	
+	.solo_pc_titulo_verde{
+		background-color: #26a737;
+    	border-radius: 4px;
+    	color: white;
+	}
+	.solo_pc_titulo_naranja{
+		background-color: #ffa000;
+    	border-radius: 4px;
+    	color: white;
+	}
+/* ---------estilo de los botones grandes personalizado----------------*/
+	.icon i{
+		font-size: 48px;
+		margin: 8% 0% 0% 3%;
+		color: #00000026; 
+		/*		
+		color: #2265c9b3;
+		*/
+	}
+	.icon-grande i{
+		font-size: 93px;
+		margin: 8% 0% 0% 3%;
+		color: #00000026; 
+		/*		
+		color: #2265c9b3;
+		*/
+	}
+	.small-box .icon-grande {
+  	  transition: all 0.3s linear;
+  	  position: absolute;
+  	  top: -20px;    
+  	  z-index: 0;
+  	  font-size: 90px;
+  	  color: rgba(0, 0, 0, 0.15);
+  	  left: 50%;
+  	  margin-left: -40px;
+	}
+	.small-box:hover .icon-grande {
+ 		 font-size: 105px;
+	}
+
+
+
+/* ------- FINNN estilo de los botones grandes personalizado----------------*/
+
 }
+/*------------- FIN VISTA SOLO PC --------------------------*/
  @media screen and (max-width: 600px) {
 	.contenedor_botones{
 	  margin-left: -6px;
@@ -466,11 +534,7 @@ a:hover{
 	}
 	.fondo_celeste{
 		background-color: #00b5ed;
-		color: white;
-		/*
-		background-color: #f5f5f5;
-		color: #2285c3;
-		*/
+		color: white;		
 	}
 	.sombra_gris{
 		box-shadow: 0px 0px 7px 0px grey;
@@ -484,12 +548,16 @@ a:hover{
 	.p-botones{
 		padding: 1px!important;
 	}
+	.m-0{
+		margin: 0px;
+	}
 	.contenedor_botones a {
     	width: 100%;
     	margin: 0px;
     	padding: 0px;
 	}
-	.contenedor_botones i{
+/* ---------estilo de los botones grandes personalizado----------------*/
+	.icon i{
 		font-size: 48px;
 		margin: 8% 0% 0% 3%;
 		color: #00000026; 
@@ -497,11 +565,33 @@ a:hover{
 		color: #2265c9b3;
 		*/
 	}
-	.fondo_celeste h3{
+	.icon-grande i{
+		font-size: 93px;
+		margin: 8% 0% 0% 3%;
+		color: #00000026; 
+		/*		
+		color: #2265c9b3;
+		*/
+	}
+	.small-box .icon-grande {
+    transition: all 0.3s linear;
+    position: absolute;
+    top: -20px;    
+    z-index: 0;
+    font-size: 90px;
+    color: rgba(0, 0, 0, 0.15);
+    left: 50%;
+    margin-left: -40px;
+	}
+	.small-box:hover .icon-grande {
+ 	 font-size: 105px;
+	}
+	.inner h3{
 		font-size: 22px!important;
 		word-wrap: break-word;
-		    margin: 20% 8% 0% 12%!important;
+		margin: 20% 8% 0% 12%!important;
 	}
+/* --------------FINNNNN  estilo de los botones grandes personalizado--------------------*/
 	.titulo_verde{
 		background-color: #26a737;
     	border-radius: 4px;
@@ -512,6 +602,7 @@ a:hover{
     	border-radius: 4px;
     	color: white;
 	}
+
 	.bordes_imput input, .bordes_imput select{
 		background-color: transparent;
 	    outline: none;
@@ -526,6 +617,10 @@ a:hover{
 		position: absolute;
    		display: inline-block;
    		width: 100%;
+	}
+	.size-17{
+		font-size: 17px;
+		padding-left: 5px;
 	}
 
 	

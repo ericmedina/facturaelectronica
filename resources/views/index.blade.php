@@ -8,12 +8,12 @@
 	            
         </div>
         <div class="x_content">
-			<div class="col-md-12 col-sm-12 col-xs-12 p-botones sombra_gris">		
+			<div class="col-md-12 col-sm-12 col-xs-12 p-botones solo_pc sombra_gris">		
 				<div class="row panel-buttons contenedor_botones">
 					<div class="col-md-3 col-xs-6 text-center p-botones">
            			<!-- small box -->
            				<a href="{{ route('facturas.create') }}">           					
-			            <div class="small-box fondo_celeste botones_cuadrados">
+			            <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
 			              <div class="inner">
 			                <h3>Nuevo <br> comprobante<sup style="font-size: 20px"></sup></h3>
 
@@ -28,7 +28,7 @@
 		         	<div class="col-md-3 col-xs-6 text-center p-botones">
            			<!-- small box -->
            				<a href="{{ route('clientes.index') }}">           					
-			            <div class="small-box fondo_celeste botones_cuadrados">
+			            <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
 			              <div class="inner">
 			                <h3>Ver <br>clientes<sup style="font-size: 20px"></sup></h3>
 
@@ -43,7 +43,7 @@
 		         	<div class="col-md-3 col-xs-6 text-center p-botones">
            			<!-- small box -->
            				<a href="{{ route('ventas.index') }}">           					
-			            <div class="small-box fondo_celeste botones_cuadrados">
+			            <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
 			              <div class="inner">
 			                <h3>Ver <br>ventas<sup style="font-size: 20px"></sup></h3>
 
@@ -58,7 +58,7 @@
 		         	<div class="col-md-3 col-xs-6 text-center p-botones">
            			<!-- small box -->
            				<a href="">           					
-			            <div class="small-box fondo_celeste botones_cuadrados">
+			            <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
 			              <div class="inner">
 			                <h3>Ver <br>proveedores<sup style="font-size: 20px"></sup></h3>
 

@@ -1,10 +1,12 @@
 @extends('layouts.panel_form')
 @section('title', 'Editar cliente - PampaDev')
-@section('titulo_panel')
-  <h2 class="text-center">Editar {{ $cliente->nombre }}</h2>
+@section('titulos')
+  <div class="col-xs-12 p-botones titulo_naranja sombra_gris solo_pc_sombra_gris">
+    <h2 class="text-center">Editar {{ $cliente->nombre }}</h2>
+  </div>
 @endsection
 @section('contenido_panel')
-  <form action="{{ url('clientes/'.$cliente->id) }}" method="POST" class="form-horizontal form-label-left">
+  <form action="{{ url('clientes/'.$cliente->id) }}" method="POST" class="form-horizontal form-label-left bordes_imput">
     {{ csrf_field() }}
     <input type="hidden" name="_method" value="PUT">
     <div class="form-group">

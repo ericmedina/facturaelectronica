@@ -168,10 +168,10 @@
           @else
             @if(Auth::user()->tipo_actividad == "productos y servicios")
               <div class="col-md-6 col-sm-6 col-xs-12 text-center">
-                  <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Insertar producto</button>
+                  <button type="button" class="boton boton-confirmar" id="boton-modal-producto" >Insertar producto <i class="fa fa-plus-circle size-17"></i></button>
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12 text-center">
-                  <button type="button" class="boton boton-confirmar" id="boton-modal-servicio" >Insertar servicio</button>
+                  <button type="button" class="boton boton-confirmar" id="boton-modal-servicio" >Insertar servicio <i class="fa fa-plus-circle size-17" style="padding-left: 11px;"></i></button>
               </div>
             @elseif(Auth::user()->tipo_actividad == "productos")
               <div class="col-xs-12 text-center">
@@ -193,8 +193,8 @@
         <div class="x_title">
           <h4 class="text-center">Totales</h4>
         </div>
-        <div class="x_content">
-          <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="x_content p-botones">
+          <div class="col-md-6 col-sm-12 col-xs-12 p-botones">
             <table id="tabla-iva" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -206,26 +206,26 @@
               </tbody>
             </table>
           </div>
-          <div class="col-md-6 col-sm-6 col-xs-12 form-item-totales">
-            <div class="form-group col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12 form-item-totales p-botones">
+            <div class="form-group col-xs-12 p-botones">
               <label class="col-md-4 col-xs-12 label-control" for="subtotal">Subtotal:</label>
               <div class=" col-md-8 col-xs-12 input-group">
                 <span class="input-group-addon">$</span>
                 <input type="text" name="subtotal" class="form-control" id="subtotal" value="0">
               </div>
             </div>
-            <div class="form-group col-xs-12">
+            <div class="form-group col-xs-12 p-botones">
               <label class="col-md-4 col-xs-12 label-control" for="importe_iva">Imp. IVA:</label>
               <div class=" col-md-8 col-xs-12 input-group">
                 <span class="input-group-addon">$</span>
                 <input type="text" name="importe_iva" class="form-control" id="importe_iva" value="0">
               </div>
             </div>
-            <div class="form-group col-xs-12">
+            <div class="form-group col-xs-12 p-botones">
               <label class="col-md-4 col-xs-12 label-control" for="total">Total:</label>
               <div class=" col-md-8 col-xs-12 input-group">
-                <span class="input-group-addon">$</span>
-                <input type="text" name="total" class="form-control" id="total" value="0">
+                <span class="input-group-addon titulo_verde">$</span>
+                <input type="text" name="total" class="form-control cel_boton_total letras_verdes" id="total" value="0">
               </div>
             </div>
           </div>
@@ -319,8 +319,8 @@
       @endif
     @endif
 
-    $(".boton_generar_comprobante").on("click", function(){
-      $("#form_comprobante").submit();
-    });
+ //   $(".boton_generar_comprobante").on("click", function(){
+   //   $("#form_comprobante").submit();
+   // });
   </script>
 @endsection

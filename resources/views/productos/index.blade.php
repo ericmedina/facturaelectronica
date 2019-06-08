@@ -1,96 +1,62 @@
-@extends('layouts.main')
+@extends('layouts.panel_form')
 @section('title', 'Listado de productos - PampaDev')
-@section('contenido')
-<h2 class="text-center">Listado de productos</h2>
+@section('titulos')
+  <div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
+    <h2 class="text-center">Listado de productos</h2>
+  </div>
+@endsection
+@section('contenido_panel')
 @include('flash::message')
-<form action="{{url('/productos')}}" method="get" accept-charset="utf-8" class="form-inline">
+<form action="{{url('/productos')}}" method="get" accept-charset="utf-8" class="form-inline bordes_imput">
 	<div class="col-md-4 col-sm-6 col-xs-12 form-item">
       <label class="col-md-3 hidden-xs label-control" for="buscar">Buscar:</label>
       <div class=" col-md-9 col-md-offset-0 col-xs-12 input-group">
-        <input type="text" name="buscar" class="form-control" id="buscar" placeholder="Buscar producto">
+        <input type="text" name="buscar" class="form-control" id="buscar" placeholder="Escriba el nombre o codigo del producto">
       </div>
     </div>
-  	<div class="col-md-2 col-xs-8 col-xs-offset-2 col-md-offset-0">
+{{-- 
+__________________    REEEMPLAZAR ESTE BOTON BUSCAR POR EL AUTOCOMPLETAR ______________________  	
+    <div class="col-md-2 col-xs-8 col-xs-offset-2 col-md-offset-0">
       <button type="submit" style="margin-top: 7px;" class="btn btn-success col-xs-12">Buscar</button>  	
-  	</div>
+  	</div> 
+________________________________________________________________________________________________
+--}}
+
+{{--  BOTONES VIEJOS, LOS GUARDOOO POR LAS DUUUUUUUUUUUUUDAS     
     <div class="col-md-2 col-xs-8 col-xs-offset-2 col-md-offset-2">
       <button type="button" id="exportar_precios" style="margin-top: 7px;" onclick="abrir_precios()" class="btn btn-success col-xs-12">Exportar precios</button>    
     </div>
     <div class="col-md-2 col-xs-8 col-xs-offset-2 col-md-offset-0">
       <button type="button" id="exportar_precios" style="margin-top: 7px;" onclick="abrir_stock()" class="btn btn-success col-xs-12">Exportar stock</button>    
-    </div>
+    </div> --}}
 </form>
+    <div class="p-botones sombra_gris margin-top-3 margin-bottom-4">   
+      <div class="row panel-buttons contenedor_botones m-1">
+            <div class="col-md-3 col-xs-6 text-center p-botones" id="exportar_precios" onclick="abrir_precios()">
+                <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
+                  <div class="inner">
+                    <h3>Exportar <br>precios<sup style="font-size: 20px"></sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-tags"></i>
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-6 text-center p-botones" id="exportar_precios" onclick="abrir_stock()">
+                <div class="small-box fondo_celeste botones_cuadrados solo_pc_sombra_gris">
+                  <div class="inner">
+                    <h3>Exportar <br>stock<sup style="font-size: 20px"></sup></h3>
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-list-ul"></i>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <br>
 <style type="text/css">
 
-     .pc{
-            display: block;
-          }
-          .cell{
-              display: none;
-          }
-    @media screen and (max-width: 600px) {
-          .pc{
-            display: none;
-          }
-          .cell{
-              display: block;
-              cursor:pointer;
-          }
-          .color_tabla{
-            background-color: #f9f9f9!important;
-            margin-bottom: 0px!important;
-
-          }
-          .icono{
-            color: green;
-            padding-left: 36%;
-          }
-          .padding-0{
-            padding:0px!important;
-          }
-          .burbuja {
-            background: #00b5ed; /* el color de fondo */
-            color: #FFF; /* el color del texto */
-            font-family: Arial, Sans-serif;
-            font-size: 12px;
-            padding: 20px 10px 10px 10px;
-            text-align: center;
-            width: 200px;
-            -moz-border-radius: 10px;
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-            float: right;
-          }
-          .burbuja:after {
-            border: solid 10px transparent;
-            border-top-color: #00b5ed;  /* igual al color de fondo */
-            border-bottom: 0;
-            bottom: -20px;  /* igual al borde + el padding-bottom de la definición anterior */
-            content: " ";
-            display: block;
-            height: 0;
-            margin: auto;
-            overflow: hidden;
-            position: relative;
-            width: 0;
-          }
-          .collapsing {
-               -webkit-transition: none;
-               transition: none;
-               visibility: hidden;
-               display: none;
-          }
-          
-          .collapse.show {
-                 -webkit-transition: none;
-                 transition: none;
-                 visibility: visible;
-                 display: block;
-          }
-
-
-    }
 
 </style>
 <!--   ____________TABLA VISTA GRANDE PARA PC______________________       -->
@@ -159,9 +125,11 @@
 </div>
 <!-- ____________________FIN DE LA TABLA VISTA GRANDE PARA PC_____________________________________ -->
 <!-- ____________________Inicio de la tablas para celulares_____________________________________ -->
-<div class="burbuja">Haz click en algun producto de la tabla para mostrar detalles</div>
-<div id="" class="cell">
-  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+<div id="" class="cell relative">
+  <div class="col-xs-12 relative">
+    <div class="burbuja" style="border: 1px solid grey; box-shadow: 2px 2px 4px 2px grey">Haz click en algun producto de la tabla para mostrar detalles</div>
+  </div>
+  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap " cellspacing="0" width="100%">
     <thead>
       <tr>
         <th>Codigo</th>

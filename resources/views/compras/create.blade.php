@@ -1,74 +1,69 @@
 @extends('layouts.panel_form')
 @section('title', 'Agregar nueva compra - PampaDev')
 @section('titulo_panel')
-  <h2 class="text-center">Nueva compra</h2>
+
 @endsection
 @section('contenido')
+<div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
+  <h2 class="text-center">Nueva compra</h2>
+</div>
 <form action="{{ route('compras.store') }}" method="POST" id="form_compra" class="form-horizontal form-label-left">
     {{ csrf_field() }}
     <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
+      <div class="col-md-12 col-sm-12 col-xs-12 bordes_imput">
+        <div class="x_panel p-botones sombra_gris">
           <div class="x_title">
             <h4 class="text-center">Datos Proveedor</h4>
           </div>
           <div class="x_content">
-            <div class="container-fluid">
+            <div class="">
               <input type="hidden" name="id" id="id" value="">
-              <div class="form-group col-xs-12 col-md-5 col-xs-12">
-                <label class="control-label col-md-3 col-xs-12" for="proveedor">Proveedor:
-                </label>
-                <div class="col-md-9">
-                  <input type="text" id="proveedor" readonly="" name="proveedor" class="form-control">
-                </div>
+              <div class="form-group col-xs-12 col-md-5 form-item">
+                <label class="label-control col-md-3 col-xs-12" for="proveedor">Proveedor:
+                </label>                
+                  <input type="text" id="proveedor" readonly="" name="proveedor" class="col-md-9 col-xs-12 form-control" placeholder="EJ: Carlos Juarez">
               </div>
-              <div class="form-group col-xs-12 col-md-4">
+              <div class="form-group col-xs-12 col-md-4 form-item">
                 <label class="control-label col-md-2 col-xs-12" for="cuit">Cuit:
-                </label>
-                <div class="col-md-10 col-xs-12">
-                  <input type="text" id="cuit" name="cuit" readonly="" class="form-control">
-                </div>
+                </label>               
+                  <input type="text" id="cuit" name="cuit" readonly="" class="col-md-10 col-xs-12 form-control" placeholder="Ej: 20322223452">
               </div>
-              <div class="form-group col-md-3 col-xs-12">
-                <button type="button" class=" col-xs-12 boton boton-confirmar" id="boton_buscar_proveedor">Buscar proveedor</button>
-              </div>
+{{--           BOTON BUSCAR PROVEDOR CAMBIAR AL QUE ESTA EN VENTAS QUE BUSCA AUTOMATICAMENTE
+              <div class="form-group col-md-3 col-xs-12 form-item">
+                <button type="button" class=" col-xs-12 boton boton-confirmar" id="boton_buscar_proveedor">Buscar proveedor <i class="fa fa-search size-17"></i></button>
+              </div> 
+--}}
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
+      <div class="col-md-12 col-sm-12 col-xs-12 bordes_imput">
+        <div class="x_panel p-botones sombra_gris">
           <div class="x_title">
             <h4 class="text-center">Datos comprobante</h4>
           </div>
           <div class="x_content">
-            <div class="container-fluid">
-              <div class="form-group col-md-4 col-xs-12">
-                <label class="control-label col-md-2" col-xs-12 for="fecha">Fecha:
-                </label>
-                <div class="col-md-10 col-xs-12">
-                  <input type="date" id="fecha" name="fecha" class="form-control" value="{{$fecha}}">
-                </div>
+            <div class="">
+              <div class="form-group col-md-4 col-xs-12 form-item">
+                <label class="control-label col-md-2 col-xs-12" for="fecha">Fecha:
+                </label>                
+                  <input type="date" id="fecha" name="fecha" class="col-md-10 col-xs-12 form-control" value="{{$fecha}}">
               </div>
-              <div class="form-group col-xs-12 col-md-4">
-                <label class="control-label col-md-3" col-xs-12 for="tipo_comprobante">Tipo:
-                </label>
-                <div class="col-md-9 col-xs-12">
-                  <select name="tipo_comprobante" class="form-control"  id="tipo_comprobante">
+              <div class="form-group col-xs-12 col-md-4 form-item">
+                <label class="control-label col-md-3 col-xs-12" for="tipo_comprobante">Tipo:
+                </label>                
+                  <select name="tipo_comprobante" class="form-control col-md-8 col-xs-12"  id="tipo_comprobante">
                     <option value="A">Factura A</option>
                     <option value="B">Factura B</option>
                     <option value="C">Factura C</option>
-                  </select>
-                </div>
+                  </select>               
               </div>
               <div class="form-group col-xs-12 col-md-4">
-                <label class="control-label col-md-2" col-xs-12 for="num_comprobante">N°:
-                </label>
-                <div class="col-md-10 col-xs-12">
-                  <input type="text" id="num_comprobante" name="num_comprobante" class="form-control" value="00000001">
-                </div>
+                <label class="control-label col-md-2 col-xs-12" for="num_comprobante">N°:
+                </label>               
+                  <input type="text" id="num_comprobante" name="num_comprobante" class="form-control col-md-10 col-xs-12" value="00000001">
               </div>
             </div>
           </div>
@@ -77,7 +72,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
+        <div class="x_panel p-botones sombra_gris">
           <div class="x_title">
             <h4 class="text-center">Productos compra</h4>
           </div>
@@ -90,6 +85,7 @@
                   <th>Importe</th>
                   <th>Total</th>
                   <th></th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -97,7 +93,7 @@
               </tbody>
             </table>
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                <button type="button" class="boton boton-confirmar" id="buscar_producto_compra" >Agregar producto</button>
+                <button type="button" class="boton boton-confirmar" id="buscar_producto_compra" >Agregar producto <i class="fa fa-plus-circle size-17"></i></button>
             </div>
           </div>
         </div>
@@ -105,7 +101,7 @@
     </div>
     <div class="row">
       <div class="col-md-8 col-sm-12 col-xs-12">
-        <div class="x_panel">
+        <div class="x_panel p-botones sombra_gris">
           <div class="x_title">
             <h4 class="text-center">Totales</h4>
           </div>
@@ -151,15 +147,35 @@
       <input type="hidden" name="detalle" id="detalle" value="">
       <input type="hidden" name="alicuotas" id="alicuotas" value="">
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
-        <h3 class="col-xs-12 label-control" for="total">Utd. paga:</h3>
-        <div class="col-xs-offset-2 col-xs-8 input-group">
-          <span class="input-group-addon">$</span>
-          <input type="text" name="pagado" class="form-control" id="pagado" value="0">
+        <div class="x_panel p-botones sombra_gris">        
+          <h3 class="col-xs-12 label-control" for="total">Utd. paga:</h3>
+          <div class="col-xs-offset-2 col-xs-8 input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" name="pagado" class="form-control" id="pagado" value="0">
+          </div>
         </div>
       </div>
+{{--       BOTONNNNN ORISHIINALLLLL
       <div class="col-md-4 col-sm-12 col-xs-12 text-center">
         <button type="button" class="boton boton-confirmar boton-margenes guardar_compra"  id="btn-guardar-compra">Guardar compra</button>
-      </div>
+      </div> 
+--}}
+          <div class="panel-buttons">
+            <div class="col-lg-4 col-md-3 col-xs-12 text-center">
+              <div class="sombra_gris solo_pc_sombra_gris">                    
+                <div class="small-box boton_verde botones_cuadrados boton_guardar_compra" id="btn-guardar-compra">
+                  <div class="inner">
+                    <h3>Guardar compra<sup style="font-size: 20px"></sup></h3>
+                  </div>
+                  <div class="icon-grande">
+                    <i class="fa fa-check"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+
   </div>
   @include('layouts.dialogs.agregar_compras')
   @include('layouts.dialogs.buscar_proveedor')

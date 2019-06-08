@@ -426,6 +426,11 @@ a:hover{
                 -webkit-border-radius: 10px;
                 border-radius: 10px;
                 float: right;
+                position: absolute;
+   				right: 15px;
+   				top: -42px;
+    			opacity: 0.9;
+    			z-index: 1;
               }
               .burbuja:after {
                 border: solid 10px transparent;
@@ -451,6 +456,23 @@ a:hover{
 		background-color: #26a737;
 		color: white;
 	}
+	.boton_verde:hover{
+		background-color: #33bf46;
+		color: white;
+	}
+	.boton_rojo{	
+		background-color: #d10a0a;
+		color: white;
+	}
+	.boton_naranja{	
+		background-color: #ffa000;
+		color: white;
+	}
+	.fondo_celeste{
+		background-color: #00b5ed;
+		color: white;		
+	}
+
 /*------------- VISTA SOLO PC --------------------------*/
 @media screen and (min-width: 601px) {
 	.para_cel{
@@ -484,6 +506,9 @@ a:hover{
 		background-color: #ffa000;
     	border-radius: 4px;
     	color: white;
+	}
+	.pc-p-botones{
+		padding: 1px!important;
 	}
 /* ---------estilo de los botones grandes personalizado----------------*/
 	.icon i{
@@ -536,9 +561,15 @@ a:hover{
 		background-color: #00b5ed;
 		color: white;		
 	}
+	.letras_rojas{
+		color: #d10a0a;
+	}
+	.letras_verdes{
+		color: #00bd00;
+	}
 	.sombra_gris{
 		box-shadow: 0px 0px 7px 0px grey;
-	}	
+	}
 	.para_cel{
 		display: none;
 	}
@@ -551,11 +582,57 @@ a:hover{
 	.m-0{
 		margin: 0px;
 	}
+	.m-pegado-panel{
+	margin: 0px -17px 0px -17px !important;
+	}
 	.contenedor_botones a {
     	width: 100%;
     	margin: 0px;
     	padding: 0px;
 	}
+	.size-14{
+		font-size: 13px;
+	}
+	.cel_boton_total{
+		height: 63px!important;
+		font-size: 41px;
+		text-align: center;
+	}
+	.cel_boton_total:hover{
+		height: 63px!important;
+		font-size: 41px;
+		text-align: center;		
+	}
+	.relative{
+		position: relative;
+	}
+	.margin-top-3{
+		margin-top: 3%!important;
+	}
+	.margin-top-10{
+		margin-top: 10%!important;
+	}
+	.margin-bottom-4{
+		margin-bottom: 4%!important;
+	}
+	.margin-bottom-10{
+		margin-bottom: 10%!important;
+	}
+	.m-1{
+       margin:  0px -6px 0px -2px;
+	}
+	.size-titulos{
+		font-size: 27px;
+	}
+	.corregir_titulo {
+		text-transform: lowercase;
+	}
+	.corregir_titulo::first-letter {
+		text-transform: uppercase;
+	}
+
+
+
 /* ---------estilo de los botones grandes personalizado----------------*/
 	.icon i{
 		font-size: 48px;
@@ -602,9 +679,14 @@ a:hover{
     	border-radius: 4px;
     	color: white;
 	}
+	.titulo_rojo{
+		background-color: #d10a0a;
+    	border-radius: 4px;
+    	color: white;
+	}
 
 	.bordes_imput input, .bordes_imput select{
-		background-color: transparent;
+		background-color: transparent!important;
 	    outline: none;
 	    border: 0px;
 	    border-bottom: 1px solid black;
@@ -692,7 +774,7 @@ a:hover{
   font-size: 90px;
   color: rgba(0, 0, 0, 0.15);
   left:50%; 
-  margin-left: -17px;
+  margin-left: -20px;
 }
 
 .small-box:hover {

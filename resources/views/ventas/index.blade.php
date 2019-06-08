@@ -1,72 +1,17 @@
 @extends('layouts.main')
 @section('title', 'Listado de ventas - PampaDev')
 @section('contenido')
-<h2 class="text-center">Listado de ventas</h2>
 @include('flash::message')
 <style type="text/css">
-       .pc{
-            display: block;
-          }
-          .cell{
-              display: none;
-          }
-    @media screen and (max-width: 600px) {
-          .pc{
-            display: none;
-          }
-          .cell{
-              display: block;
-              cursor:pointer;
-          }
-          .color_tabla{
-            background-color: #f9f9f9!important;
-            margin-bottom: 0px!important;
 
-          }
-          .icono{
-            color: green;
-            padding-left: 36%;
-          }
-          .padding-0{
-            padding:0px!important;
-          }
-          .borde-tabla{
-            border: 1px solid #ddd;
-          }
-        .burbuja {
-                background: #00b5ed; /* el color de fondo */
-                color: #FFF; /* el color del texto */
-                font-family: Arial, Sans-serif;
-                font-size: 12px;
-                padding: 20px 10px 10px 10px;
-                text-align: center;
-                width: 200px;
-                -moz-border-radius: 10px;
-                -webkit-border-radius: 10px;
-                border-radius: 10px;
-                float: right;
-              }
-              .burbuja:after {
-                border: solid 10px transparent;
-                border-top-color: #00b5ed;  /* igual al color de fondo */
-                border-bottom: 0;
-                bottom: -20px;  /* igual al borde + el padding-bottom de la definición anterior */
-                content: " ";
-                display: block;
-                height: 0;
-                margin: auto;
-                overflow: hidden;
-                position: relative;
-                width: 0;
-              }
-
-
-    }
 
 
 </style>
-<div id="card" class="x_content pc">
-  <table class="table table-bordered table-striped  dt-responsive nowrap tabla-movimientos" cellspacing="0" width="100%">
+<div id="card" class="x_content pc pc-p-botones">
+  <div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
+    <h2 class="text-center">Listado de ventas</h2> 
+  </div>
+  <table class="table table-bordered table-striped  dt-responsive nowrap tabla-movimientos solo_pc_sombra_gris" cellspacing="0" width="100%">
     <thead>
       <tr>
         <th class="text-center">Fecha</th>
@@ -126,9 +71,14 @@
     </tbody>
   </table>
 </div>
-<div class="burbuja">Haz click en algun producto de la tabla para mostrar detalles</div>
-<div id="" class="x_content cell">
-  <table class="table table-striped dt-responsive nowrap tabla-movimientos" cellspacing="0" width="100%">
+<div id="" class="cell p-botones">
+  <div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
+    <h2 class="text-center">Listado de ventas</h2>
+  </div>
+  <div class="relative col-xs-12">
+      <div class="burbuja cell">Haz click en algun producto de la tabla para mostrar detalles</div>
+  </div>
+  <table class="table table-striped dt-responsive nowrap tabla-movimientos sombra_gris" cellspacing="0" width="100%">
     <thead class="borde-tabla">
       <tr>
         <th class="text-center">Fecha</th>       
@@ -137,7 +87,7 @@
         <th>Detalle</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="size-14">
       @foreach($ventas as $venta)
         <!-- el DATA-TARGET tiene las letras cell al lado para que el id no sea igual al de la tabla
                          para pantallas grandes y no se pise el colapse-->

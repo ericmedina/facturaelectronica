@@ -1,29 +1,29 @@
 <div class="modal fade modal-agregar-compras" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-lg m-0">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
         </button>
         <h4 class="modal-title text-center" id="title_dialog_detalle">Agregar producto</h4>
       </div>  
-      <div class="modal-body">
-                <div class="container-fluid">
+      <div class="modal-body p-botones">
+                <div class="container-fluid p-botones">
           <div class="col-md-8 col-xs-12 form-item">
-            <label class="col-md-3 col-xs-12 label-control" for="buscar_producto">Producto:</label>
-            <div class=" col-md-9 col-xs-12 input-group">
+            <label class="col-md-3 col-xs-3 label-control" for="buscar_producto">Producto:</label>
+            <div class=" col-md-9 col-xs-9 input-group">
               <input type="text" name="buscar_producto" class="form-control" id="buscar_producto" placeholder="codigo/producto" value="">
             </div>
           </div>
-          <div class="col-md-4 col-xs-12 form-item">
-            <label class="col-md-4 col-xs-5 label-control" for="cantidad_detalle">Cantidad:</label>
-            <div class=" col-md-8 col-xs-7 input-group">
+          <div class="col-md-4 col-xs-6 form-item">
+            <label class="col-md-4 col-xs-6 label-control" for="cantidad_detalle">Cantidad:</label>
+            <div class=" col-md-8 col-xs-6 input-group">
               <input type="text" name="cantidad_detalle" class="form-control" id="cantidad_detalle" value="1">
             </div>
           </div>
-          <div class="col-md-6 col-xs-12  form-item">
+          <div class="col-md-6 col-xs-6  form-item">
             <label class="col-md-4 col-xs-5 label-control" for="precio_producto">Precio:</label>
             <div class=" col-md-8 col-xs-7 input-group">
-              <span class="input-group-addon">$</span>
+              <span class="input-group-addon pc">$</span>
               <input type="text" name="precio_producto" class="form-control" readonly="" id="precio_producto" value="0">
             </div>
           </div>
@@ -56,9 +56,9 @@
             </table>
         </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="boton boton-cancelar" data-dismiss="modal">Cerrar</button>
-        <button type="button" name="boton-confirmar" id="boton-confirmar" class="boton boton-confirmar" >Añadir</button>
+      <div class="modal-footer p-botones">
+        <button type="button" class="boton boton-cancelar" data-dismiss="modal">Cerrar  <i class="fa fa-times size-17"></i></button>
+        <button type="button" name="boton-confirmar" id="boton-confirmar" class="boton boton-confirmar boton_verde" >Añadir <i class="fa fa-check size-17"></i></button>
       </div>
 
     </div>

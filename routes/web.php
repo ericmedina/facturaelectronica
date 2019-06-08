@@ -2,6 +2,7 @@
 
 #----------------------------------------------
 #IMPORTS
+
 #----------------------------------------------
 
 use \Milon\Barcode\DNS1D;
@@ -191,21 +192,24 @@ Route::get('/modificar_codigo', function(){
     });
 });
 
+Route::get("/welcome2", function(){
+    return view("welcome2");
+});
 Route::get("/sistemas-personalizados", function(){
-    return view("sistema");
+    return view("sistema2");
 });
 Route::get("/marketing-digital", function(){
-    return view("marketing");
+    return view("marketing2");
 });
 
 Route::get("/paginas-web", function(){
-    return view("paginas-web");
+    return view("paginas-web2");
 });
 Route::get("/ecommerce", function(){
-    return view("ecomerce");
+    return view("ecomerce2");
 });
 Route::get("/facturacionelectronica", function(){
-    return view("facturacionelectronica");
+    return view("facturacionelectronica2");
 });
 Route::get('array/productos/{buscar}', function($buscar){
     $productos = App\Producto::search($buscar)->orderBy('producto', 'ASC')->get();

@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Listado de compras - PampaDev')
 @section('contenido')
-<h2 class="text-center">Listado de compras</h2>
 @include('flash::message')
 <div id="card" class="pc">  
   <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -54,8 +53,13 @@
 </div>
 <!-- ______________________TABLA PARA CELULARES________________ -->
 <div id="" class="cell">  
-  <div class="burbuja">Haz click en algun producto de la tabla para mostrar detalles</div>
-  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+  <div class="col-xs-12 p-botones titulo_verde solo_pc_titulo_verde sombra_gris solo_pc_sombra_gris">
+    <h2 class="text-center">Listado de compras</h2>
+  </div>
+  <div class="relative col-xs-12">
+    <div class="burbuja">Haz click en algun producto de la tabla para mostrar detalles</div>
+  </div>
+  <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap sombra_gris" cellspacing="0" width="100%">
     <thead>
       <tr>
         <th>Fecha</th>

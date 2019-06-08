@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/empresas', function(){
+	$empresas = App\Empresa::all();
+	$output = new Symfony\Component\Console\Output\ConsoleOutput();
+	$output->writeln("asdsad");
+	return response()->json($empresas, 200);
+});

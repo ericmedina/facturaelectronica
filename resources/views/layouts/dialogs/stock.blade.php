@@ -16,11 +16,13 @@
           <li>Precio de venta</li>
         </ul>
       </div>
-      <div class="modal-footer">
-        <div class="modal-footer">
-        <a href="{{url('/exportar/stock/xls')}}" id="" class="boton boton-confirmar" download="">Exportar en excel</a>
-        <a href="{{url('/exportar/stock/pdf')}}" id="" class="boton boton-confirmar">Exportar en PDF</a>
-      </div>
+      <div class="modal-footer p-botones">
+        <div class="col-xs-6">
+          <a href="{{url('/exportar/stock/xls')}}" id="" class="boton boton-confirmar boton_verde text-center col-xs-12" download=""><img src="images/iconos_botones/excel.png" style="width: 50%"><p>Exportar en Excel</p></a>
+        </div>
+        <div class="col-xs-6">
+          <a href="{{url('/exportar/stock/pdf')}}" id="" class="boton boton-confirmar text-center col-xs-12 boton_rojo"><img src="images/iconos_botones/pdf3.png" style="width: 50%"><p>Exportar en PDF</p></a>
+        </div>
       </div>
     </div>
   </div>

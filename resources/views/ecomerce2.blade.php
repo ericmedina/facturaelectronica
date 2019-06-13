@@ -105,21 +105,15 @@
                 <div class="row">
                     <div class="col-md-10 m-auto pc-float-none">
 
-                       <div class="col-md-4 col-xs-12">
-                        <div class="">
+                        <div class="col-md-4">
                             <div>
-                                <h3 class="size-21">La vidriera de tu local en la web</h3>                                
+                                <h3 class="size-21">La vidriera de tu local en la web</h3>
                             </div>
                             <div class="">
                                 <p class="desarrollo_recuadro">Desarrollamos una página de ventas novedosa, con el diseño a medida de tu empresa, respetado la imagen institucional de la misma. Acompañado de las estrategias de Marketing Digital actuales.</p>                           
                             </div>
                         </div>
-                        </div>
-                    <!-- /shop -->
-
-                    <!-- shop -->
-                       <div class="col-md-4 col-xs-12">
-                        <div class="">
+                        <div class="col-md-4 col-xs-12">
                             <div>
                                 <h3 class="size-21">Catálogo</h3>                                
                             </div>
@@ -127,12 +121,7 @@
                                 <p class="desarrollo_recuadro">Hoy en día tener tu catalogo en línea es una necesidad. Acerca tus productos a todos los canales digitales, como Facebook, twiteer, instagram. A tan solo un click poder mostrar todos tus productos o servicios.</p> 
                             </div>
                         </div>
-                        </div>
-                    <!-- /shop -->
-
-                    <!-- shop -->
-                       <div class="col-md-4 col-xs-12">
-                        <div class="">
+                        <div class="col-md-4 col-xs-12">
                             <div>
                                 <h3 class="size-21">Responsive</h3>                                
                             </div>
@@ -140,8 +129,6 @@
                                  <p class="desarrollo_recuadro">Con el avance de la tecnología debemos estar preparados para acceder desde cualquier dispositivo, tanto computadoras de escritorios como notebook o dispositivos móviles. Lleva tu empresa en el bolsillo.</p>                             
                             </div>
                         </div>
-                        </div>
-                    <!-- /shop -->
                     </div>
                 </div>
             </div>

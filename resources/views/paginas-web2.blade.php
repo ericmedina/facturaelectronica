@@ -102,46 +102,30 @@
                     <h2></h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-
-                       <div class="col-md-4 col-xs-12">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-4">
+                        <div>
+                            <h3 class="size-21">Diseño web Responsive</h3>                                
+                        </div>
                         <div class="">
-                            <div>
-                                <h3 class="size-21">Diseño web Responsive</h3>                                
-                            </div>
-                            <div class="">
-                                <p class="desarrollo_recuadro">Creamos las páginas web para que puedan verse de manera óptima no sólo en cualquier PC, sino también desde cualquier dispositivo móvil como celulares y tablets. Lo que permite atraer más clientes debido a la comodidad que ésto conlleva.</p>                           
-                            </div>
+                            <p class="desarrollo_recuadro">Creamos las páginas web para que puedan verse de manera óptima no sólo en cualquier PC, sino también desde cualquier dispositivo móvil como celulares y tablets. Lo que permite atraer más clientes debido a la comodidad que ésto conlleva.</p>                           
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h3 class="size-21">Optimizado para Buscadores</h3>                                
                         </div>
-                    <!-- /shop -->
-
-                    <!-- shop -->
-                       <div class="col-md-4 col-xs-12">
                         <div class="">
-                            <div>
-                                <h3 class="size-21">Optimizado para Buscadores</h3>                                
-                            </div>
-                            <div class="">
-                                <p class="desarrollo_recuadro">Nuestro objetivo de realizar una página vistosa y optimizada no solo incluye a las personas que ingresen, también a los motores de búsqueda, como Google. Logrando así que la página obtenga una mejor posición en los resultados de búsquedas relacionadas.</p> 
-                            </div>
+                            <p class="desarrollo_recuadro">Nuestro objetivo de realizar una página vistosa y optimizada no solo incluye a las personas que ingresen, también a los motores de búsqueda, como Google. Logrando así que la página obtenga una mejor posición en los resultados de búsquedas relacionadas.</p> 
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h3 class="size-21">Diseño Gráﬁco</h3>                            
                         </div>
-                    <!-- /shop -->
-
-                    <!-- shop -->
-                       <div class="col-md-4 col-xs-12">
                         <div class="">
-                            <div>
-                                <h3 class="size-21">Diseño Gráﬁco</h3>                                
-                            </div>
-                            <div class="">
-                                 <p class="desarrollo_recuadro">Si lo requieres te ayudamos a crear o mejorar tu imagen institucional para lograr que la página luzca realmente como una sucursal online de tu empresa.</p>                             
-                            </div>
+                             <p class="desarrollo_recuadro">Si lo requieres te ayudamos a crear o mejorar tu imagen institucional para lograr que la página luzca realmente como una sucursal online de tu empresa.</p>                             
                         </div>
-                        </div>
-                    <!-- /shop -->
                     </div>
                 </div>
             </div>

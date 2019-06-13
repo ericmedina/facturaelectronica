@@ -208,7 +208,7 @@ Route::get("/paginas-web", function(){
 Route::get("/ecommerce", function(){
     return view("ecomerce2");
 });
-Route::get("/facturacionelectronica", function(){
+Route::get("/facturacion-electronica", function(){
     return view("facturacionelectronica2");
 });
 Route::get('array/productos/{buscar}', function($buscar){

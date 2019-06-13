@@ -1097,12 +1097,37 @@ footer {
     04 -> CATEGORY SHOP
 ===========================================================*/
 
-.shop {
+.shop, .item-portafolio {
   position: relative;
   overflow: hidden;
   margin: 15px 0px;
 }
+.item-portafolio{  
+    -webkit-transition: 0.3s all;
+    transition: 0.3s all;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.4)
+}
+.portafolio-titulo{
+    padding-top: 15px;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    background-color: white;
+    opacity: 0.9;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+.item-portafolio:hover .portafolio-titulo{
+    opacity: 1;
+}
+.portafolio-titulo h4{
+    font-weight: 600;
+}
+.portafolio-titulo p{
 
+}
 .shop:before {
   content: "";
   position: absolute;
@@ -1133,19 +1158,19 @@ footer {
   z-index: 10;
 }
 
-.shop .shop-img {
+.shop .shop-img, .portafolio-img{
   position: relative;
   background-color: #E4E7ED;
   z-index: 1;
 }
 
-.shop .shop-img>img {
+.shop .shop-img>img, .portafolio-img>img {
   width: 100%;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
 }
 
-.shop:hover .shop-img>img {
+.shop:hover .shop-img>img, .item-portafolio:hover {
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);

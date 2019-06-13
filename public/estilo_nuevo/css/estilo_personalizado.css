@@ -236,6 +236,8 @@
 	}
 	.size-slider h2{
 		font-size: 35px!important;
+		white-space: pre-wrap;
+		width: 93%;
 	}
 	.size-slider p{
 		font-size: 20px!important;
@@ -294,6 +296,16 @@
 	.cell-boton-registrarce p{
 		color: white;
 		font-weight: 600;
+	}
+	.img-servicios{
+		height: 100px;
+	}
+	.img-servicios img{
+		height: 100%;
+		width: auto;
+	}
+	.text-xs-center{
+		text-align: center;
 	}
 }
 /* ___________________FIN ISTA PARA CELLLLLL___________________*/

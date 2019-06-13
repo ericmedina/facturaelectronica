@@ -63,7 +63,7 @@
         <div class="container">
             <div class="col-md-10 col-md-offset-1">
                 <nav class="navbar navbar-inverse" role="navigation">
-                    <div class="navbar-header col-lg-4" style="padding-left: 0;">
+                    <div class="navbar-header col-lg-4" style="padding-right: 0;">
                         <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
@@ -83,7 +83,7 @@
                                     <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('paginas-web')}}">Páginas web</a></li>
                                     <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('ecommerce')}}">E-commerce</a></li>
                                     <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('marketing-digital')}}">Marketing digital</a></li>
-                                    <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('facturacionelectronica')}}">Facturación Electrónica</a></li>
+                                    <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('facturacion-electronica')}}">Facturación Electrónica</a></li>
                                   </ul>
                             </li>
                             <li class="hover-menu"><a href="#services" class="scroll-link">Noticias</a></li>

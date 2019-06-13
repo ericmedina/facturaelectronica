@@ -12,7 +12,7 @@
             <div class="row cell-p-0">  
                   <div class="col-sm-12 col-md-12"> 
                       <!--NOTE: Update your email Id in "contact_me.php" file in order to receive emails from your contact form-->
-                        <form name="sentMessage" id="contactForm" novalidate class="cell-p-0 col-md-8 pc-m-auto"> 
+                        <form  action="{{ url('/consulta') }}" method="get" name="sentMessage" id="contactForm" novalidate class="cell-p-0 col-md-8 pc-m-auto" accept-charset="utf-8"> 
                             <div class="control-group">
                               <div class="controls">
                                 <input type="text" class="form-control" placeholder="Nombre/Razón social" id="name" required data-validation-required-message="Por favor ingresa tu nombre" />
@@ -32,7 +32,8 @@
                                     data-validation-minlength-message="El mínimo debe ser 5 caracteres." 
                                     maxlength="999" style="resize:none"></textarea>
                                 </div>
-                            </div>     
+                            </div>
+                            <div style="margin-bottom: 10px;" class="g-recaptcha" data-sitekey="6LdAe50UAAAAACup8Ycv_VfHOoWlyXVyESMsQmsO"></div>
                             <div id="success"> </div> <!-- For success/fail messages -->
                             <button type="submit" class="btn boton-celeste pull-right ">Enviar consulta</button><br />
                         </form>

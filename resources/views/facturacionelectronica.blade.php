@@ -1,103 +1,145 @@
-@extends('layouts.home.main')
+@extends('layouts.home.main2')
+@section('title','Facturación Electrónica - PampaDev')
 @section('contenido')
-  <div class="container">
-    <section class="servicios row mt-5">
-      <div class="col-12 d-block d-sm-none d-lg-none mb-5">
-          <div class="img-servicios">
-           <img class="svg-sistemas" id="" src="{{asset('images/home/facturacion_electronica.svg')}}" alt="" >
-          </div>
-      </div>
-      <div class="col-lg-6 col-12 texto-servicio derecha mt-5 pt-5">
-        <h2 class="slogan-servicio">Facturación electrónica</h2>
-        <p class="resumen-servicio mt-2">
-            Proponemos optimizar los tiempos en la facturación y gestión administrativa de su empresa, desde donde quieras, de manera simple y a un bajo costo. Cumpliendo con el nuevo régimen de AFIP sobre la modalidad de facturación de los contribuyentes ofrece llevar un control de tu empresa en los procesos de administrativos, comercial y contable.
-        </p>
-      </div>
-      <div class="col-6 d-none d-lg-block">
-          <div class="img-servicios">
-           <img class="svg-sistemas" id="" src="{{asset('images/home/facturacion_electronica.svg')}}" alt="" >
-          </div>
-      </div>
-    </section>  
-    <section class="mt-5">
-      <div class="datos-servicio">
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Facturá </p>
-            <p class="desarrollo_recuadro">de forma rápida y simple en cumplimiento con las exigencias impuestas por AFIP.</p>
-          </div>
-        </div>
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Mantené</p>
-            <p class="desarrollo_recuadro">tu inventario actualizado a través de las compras y las ventas que realices.</p>
-          </div>
-        </div>
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Registrá</p>
-            <p class="desarrollo_recuadro">tus compras, actualizá tu inventario automáticamente y las cuentas corrientes de tus proveedores.</p>
-          </div>
-        </div>
-      </div>
-      <div class="datos-servicio mt-3">
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Registrá</p>
-            <p class="desarrollo_recuadro">los datos de tus clientes para facturarles y chequeá su historial de compras.</p>
-          </div>
-        </div>
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Podés</p>
-            <p class="desarrollo_recuadro">automatizar la facturación de tus servicios mensuales y el sistema facturará por vos.</p>
-          </div>
-        </div>
-        <div class="cuadro-servicio columnas-3">
-          <div class="cuadro-grande fondo-celeste">
-            <p class="titulo_recuadro">Obtené</p>
-            <p class="desarrollo_recuadro">tu lista de precios, tus productos más vendidos, tus cuentas corrientes y los balances de compras y ventas.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section style="" class="row">
-          <div class="col-12 d-block d-sm-none d-lg-none">
-              <div class="img-servicios">
-               <img class="position-relative mr-5 col-lg-11 float-right" id="" src="{{asset('images/home/fondocontador.png')}}" alt="" >
-              </div>
-          </div>      
-          <div class="col-12 col-lg-6 texto-servicio izquierda mb-5 mt-lg-5 pt-lg-5">
-              <h2 class="slogan-servicio">Contable</h2>
-                 <p class="resumen-servicio mt-2">La obtención de los datos  de facturación necesarios para la realización de las distintas DDJJ se vuelve algo tedioso. Para esto, PampaDev ofrece un sistemas totalmente gratuito para contadores, en el cual si sus clientes facturan desde el mismo puede obtener la información correspondiente de manera muy simple y sencilla.</p>
-          </div>
-          <div class="col-6 d-none d-lg-block">
-            <div class="img-servicios">
-              <img class="position-relative mr-5 col-lg-11 float-right" id="" src="{{asset('images/home/fondocontador.png')}}" alt="" >
+    <div id="#top"></div>
+    <section id="home" class="pc-mt-N28">
+        <div class="banner-container img_slider_sub_paginas">
+            <img src="{{asset('images/tecladochico2.jpg')}}" alt="banner" />
+            <div class="container banner-content">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="titulo-banner">
+                        <h2>Facturación Electrónica</h2>
+                        <p>Llevá tu necogio a donde vayas</p>
+                    </div>
+                </div>
             </div>
-          </div>
-    
-    
+        </div>
     </section>
-      <div class="clearfix"></div>
-  </div>
-  <hr class="mt-lg-0 mt-0">
-  <section class="contacto pb-5" style="">
-    <div class="container">
-      <h1 class="titulo-servicio">¿TENÉS ALGUNA DUDA O CONSULTA?</h1>
-      <h2 class="slogan-servicio">Conectate con nosotros</h2>
-      <form action="{{ url('/consulta') }}" method="get" class="form-horizontal" accept-charset="utf-8">
-        <input class="form-control" type="text" name="nombre" value="" placeholder="Nombre/Razón social">
-        <select class="form-control round" name="categoria">
-          <option value="" selected="">Categoría a la que se dedica</option>
-        </select>
-        <input class="form-control" type="text" name="telefono" value="" placeholder="Teléfono">
-        <input class="form-control" type="text" name="email" value="" placeholder="E-mail">
-        <textarea rows="5" class="form-control" name="consulta" placeholder="Ingrese su consulta.."></textarea>
-        <div class="g-recaptcha" data-sitekey="6LdAe50UAAAAACup8Ycv_VfHOoWlyXVyESMsQmsO"></div>
-        <button class="float-right boton celeste" type="submit">Enviar</button>
-        <div class="clearfix"></div>
-      </form>
-    </div>
-  </section> 
+    <section id="clients" class="page-section pt-4 pt-lg-5">
+        <div class="container">
+            <div class=" col-md-10 col-md-offset-1">
+                <div class="col-md-11 text-left">  
+                        <p> Proponemos optimizar los tiempos en la facturación y gestión administrativa de su empresa, desde donde quieras, de manera simple y a un bajo costo. Cumpliendo con el nuevo régimen de AFIP sobre la modalidad de facturación de los contribuyentes ofrece llevar un control de tu empresa en los procesos de administrativos, comercial y contable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="page-section">
+        <div class="container">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="heading text-left letras_grises pb-md-0">
+                    <!-- Heading -->
+                    <h2 class="pl-md-3 mt-md-0">Ventajas</h2>
+                </div>
+                <div class="row col-xs-12">
+                    <div class="col-md-6 col-xs-12 mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Facturarapido1.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Facturá de forma rápida y simple en cumplimiento con las exigencias impuestas por AFIP.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Podesautomatizar.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Podés automatizar la facturación de tus servicios mensuales y el sistema facturara por vos.</p>
+                        </div>
+                    </div>
+{{--                     <div class="col-md-6 col-xs-12 mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0 pt-3">
+                            <img src="{{asset('images/iconos_sistemas/Disponibilidad.svg')}}">
+                        </div>
+                        <div class="col-xs-9">
+                            <p class="letras_sistemas">Disponibilidad de la informacion en tiempo real</p>
+                        </div>
+                    </div> --}}
+                    <div class="col-md-6 col-xs-12  mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Registradatos.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Registrá los datos de tus clientes para facturarles. Y chequeá su historial de compras.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Registracompras.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Registrá tus compras, actualiza tu inventario automaticamente y las cuentas corrientes de tus proveedores.</p>
+                        </div>
+                        
+                    </div>
+                    <div class="col-md-6 col-xs-12  mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Manteneinventario1.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Mantené tu inventario actualizado a través de las compras y las ventas que realices.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12  mt-5 overflow-hidden">
+                        <div class="col-lg-2 col-xs-3 p-0">
+                            <img src="{{asset('images/iconos_facturacion/Obtenetulista.svg')}}">
+                        </div>
+                        <div class="col-xs-9 pt-md-2">
+                            <p class="letras_sistemas">Obtené tu lista de precios, tus productos mas vendidos, tus cuentas corrientes y los balances de compras y ventas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.container-->
+    </section>
+    <!--/.NOTICIAS FONDO BLANCO-->
+    <section id="clients" style="padding-bottom:50px;">
+        <div id="demo" class="clients">
+            <div class="container">
+                <div class="heading text-center">
+                    <h2></h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-10 pc-float-none m-auto">
+
+                       <div class="col-md-6 col-xs-12">
+                        <div class="">
+                            <div>
+                                <h3 class="size-21">Contable</h3>                                
+                            </div>
+                            <div class="">
+                                <p class="desarrollo_recuadro">La obtención de los datos  de facturación necesarios para la realización de las distintas DDJJ se vuelve algo tedioso. Para esto, PampaDev ofrece un sistemas totalmente gratuito para contadores, en el cual si sus clientes facturan desde el mismo puede obtener la información correspondiente de manera muy simple y sencilla.</p>                           
+                            </div>
+                        </div>
+                        </div>
+                    <!-- /shop -->
+
+                    <!-- shop -->
+                       <div class="col-md-6 col-xs-12">
+                        <div class="">
+                            <div>
+                                                                
+                            </div>
+                            <div class="pc-boton-registrarce cell-boton-registrarce mt-5">
+                                <h3 class="text-center pt-5">REGISTRATE!</h3>
+                                <p class="text-center pt-3 pb-4">Y OBTENE UN MES DE PRUEBA</p> 
+                            </div>
+                        </div>
+                        </div>
+                    <!-- /shop -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @include('layouts.contacto')
+@endsection
+@section('js')
+
+    <script type="text/javascript">
+
+    </script>
 @endsection

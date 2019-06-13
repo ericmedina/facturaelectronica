@@ -162,7 +162,6 @@ a {
                 line-height: 35px;
                 width: 35px;
                 text-align: center;
-                padding-top: 10px;
             }
 
     #section-top .region-top-first {
@@ -350,6 +349,7 @@ a {
     top: 0px;
     left: 0px;
     right: 0px;
+    height: 100%!important;
 }
 
     .banner-content h2 {
@@ -422,8 +422,8 @@ a {
 .da-dots span {
     display: inline-block;
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.13);
     margin: 3px;

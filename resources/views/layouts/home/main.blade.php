@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="{{asset('/css/animacion_sistemas.css')}}">
 
 </head>
-<body>
+<body >
     <img class="img_nube" src="{{asset('images/home/fondo_nube_gris.svg')}}" alt="">
     <img class="img_forma_azul" src="{{asset('images/home/fondo_nube_azul.svg')}}" alt="">
     <nav class="">

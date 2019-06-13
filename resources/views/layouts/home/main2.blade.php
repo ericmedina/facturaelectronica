@@ -37,6 +37,7 @@
     <link href="{{asset('estilo_nuevo/css/estilo_personalizado.css')}}" rel="stylesheet">
     <link href="{{asset('estilo_nuevo/css/margenes_boostrap.css')}}" rel="stylesheet">
     <script src="{{asset('estilo_nuevo/js/modernizr-latest.js')}}"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -70,7 +71,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a href="" class="logo"><b><img class="col-lg-12 col-xs-8" style="padding-left: 0;" src="{{asset('images/logotipo_fondo_blanco.png')}}"></b></a>
+                        <a href="{{url('/')}}" class="logo"><b><img class="col-lg-12 col-xs-8" style="padding-left: 0;" src="{{asset('images/logotipo_fondo_blanco.png')}}"></b></a>
                     </div>
                     <!--/.navbar-header-->
                     <div id="main-nav" class="collapse navbar-collapse">
@@ -86,8 +87,8 @@
                                     <li class="hover-menu"><a class="dropdown-item pb-4 pt-4 pl-5 pr-5" class="scroll-link" href="{{url('facturacion-electronica')}}">Facturación Electrónica</a></li>
                                   </ul>
                             </li>
-                            <li class="hover-menu"><a href="#services" class="scroll-link">Noticias</a></li>
-                            <li class="hover-menu"><a href="#portfolio" class="scroll-link">Contacto</a></li>
+                            <li class="hover-menu"><a href="{{url('/')}}#noticias" class="scroll-link">Noticias</a></li>
+                            <li class="hover-menu"><a href="#contactUs" class="scroll-link">Contacto</a></li>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" href="#collapseSistemas" role="button" aria-expanded="false" aria-controls="collapseSistemas" class="scroll-link hover-menu">GeonDev <span class="caret"></span></a>
                                <ul class="dropdown-menu borde-menu">
@@ -111,7 +112,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    Copyright 2019 | All Rights Reserved - <a href="https://webthemez.com/tag/free" target="_blank">PampaDev</a> Soluciones informaticas.        
+                    Copyright 2019 | All Rights Reserved - <a href="{{url('/')}}">PampaDev</a> Soluciones informaticas.        
                 </div>
             </div>
             <!-- / .row -->
@@ -130,7 +131,51 @@
     <script src="{{asset('estilo_nuevo/contact/contact_me.js')}}"></script>
     <script src="{{asset('estilo_nuevo/js/custom.js')}}" type="text/javascript"></script>
     <script src="{{asset('estilo_nuevo/js/owl-carousel/owl.carousel.js')}}"></script>
-    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4R_duN92jPo5Z4hFRvxxXsAvhlDNvRL0 "></script>  
+    {{-- <script async type="text/javascript">
+        window.addEventListener('load', function(){
+            registerServiceWorker();
+        });
+        function registerServiceWorker() {
+          return navigator.serviceWorker.register('/service-worker.js')
+            .then(function(registration) {
+              console.log('Service worker successfully registered.');
+              initialiseServiceWorker();
+              _registration = registration;
+              return registration;
+            })
+            .catch(function(err) {
+              console.error('Unable to register service worker.', err);
+            });
+        }
+        function initialiseServiceWorker () {
+          if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
+            console.log('Notifications aren\'t supported.')
+            return
+          }
+          if (Notification.permission === 'denied') {
+            console.log('The user has blocked notifications.')
+            return
+          }
+          if (!('PushManager' in window)) {
+            console.log('Push messaging isn\'t supported.')
+            return
+          }
+          navigator.serviceWorker.ready.then(registration => {
+            registration.pushManager.getSubscription()
+              .then(subscription => {
+                if (!subscription) {
+                  return
+                }
+                //this.sendSubscriptionToBackEnd(subscription)
+                this.isPushEnabled = true
+              })
+              .catch(e => {
+                console.log('Error during getSubscription()', e)
+              })
+          })
+        }
+    </script> --}}
     @yield('js')
 
 </body>
